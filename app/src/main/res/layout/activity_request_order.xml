@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_backGrey"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/white">
+        <Switch
+            android:id="@+id/switch_isAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_centerVertical="true"
+            android:textColor="#48a0dc"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/switch_isAll"
+            android:layout_marginLeft="5dp"
+            android:layout_centerVertical="true"
+            android:text="所有任务"
+            android:textColor="#48a0dc"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10月1日"
+                android:textColor="#48a0dc"/>
+            <TextView
+                android:id="@+id/tv_isAll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="未完成任务"
+                android:textColor="#48a0dc"/>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_refresh"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:padding="8dp"
+            android:src="@drawable/icon_refresh"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swip_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="10dp">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_taskCard"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+        </android.support.v7.widget.RecyclerView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</LinearLayout>

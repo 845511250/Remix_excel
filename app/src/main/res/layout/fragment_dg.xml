@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/iv_pillow"
+        android:layout_width="800px"
+        android:layout_height="800px"
+        android:layout_centerVertical="true"/>
+    <Button
+        android:id="@+id/bt_remix"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:text="生成刀版"
+        android:background="@drawable/selector_button"
+        android:textColor="@color/whited"/>
+
+    <View
+        android:layout_width="1px"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="834px"
+        android:background="@color/myred"/>
+
+    <View
+        android:layout_width="1px"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="834px"
+        android:background="@color/myred"/>
+</RelativeLayout>

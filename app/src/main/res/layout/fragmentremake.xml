@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ProgressBar
+        android:id="@+id/pb_remake"
+        android:layout_width="500px"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        style="@android:style/Widget.ProgressBar.Horizontal" />
+    <TextView
+        android:id="@+id/tv_remake_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/pb_remake"
+        android:text="补图完成"
+        android:textColor="@color/mygreen"
+        android:textSize="20sp"
+        android:visibility="invisible"/>
+</RelativeLayout>

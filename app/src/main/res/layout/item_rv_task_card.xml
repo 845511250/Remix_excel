@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:paddingBottom="10dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:background="@drawable/shape_radius10_white"
+        android:paddingBottom="10dp">
+        <LinearLayout
+            android:id="@+id/ll_sku"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/tv_sku"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="DD"
+                android:textSize="17sp"
+                android:textColor="@color/color_black_background"
+                android:layout_margin="6dp"/>
+            <ImageView
+                android:id="@+id/iv_open_close"
+                android:layout_width="16dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_down_open"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/color_black_0D" />
+        <Button
+            android:id="@+id/bt_all"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@drawable/selector_button_white"
+            android:layout_marginTop="5dp"
+            android:text="全部"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/color_line"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp" />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_taskList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
+        </android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+
+</RelativeLayout>
