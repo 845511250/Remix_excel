@@ -170,6 +170,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvasCombine.drawBitmap(MainActivity.instance.bitmapPillow, 0, 0, null);
         canvasCombine.drawRect(0, 0, 7100, 6800, rectBorderPaint);
         drawText(canvasCombine);
+        bitmapCombine = Bitmap.createScaledBitmap(bitmapCombine, 7550, 7362, true);
 
         try {
             Matrix matrix = new Matrix();

@@ -332,6 +332,31 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         pillow2X = 7044;
         pillow2Y = 281;
         switch (size) {
+            case "S":
+                quiltWidth = 7571;
+                quiltHeight = 9744;
+                quiltX = 2200;
+                quiltY = 2911;
+                drawWidth = 7653 + (int) (43 * 0.5);//7653:176.7
+                drawHeight = 9853 + (int) (43 * 4.5);
+                break;
+            case "M":
+                quiltWidth = 9744;
+                quiltHeight = 9744;
+                quiltX = 1113;
+                quiltY = 2911;
+                drawWidth = 9853 + (int) (43 * 4.5);//9853:227.5
+                drawHeight = 9853 + (int) (43 * 1.5);
+                break;
+            case "L":
+                quiltWidth = 11487;
+                quiltHeight = 9744;
+                quiltX = 242;
+                quiltY = 2911;
+                drawWidth = 11613 + (int) (43 * 4);//11613:268
+                drawHeight = 9853 + (int) (43 * 1.5);
+                break;
+
             case "S1":
                 quiltWidth = 7571;
                 quiltHeight = 9744;
@@ -358,69 +383,69 @@ String sdCardPath = "/storage/emulated/0/Pictures";
                 break;
 
             case "S2":
-                quiltWidth = 7571;
+                quiltWidth = 6496;
                 quiltHeight = 9744;
-                quiltX = 2200;
+                quiltX = 2736;
                 quiltY = 2911;
-                drawWidth = 7653 + (int) (43 * 0.5);//7653:176.7
-                drawHeight = 9853 + (int) (43 * 4.5);
+                drawWidth = 6063 + (int) (43 * 4);
+                drawHeight = 9094 + (int) (43 * 8);
                 break;
             case "M2":
+                quiltWidth = 8352;
+                quiltHeight = 9744;
+                quiltX = 1808;
+                quiltY = 2911;
+                drawWidth = 7795 + (int) (43 * 4);
+                drawHeight = 9094 + (int) (43 * 8);
+                break;
+            case "L2":
                 quiltWidth = 9744;
                 quiltHeight = 9744;
                 quiltX = 1113;
                 quiltY = 2911;
-                drawWidth = 9853 + (int) (43 * 4.5);//9853:227.5
-                drawHeight = 9853 + (int) (43 * 1.5);
-                break;
-            case "L2":
-                quiltWidth = 11487;
-                quiltHeight = 9744;
-                quiltX = 242;
-                quiltY = 2911;
-                drawWidth = 11613 + (int) (43 * 4);//11613:268
-                drawHeight = 9853 + (int) (43 * 1.5);
+                drawWidth = 9094 + (int) (43 * 7);
+                drawHeight = 9094 + (int) (43 * 8);
                 break;
             case "XL2":
-                quiltWidth = 11487;
+                quiltWidth = 10629;
                 quiltHeight = 9744;
-                quiltX = 242;
+                quiltX = 670;
                 quiltY = 2911;
-                drawWidth = 11613 + (int) (43 * 4);//11613:268
-                drawHeight = 9853 + (int) (43 * 1.5);
+                drawWidth = 10394 + (int) (43 * 8);
+                drawHeight = 9528 + (int) (43 * 8);
                 break;
 
             case "S3":
-                quiltWidth = 7571;
-                quiltHeight = 9744;
-                quiltX = 2200;
+                quiltWidth = 6577;
+                quiltHeight = 2686;
+                quiltX = 2696;
                 quiltY = 2911;
-                drawWidth = 7653 + (int) (43 * 0.5);//7653:176.7
-                drawHeight = 9853 + (int) (43 * 4.5);
+                drawWidth = 5846 + (int) (43 * 4);
+                drawHeight = 8661 + (int) (43 * 7);
                 break;
             case "M3":
                 quiltWidth = 9744;
                 quiltHeight = 9744;
                 quiltX = 1113;
                 quiltY = 2911;
-                drawWidth = 9853 + (int) (43 * 4.5);//9853:227.5
-                drawHeight = 9853 + (int) (43 * 1.5);
+                drawWidth = 8661 + (int) (43 * 7);
+                drawHeight = 8661 + (int) (43 * 7);
                 break;
             case "L3":
-                quiltWidth = 11487;
+                quiltWidth = 10186;
                 quiltHeight = 9744;
-                quiltX = 242;
+                quiltX = 891;
                 quiltY = 2911;
-                drawWidth = 11613 + (int) (43 * 4);//11613:268
-                drawHeight = 9853 + (int) (43 * 1.5);
+                drawWidth = 9961 + (int) (43 * 8);
+                drawHeight = 9528 + (int) (43 * 8);
                 break;
             case "XL3":
-                quiltWidth = 11487;
+                quiltWidth = 11515;
                 quiltHeight = 9744;
-                quiltX = 242;
+                quiltX = 227;
                 quiltY = 2911;
-                drawWidth = 11613 + (int) (43 * 4);//11613:268
-                drawHeight = 9853 + (int) (43 * 1.5);
+                drawWidth = 11260 + (int) (43 * 9);
+                drawHeight = 9528 + (int) (43 * 8);
                 break;
             default:
                 showDialogSizeWrong(orderItems.get(currentID).order_number);
