@@ -168,9 +168,14 @@ String sdCardPath = "/storage/emulated/0/Pictures";
 
     }
 
-    void drawTextFront(Canvas canvas) {
+    void drawTextFrontR(Canvas canvas) {
         canvas.drawRect(1000, 4159, 1000 + 500, 4159 + 25, rectPaint);
-        canvas.drawText("正面 " + time + "  " + orderItems.get(currentID).order_number + "   " + orderItems.get(currentID).newCodeStr, 1000, 4159 + 23, paint);
+        canvas.drawText("正面右 " + time + "  " + orderItems.get(currentID).order_number + "   " + orderItems.get(currentID).newCodeStr, 1000, 4159 + 23, paint);
+        canvas.drawText(currentID + "", 1440, 4159 + 23, paintRed);
+    }
+    void drawTextFrontL(Canvas canvas) {
+        canvas.drawRect(1000, 4159, 1000 + 500, 4159 + 25, rectPaint);
+        canvas.drawText("正面左 " + time + "  " + orderItems.get(currentID).order_number + "   " + orderItems.get(currentID).newCodeStr, 1000, 4159 + 23, paint);
         canvas.drawText(currentID + "", 1440, 4159 + 23, paintRed);
     }
     void drawTextBack(Canvas canvas) {
@@ -196,7 +201,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     }
     void drawTextMaoziInL(Canvas canvas) {
         canvas.drawRect(1130, 7, 1130 + 180, 7 + 25, rectPaint);
-        canvas.drawText("内 " + orderItems.get(currentID).sizeStr, 1130, 7 + 23, paint);
+        canvas.drawText("内左 " + orderItems.get(currentID).sizeStr, 1130, 7 + 23, paint);
         canvas.drawText(currentID + "", 1230, 7 + 23, paintRed);
 
         canvas.save();
@@ -207,7 +212,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     }
     void drawTextMaoziInR(Canvas canvas) {
         canvas.drawRect(650, 7, 650 + 180, 7 + 25, rectPaint);
-        canvas.drawText("内 " + orderItems.get(currentID).sizeStr, 650, 7 + 23, paint);
+        canvas.drawText("内右 " + orderItems.get(currentID).sizeStr, 650, 7 + 23, paint);
         canvas.drawText(currentID + "", 750, 7 + 23, paintRed);
 
         canvas.save();
@@ -218,7 +223,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     }
     void drawTextMaoziOutL(Canvas canvas) {
         canvas.drawRect(920, 8, 920 + 100, 8 + 25, rectPaint);
-        canvas.drawText("外", 920, 8 + 23, paint);
+        canvas.drawText("外左", 920, 8 + 23, paint);
         canvas.drawText(currentID + "", 970, 8 + 23, paintRed);
 
         canvas.save();
@@ -229,7 +234,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     }
     void drawTextMaoziOutR(Canvas canvas) {
         canvas.drawRect(920, 8, 920 + 100, 8 + 25, rectPaint);
-        canvas.drawText("外", 920, 8 + 23, paint);
+        canvas.drawText("外右", 920, 8 + 23, paint);
         canvas.drawText(currentID + "", 970, 8 + 23, paintRed);
 
         canvas.save();
@@ -287,7 +292,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         Bitmap bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.gr_front_r);
         canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
         bitmapDB.recycle();
-        drawTextFront(canvasTemp);
+        drawTextFrontR(canvasTemp);
         bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_front, height_front, true);
         canvasCombine.drawBitmap(bitmapTemp, 0, 0, null);
         bitmapTemp.recycle();
@@ -297,6 +302,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.gr_front_l);
         canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
         bitmapDB.recycle();
+        drawTextFrontL(canvasTemp);
         bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_front, height_front, true);
         canvasCombine.drawBitmap(bitmapTemp, width_front + margin, 0, null);
         bitmapTemp.recycle();

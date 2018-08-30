@@ -197,28 +197,28 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvas.save();
         canvas.rotate(6, 1291, 22);
         canvas.drawRect(1291, 22, 1291 + 400, 22 + 25, rectPaint);
-        canvas.drawText("内" + orderItems.get(currentID).sizeStr + " " + time + " " + orderItems.get(currentID).order_number, 1291, 22 + 23, paint);
+        canvas.drawText("内左" + orderItems.get(currentID).sizeStr + " " + time + " " + orderItems.get(currentID).order_number, 1291, 22 + 23, paint);
         canvas.restore();
     }
     void drawTextMaoziInR(Canvas canvas) {
         canvas.save();
         canvas.rotate(-6, 108, 65);
         canvas.drawRect(108, 65, 108 + 400, 65 + 25, rectPaint);
-        canvas.drawText("内" + orderItems.get(currentID).sizeStr + " " + time + " " + orderItems.get(currentID).order_number, 108, 65 + 23, paint);
+        canvas.drawText("内右" + orderItems.get(currentID).sizeStr + " " + time + " " + orderItems.get(currentID).order_number, 108, 65 + 23, paint);
         canvas.restore();
     }
     void drawTextMaoziOutL(Canvas canvas) {
         canvas.save();
         canvas.rotate(-6.4f, 137, 73);
         canvas.drawRect(137, 73, 137 + 400, 73 + 25, rectPaint);
-        canvas.drawText("外" + orderItems.get(currentID).sizeStr + " " + time + " " + orderItems.get(currentID).order_number, 137, 73 + 23, paint);
+        canvas.drawText("外左" + orderItems.get(currentID).sizeStr + " " + time + " " + orderItems.get(currentID).order_number, 137, 73 + 23, paint);
         canvas.restore();
     }
     void drawTextMaoziOutR(Canvas canvas) {
         canvas.save();
         canvas.rotate(5.9f, 1284, 31);
         canvas.drawRect(1284, 31, 1284 + 400, 31 + 25, rectPaint);
-        canvas.drawText("外" + orderItems.get(currentID).sizeStr + " " + time + " " + orderItems.get(currentID).order_number, 1284, 31 + 23, paint);
+        canvas.drawText("外右" + orderItems.get(currentID).sizeStr + " " + time + " " + orderItems.get(currentID).order_number, 1284, 31 + 23, paint);
         canvas.restore();
     }
     void drawTextXiabaiFront(Canvas canvas) {

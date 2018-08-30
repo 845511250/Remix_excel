@@ -174,9 +174,13 @@ String sdCardPath = "/storage/emulated/0/Pictures";
 
     }
 
-    void drawTextFront(Canvas canvas) {
+    void drawTextFrontR(Canvas canvas) {
         canvas.drawRect(250, 3415 - 25, 250 + 500, 3415, rectPaint);
-        canvas.drawText(time + "  " + orderItems.get(currentID).order_number + "   " + orderItems.get(currentID).newCodeStr, 250, 3415 - 2, paint);
+        canvas.drawText(time + " 右 " + orderItems.get(currentID).order_number + "   " + orderItems.get(currentID).newCodeStr, 250, 3415 - 2, paint);
+    }
+    void drawTextFrontL(Canvas canvas) {
+        canvas.drawRect(250, 3415 - 25, 250 + 500, 3415, rectPaint);
+        canvas.drawText(time + " 左 " + orderItems.get(currentID).order_number + "   " + orderItems.get(currentID).newCodeStr, 250, 3415 - 2, paint);
     }
     void drawTextBack(Canvas canvas) {
         canvas.drawRect(1000, 3448, 1000 + 500, 3448 + 25, rectPaint);
@@ -225,7 +229,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         Bitmap bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.gum_front_r);
         canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
         bitmapDB.recycle();
-        drawTextFront(canvasTemp);
+        drawTextFrontR(canvasTemp);
         bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_front, height_front, true);
         canvasCombine.drawBitmap(bitmapTemp, 0, height_back + margin, null);
         bitmapTemp.recycle();
@@ -235,6 +239,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.gum_front_l);
         canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
         bitmapDB.recycle();
+        drawTextFrontL(canvasTemp);
         bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_front, height_front, true);
         canvasCombine.drawBitmap(bitmapTemp, 0, height_back + height_front + margin, null);
         bitmapTemp.recycle();

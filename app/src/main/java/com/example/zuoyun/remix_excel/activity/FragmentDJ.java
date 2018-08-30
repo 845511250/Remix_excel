@@ -125,8 +125,16 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvasLeftMain.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
         canvasLeftMain.drawBitmap(bitmapDB_main, 0, 0, null);
         //left_side
-        Bitmap bitmapLeftSide1 = Bitmap.createBitmap(MainActivity.instance.bitmapLeft, 295, 148, 631, 841);
-        Bitmap bitmapLeftSide2 = Bitmap.createBitmap(MainActivity.instance.bitmapLeft, 1072, 148, 631, 841);
+        Bitmap bitmapLeftSide1 = Bitmap.createBitmap(MainActivity.instance.bitmapLeft, 259, 114, 698, 900);
+        bitmapLeftSide1 = Bitmap.createScaledBitmap(bitmapLeftSide1, 631, 841, true);
+        Bitmap bitmapLeftSide2 = Bitmap.createBitmap(MainActivity.instance.bitmapLeft, 1099, 114, 698, 900);
+        bitmapLeftSide2 = Bitmap.createScaledBitmap(bitmapLeftSide2, 631, 841, true);
+
+//        Bitmap bitmapLeftSide1 = Bitmap.createBitmap(MainActivity.instance.bitmapLeft, 272, 119, 655, 877);
+//        bitmapLeftSide1 = Bitmap.createScaledBitmap(bitmapLeftSide1, 631, 841, true);
+//        Bitmap bitmapLeftSide2 = Bitmap.createBitmap(MainActivity.instance.bitmapLeft, 1077, 119, 655, 877);
+//        bitmapLeftSide2 = Bitmap.createScaledBitmap(bitmapLeftSide2, 631, 841, true);
+
         Bitmap bitmapLeftSide = Bitmap.createBitmap(1682, 631, Bitmap.Config.ARGB_8888);
         Canvas canvasLeftSide = new Canvas(bitmapLeftSide);
         canvasLeftSide.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
@@ -146,9 +154,18 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvasRightMain.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
         canvasRightMain.drawBitmap(bitmapDB_main, 0, 0, null);
         //right_side
-        Bitmap bitmapRightSide1 = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 295, 148, 631, 841);
-        Bitmap bitmapRightSide2 = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 1072, 148, 631, 841);
+        Bitmap bitmapRightSide1 = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 259, 114, 698, 900);
+        bitmapRightSide1 = Bitmap.createScaledBitmap(bitmapRightSide1, 631, 841, true);
+        Bitmap bitmapRightSide2 = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 1099, 114, 698, 900);
+        bitmapRightSide2 = Bitmap.createScaledBitmap(bitmapRightSide2, 631, 841, true);
         Bitmap bitmapRightSide = Bitmap.createBitmap(1682, 631, Bitmap.Config.ARGB_8888);
+
+//        Bitmap bitmapRightSide1 = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 272, 119, 655, 877);
+//        bitmapRightSide1 = Bitmap.createScaledBitmap(bitmapRightSide1, 631, 841, true);
+//        Bitmap bitmapRightSide2 = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 1077, 119, 655, 877);
+//        bitmapRightSide2 = Bitmap.createScaledBitmap(bitmapRightSide2, 631, 841, true);
+//        Bitmap bitmapRightSide = Bitmap.createBitmap(1682, 631, Bitmap.Config.ARGB_8888);
+
         Canvas canvasRightSide = new Canvas(bitmapRightSide);
         canvasRightSide.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
         matrixSide.reset();
