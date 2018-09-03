@@ -179,8 +179,8 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvas.drawText(time + " 右 " + orderItems.get(currentID).order_number + "   " + orderItems.get(currentID).newCodeStr, 250, 3415 - 2, paint);
     }
     void drawTextFrontL(Canvas canvas) {
-        canvas.drawRect(250, 3415 - 25, 250 + 500, 3415, rectPaint);
-        canvas.drawText(time + " 左 " + orderItems.get(currentID).order_number + "   " + orderItems.get(currentID).newCodeStr, 250, 3415 - 2, paint);
+        canvas.drawRect(500, 3415 - 25, 500 + 500, 3415, rectPaint);
+        canvas.drawText(time + " 左 " + orderItems.get(currentID).order_number + "   " + orderItems.get(currentID).newCodeStr, 500, 3415 - 2, paint);
     }
     void drawTextBack(Canvas canvas) {
         canvas.drawRect(1000, 3448, 1000 + 500, 3448 + 25, rectPaint);
