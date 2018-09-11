@@ -149,7 +149,6 @@ String sdCardPath = "/storage/emulated/0/Pictures";
             @Override
             public void run() {
                 super.run();
-                setScale(orderItems.get(currentID).sizeStr);
                 if (sizeOK) {
                     for(int i=0;i<currentID;i++) {
                         if (orderItems.get(currentID).order_number.equals(orderItems.get(i).order_number)) {
@@ -164,27 +163,27 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     }
 
     void drawText(Canvas canvas, int left, int bottom) {
-        canvas.drawRect(left, bottom - 20, left + 800, bottom, rectPaint);
-        canvas.drawText(time + "  FA  " + orderItems.get(currentID).sizeStr+ orderItems.get(currentID).color, left, bottom - 2, paintSmall);
-        canvas.drawText(getRedNewCode(orderItems.get(currentID).newCode), left + 180, bottom - 2, paintRedSmall);
-        canvas.drawText("枕套" + orderItems.get(currentID).sizeStr + "   " + orderItems.get(currentID).order_number, left + 320, bottom - 2, paintSmall);
-        //-------
-        canvas.drawText("验片码" + orderItems.get(currentID).codeE, left + 600, bottom - 2, paintRedSmall);
+        canvas.drawRect(left, bottom - 20, left + 900, bottom, rectPaint);
+        canvas.drawText(time + "  FA枕套  " + orderItems.get(currentID).sizeStr + orderItems.get(currentID).color + "   " + orderItems.get(currentID).order_number, left, bottom - 2, paintSmall);
+        canvas.drawText(getRedNewCode(orderItems.get(currentID).newCode), left + 500, bottom - 2, paintRedSmall);
+//        canvas.drawText("验片码" + orderItems.get(currentID).codeE, left + 600, bottom - 2, paintRedSmall);
     }
 
     void drawTextRotateQuilt(Canvas canvas, int degree, int left, int bottom) {
         canvas.save();
         canvas.rotate(degree, (float) left, (float) bottom);
-        canvas.drawRect(left, bottom - 20, left + 800, bottom, rectPaint);
-        canvas.drawText(time + "  FA  " + orderItems.get(currentID).sizeStr+ orderItems.get(currentID).color, left, bottom - 2, paintSmall);
-        canvas.drawText(getRedNewCode(orderItems.get(currentID).newCode), left + 180, bottom - 2, paintRedSmall);
-        canvas.drawText("被套  " + orderItems.get(currentID).sizeStr + "   " + orderItems.get(currentID).order_number, left + 320, bottom - 2, paintSmall);
-        //-------
-        canvas.drawText("验片码" + orderItems.get(currentID).codeE, left + 600, bottom - 2, paintRedSmall);
+        canvas.drawRect(left, bottom - 20, left + 1000, bottom, rectPaint);
+        canvas.drawText(time + "  FA被套  " + orderItems.get(currentID).sizeStr + orderItems.get(currentID).color + "   " + orderItems.get(currentID).order_number, left, bottom - 2, paintSmall);
+        canvas.drawText(getRedNewCode(orderItems.get(currentID).newCode), left + 500, bottom - 2, paintRedSmall);
+//        canvas.drawText("验片码" + orderItems.get(currentID).codeE, left + 600, bottom - 2, paintRedSmall);
         canvas.restore();
     }
 
     public void remixx(){
+        orderItems.get(currentID).sizeStr = orderItems.get(currentID).sizeStr.replace("/", ".");
+        orderItems.get(currentID).newCode = orderItems.get(currentID).newCode.replace("/", ".");
+        setScale(orderItems.get(currentID).sizeStr);
+
         int pillowWidthPrint = 3300 + (int) (43 * 3.5);
         int pillowHeightPrint = 2200 + (int) (43 * 3.5);
 
@@ -198,13 +197,13 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         Rect rectDraw = new Rect(0, 0, pillowWidthPrint, pillowHeightPrint);
         canvasPrintPillow.drawBitmap(MainActivity.instance.bitmapPillow, rectCut, rectDraw, null);
         canvasPrintPillow.drawRect(rectDraw, rectBorderPaint);
-        drawText(canvasPrintPillow, pillowWidthPrint / 2, pillowHeightPrint);
+        drawText(canvasPrintPillow, pillowWidthPrint / 2, pillowHeightPrint - 2);
 
         rectCut = new Rect(pillow2X, pillow2Y, pillow2X + pillowWidth, pillow2Y + pillowHeight);
         rectDraw = new Rect(0, pillowHeightPrint + 6, pillowWidthPrint, pillowHeightPrint + 6 + pillowHeightPrint);
         canvasPrintPillow.drawBitmap(MainActivity.instance.bitmapPillow, rectCut, rectDraw, null);
         canvasPrintPillow.drawRect(rectDraw, rectBorderPaint);
-        drawText(canvasPrintPillow, pillowWidthPrint / 2, pillowHeightPrint + 6 + pillowHeightPrint);
+        drawText(canvasPrintPillow, pillowWidthPrint / 2, pillowHeightPrint + 6 + pillowHeightPrint - 2);
 
         Matrix matrix90 = new Matrix();
         matrix90.postRotate(90);
@@ -212,7 +211,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         bitmapPrintPillow = Bitmap.createBitmap(bitmapPrintPillow, 0, 0, bitmapPrintPillow.getWidth(), bitmapPrintPillow.getHeight(), matrix90, true);
         //save pillow
         String noNewCode = orderItems.get(currentID).newCode.equals("") ? orderItems.get(currentID).sizeStr : "";
-        String nameCombinePillow = orderItems.get(currentID).sku + orderItems.get(currentID).newCode + noNewCode + "枕套" + orderItems.get(currentID).color + orderItems.get(currentID).order_number + strPlus + ".jpg";
+        String nameCombinePillow = orderItems.get(currentID).sku + "-" + orderItems.get(currentID).newCode + noNewCode + "枕套" + orderItems.get(currentID).color + orderItems.get(currentID).order_number + strPlus + ".jpg";
 
         String pathSave;
         if(MainActivity.instance.cb_classify.isChecked()){
@@ -257,7 +256,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         drawTextRotateQuilt(canvasPrintQuilt, 90, 0, drawWidth / 2 + 100);
 
         try {
-            String nameCombine = orderItems.get(currentID).sku + orderItems.get(currentID).newCode + noNewCode + "被套" + orderItems.get(currentID).color + orderItems.get(currentID).order_number + strPlus + ".jpg";
+            String nameCombine = orderItems.get(currentID).sku + "-"  + orderItems.get(currentID).newCode + noNewCode + "被套" + orderItems.get(currentID).color + orderItems.get(currentID).order_number + strPlus + ".jpg";
 
             File fileSave = new File(pathSave + nameCombine);
             BitmapToJpg.save(bitmapPrintQuilt, fileSave, 110);
@@ -357,7 +356,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
                 drawHeight = 9853 + (int) (43 * 1.5);
                 break;
 
-            case "US Twin":
+            case "US TWIN":
                 quiltWidth = 7571;
                 quiltHeight = 9744;
                 quiltX = 2200;
@@ -365,7 +364,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
                 drawWidth = 7653 + (int) (43 * 0.5);//7653:176.7
                 drawHeight = 9853 + (int) (43 * 4.5);
                 break;
-            case "US Queen":
+            case "US QUEEN.FULL":
                 quiltWidth = 9744;
                 quiltHeight = 9744;
                 quiltX = 1113;
@@ -373,7 +372,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
                 drawWidth = 9853 + (int) (43 * 4.5);//9853:227.5
                 drawHeight = 9853 + (int) (43 * 1.5);
                 break;
-            case "US King":
+            case "US KING":
                 quiltWidth = 11487;
                 quiltHeight = 9744;
                 quiltX = 242;
@@ -381,7 +380,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
                 drawWidth = 11613 + (int) (43 * 4);//11613:268
                 drawHeight = 9853 + (int) (43 * 1.5);
                 break;
-            case "US California King":
+            case "US CALIFORNIA KING":
                 quiltWidth = 11487;
                 quiltHeight = 9744;
                 quiltX = 242;
@@ -390,7 +389,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
                 drawHeight = 9853 + (int) (43 * 1.5);
                 break;
 
-            case "AU Single":
+            case "AU SINGLE":
                 quiltWidth = 6496;
                 quiltHeight = 9744;
                 quiltX = 2736;
@@ -398,7 +397,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
                 drawWidth = 6063 + (int) (43 * 4);
                 drawHeight = 9094 + (int) (43 * 8);
                 break;
-            case "AU Double":
+            case "AU DOUBLE":
                 quiltWidth = 8352;
                 quiltHeight = 9744;
                 quiltX = 1808;
@@ -406,7 +405,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
                 drawWidth = 7795 + (int) (43 * 4);
                 drawHeight = 9094 + (int) (43 * 8);
                 break;
-            case "AU Queen":
+            case "AU QUEEN":
                 quiltWidth = 9744;
                 quiltHeight = 9744;
                 quiltX = 1113;
@@ -414,7 +413,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
                 drawWidth = 9094 + (int) (43 * 7);
                 drawHeight = 9094 + (int) (43 * 8);
                 break;
-            case "AU King":
+            case "AU KING":
                 quiltWidth = 10629;
                 quiltHeight = 9744;
                 quiltX = 670;
@@ -423,7 +422,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
                 drawHeight = 9528 + (int) (43 * 8);
                 break;
 
-            case "UK Single":
+            case "UK SINGLE":
                 quiltWidth = 6577;
                 quiltHeight = 2686;
                 quiltX = 2696;
@@ -431,7 +430,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
                 drawWidth = 5846 + (int) (43 * 4);
                 drawHeight = 8661 + (int) (43 * 7);
                 break;
-            case "UK Double":
+            case "UK DOUBLE":
                 quiltWidth = 9744;
                 quiltHeight = 9744;
                 quiltX = 1113;
@@ -439,7 +438,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
                 drawWidth = 8661 + (int) (43 * 7);
                 drawHeight = 8661 + (int) (43 * 7);
                 break;
-            case "UK King":
+            case "UK KING":
                 quiltWidth = 10186;
                 quiltHeight = 9744;
                 quiltX = 891;
@@ -447,7 +446,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
                 drawWidth = 9961 + (int) (43 * 8);
                 drawHeight = 9528 + (int) (43 * 8);
                 break;
-            case "UK Super King":
+            case "UK SUPER KING":
                 quiltWidth = 11515;
                 quiltHeight = 9744;
                 quiltX = 227;

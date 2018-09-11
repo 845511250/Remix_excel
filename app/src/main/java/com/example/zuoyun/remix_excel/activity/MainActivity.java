@@ -280,6 +280,54 @@ public class MainActivity extends FragmentActivity {
                 tv_title.setText("被罩 " + orderItems.get(currentID).order_number);
                 transaction.replace(R.id.frame_main, new FragmentFA());
                 break;
+            case "FA1":
+                tv_title.setText("被罩 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentFA());
+                break;
+            case "FA2":
+                tv_title.setText("被罩 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentFA());
+                break;
+            case "FA3":
+                tv_title.setText("被罩 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentFA());
+                break;
+            case "FA4":
+                tv_title.setText("被罩 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentFA());
+                break;
+            case "FA5":
+                tv_title.setText("被罩 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentFA());
+                break;
+            case "FA6":
+                tv_title.setText("被罩 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentFA());
+                break;
+            case "FA7":
+                tv_title.setText("被罩 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentFA());
+                break;
+            case "FA8":
+                tv_title.setText("被罩 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentFA());
+                break;
+            case "FA9":
+                tv_title.setText("被罩 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentFA());
+                break;
+            case "FA10":
+                tv_title.setText("被罩 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentFA());
+                break;
+            case "FA11":
+                tv_title.setText("被罩 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentFA());
+                break;
+            case "FA12":
+                tv_title.setText("被罩 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentFA());
+                break;
             case "FB":
                 tv_title.setText("高跟鞋 " + orderItems.get(currentID).order_number);
                 transaction.replace(R.id.frame_main, new FragmentFB());
@@ -382,7 +430,11 @@ public class MainActivity extends FragmentActivity {
                 break;
             case "GS":
                 tv_title.setText("卫衣裙 " + orderItems.get(currentID).order_number);
-                transaction.replace(R.id.frame_main, new FragmentGSnew());
+                if (orderItems.get(currentID).sizeStr.equals("2XL")) {
+                    transaction.replace(R.id.frame_main, new FragmentGS100());
+                } else {
+                    transaction.replace(R.id.frame_main, new FragmentGS165());
+                }
                 break;
             case "GT":
                 tv_title.setText("丝巾 " + orderItems.get(currentID).order_number);
