@@ -430,11 +430,12 @@ public class MainActivity extends FragmentActivity {
                 break;
             case "GS":
                 tv_title.setText("卫衣裙 " + orderItems.get(currentID).order_number);
-                if (orderItems.get(currentID).sizeStr.equals("2XL")) {
-                    transaction.replace(R.id.frame_main, new FragmentGS100());
-                } else {
-                    transaction.replace(R.id.frame_main, new FragmentGS165());
-                }
+//                if (orderItems.get(currentID).sizeStr.equals("2XL")) {
+//                    transaction.replace(R.id.frame_main, new FragmentGS100());
+//                } else {
+//                    transaction.replace(R.id.frame_main, new FragmentGS165());
+//                }
+                transaction.replace(R.id.frame_main, new FragmentGS165());
                 break;
             case "GT":
                 tv_title.setText("丝巾 " + orderItems.get(currentID).order_number);

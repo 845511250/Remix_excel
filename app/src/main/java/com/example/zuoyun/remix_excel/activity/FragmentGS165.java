@@ -255,9 +255,9 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         Bitmap bitmapB = orderItems.get(currentID).img_left == null ? MainActivity.instance.bitmapPillow : MainActivity.instance.bitmapLeft;
 
         Bitmap bitmapCombine;
-        if (orderItems.get(currentID).sizeStr.equals("XS") || orderItems.get(currentID).sizeStr.equals("S")) {
+        if (1 == 1) {
             bitmapCombine = Bitmap.createBitmap(width_combine, height_combine, Bitmap.Config.ARGB_8888);
-            Canvas canvasCombine= new Canvas(bitmapCombine);
+            Canvas canvasCombine = new Canvas(bitmapCombine);
             canvasCombine.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
             canvasCombine.drawColor(0xffffffff);
 
@@ -281,6 +281,28 @@ String sdCardPath = "/storage/emulated/0/Pictures";
             drawTextBack(canvasTemp);
             bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_back, height_back, true);
             canvasCombine.drawBitmap(bitmapTemp, x_back, y_back, null);
+            bitmapTemp.recycle();
+
+            //xiuziL
+            bitmapTemp = Bitmap.createBitmap(bitmapF, 5680, 2994, 2412, 3309);
+            canvasTemp = new Canvas(bitmapTemp);
+            bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.gs_arm_l);
+            canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
+            bitmapDB.recycle();
+            drawTextXiuziL(canvasTemp);
+            bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_arm, height_arm, true);
+            canvasCombine.drawBitmap(bitmapTemp, x_arm_l, y_arm_l, null);
+            bitmapTemp.recycle();
+
+            //xiuziR
+            bitmapTemp = Bitmap.createBitmap(bitmapF, 7, 2994, 2412, 3309);
+            canvasTemp = new Canvas(bitmapTemp);
+            bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.gs_arm_r);
+            canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
+            bitmapDB.recycle();
+            drawTextXiuziR(canvasTemp);
+            bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_arm, height_arm, true);
+            canvasCombine.drawBitmap(bitmapTemp, x_arm_r, y_arm_r, null);
             bitmapTemp.recycle();
 
             //maomianL
@@ -325,28 +347,6 @@ String sdCardPath = "/storage/emulated/0/Pictures";
             drawTextMaoziInL(canvasTemp);
             bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_maozi, height_maozi, true);
             canvasCombine.drawBitmap(bitmapTemp, x_maoli_l, y_maoli_l, null);
-            bitmapTemp.recycle();
-
-            //xiuziL
-            bitmapTemp = Bitmap.createBitmap(bitmapF, 5680, 2994, 2412, 3309);
-            canvasTemp = new Canvas(bitmapTemp);
-            bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.gs_arm_l);
-            canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
-            bitmapDB.recycle();
-            drawTextXiuziL(canvasTemp);
-            bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_arm, height_arm, true);
-            canvasCombine.drawBitmap(bitmapTemp, x_arm_l, y_arm_l, null);
-            bitmapTemp.recycle();
-
-            //xiuziR
-            bitmapTemp = Bitmap.createBitmap(bitmapF, 7, 2994, 2412, 3309);
-            canvasTemp = new Canvas(bitmapTemp);
-            bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.gs_arm_r);
-            canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
-            bitmapDB.recycle();
-            drawTextXiuziR(canvasTemp);
-            bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_arm, height_arm, true);
-            canvasCombine.drawBitmap(bitmapTemp, x_arm_r, y_arm_r, null);
             bitmapTemp.recycle();
 
             //xiabaiFront
@@ -410,7 +410,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
             } else {
                 bitmapCombine = Bitmap.createBitmap(width_front + width_back + width_maozi + margin * 2, height_back + height_arm + height_xiabai * 2 + margin * 4, Bitmap.Config.ARGB_8888);
             }
-            Canvas canvasCombine= new Canvas(bitmapCombine);
+            Canvas canvasCombine = new Canvas(bitmapCombine);
             canvasCombine.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
             canvasCombine.drawColor(0xffffffff);
 
@@ -441,6 +441,36 @@ String sdCardPath = "/storage/emulated/0/Pictures";
                 canvasCombine.drawBitmap(bitmapTemp, width_front + margin, 0, null);
             } else {
                 canvasCombine.drawBitmap(bitmapTemp, width_front + margin, 0, null);
+            }
+            bitmapTemp.recycle();
+
+            //xiuziL
+            bitmapTemp = Bitmap.createBitmap(bitmapF, 5680, 2994, 2412, 3309);
+            canvasTemp = new Canvas(bitmapTemp);
+            bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.gs_arm_l);
+            canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
+            bitmapDB.recycle();
+            drawTextXiuziL(canvasTemp);
+            bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_arm, height_arm, true);
+            if (orderItems.get(currentID).sizeStr.length() >= 3) {
+                canvasCombine.drawBitmap(bitmapTemp, 0, height_back + height_xiabai + height_maozi + margin * 3, null);
+            } else {
+                canvasCombine.drawBitmap(bitmapTemp, 0, height_back + margin, null);
+            }
+            bitmapTemp.recycle();
+
+            //xiuziR
+            bitmapTemp = Bitmap.createBitmap(bitmapF, 7, 2994, 2412, 3309);
+            canvasTemp = new Canvas(bitmapTemp);
+            bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.gs_arm_r);
+            canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
+            bitmapDB.recycle();
+            drawTextXiuziR(canvasTemp);
+            bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_arm, height_arm, true);
+            if (orderItems.get(currentID).sizeStr.length() >= 3) {
+                canvasCombine.drawBitmap(bitmapTemp, width_arm + margin, height_back + height_xiabai + height_maozi + margin * 3, null);
+            } else {
+                canvasCombine.drawBitmap(bitmapTemp, width_arm + margin, height_back + margin, null);
             }
             bitmapTemp.recycle();
 
@@ -501,36 +531,6 @@ String sdCardPath = "/storage/emulated/0/Pictures";
                 canvasCombine.drawBitmap(bitmapTemp, width_maozi * 3 + margin * 3, height_back + height_xiabai + margin * 2, null);
             } else {
                 canvasCombine.drawBitmap(bitmapTemp, width_front + width_back + margin * 2, height_maozi * 3, null);
-            }
-            bitmapTemp.recycle();
-
-            //xiuziL
-            bitmapTemp = Bitmap.createBitmap(bitmapF, 5680, 2994, 2412, 3309);
-            canvasTemp = new Canvas(bitmapTemp);
-            bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.gs_arm_l);
-            canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
-            bitmapDB.recycle();
-            drawTextXiuziL(canvasTemp);
-            bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_arm, height_arm, true);
-            if (orderItems.get(currentID).sizeStr.length() >= 3) {
-                canvasCombine.drawBitmap(bitmapTemp, 0, height_back + height_xiabai + height_maozi + margin * 3, null);
-            } else {
-                canvasCombine.drawBitmap(bitmapTemp, 0, height_back + margin, null);
-            }
-            bitmapTemp.recycle();
-
-            //xiuziR
-            bitmapTemp = Bitmap.createBitmap(bitmapF, 7, 2994, 2412, 3309);
-            canvasTemp = new Canvas(bitmapTemp);
-            bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.gs_arm_r);
-            canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
-            bitmapDB.recycle();
-            drawTextXiuziR(canvasTemp);
-            bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_arm, height_arm, true);
-            if (orderItems.get(currentID).sizeStr.length() >= 3) {
-                canvasCombine.drawBitmap(bitmapTemp, width_arm + margin, height_back + height_xiabai + height_maozi + margin * 3, null);
-            } else {
-                canvasCombine.drawBitmap(bitmapTemp, width_arm + margin, height_back + margin, null);
             }
             bitmapTemp.recycle();
 
@@ -733,19 +733,19 @@ String sdCardPath = "/storage/emulated/0/Pictures";
 
                 x_front=0;
                 y_front = 0;
-                x_back = 3047;
+                x_back = 3032;
                 y_back = 0;
                 x_arm_l = 0;
                 y_arm_l = 4690;
                 x_arm_r =2358;
                 y_arm_r = 4690;
-                x_maoli_r =6086;
+                x_maoli_r =6071;
                 y_maoli_r =0;
-                x_maoli_l =7918;
+                x_maoli_l =7865;
                 y_maoli_l =0;
-                x_maomian_r =6086;
+                x_maomian_r =6071;
                 y_maomian_r =2416;
-                x_maomian_l =7918;
+                x_maomian_l =7865;
                 y_maomian_l =2416;
                 x_xiabai_front =4684;
                 y_xiabai_front =6155;
@@ -758,7 +758,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
                 x_pocket =4684;
                 y_pocket =4698;
 
-                width_combine = 9744;
+                width_combine = 9583;
                 height_combine = 8017;
                 break;
             case "S":
@@ -826,6 +826,36 @@ String sdCardPath = "/storage/emulated/0/Pictures";
                 height_xiukou = 892;
                 width_cut = 2498;
                 height_cut = 1441;
+
+                x_front=0;
+                y_front = 0;
+                x_back = 3363;
+                y_back = 0;
+                x_arm_l = 6672;
+                y_arm_l = 0;
+                x_arm_r =7171;
+                y_arm_r = 3399;
+                x_maoli_r =0;
+                y_maoli_r =4893;
+                x_maoli_l =3672;
+                y_maoli_l =4902;
+                x_maomian_r =5477;
+                y_maomian_r =4902;
+                x_maomian_l =1805;
+                y_maomian_l =4893;
+                x_xiabai_front =0;
+                y_xiabai_front =7432;
+                x_xiabai_back =3300;
+                y_xiabai_back =7432;
+                x_xiukou_l =0;
+                y_xiukou_l =8398;
+                x_xiukou_r =1589;
+                y_xiukou_r =8398;
+                x_pocket =6836;
+                y_pocket =7503;
+
+                width_combine = 9583;
+                height_combine = 9290;
                 break;
             case "L":
                 width_front = 3408;
@@ -844,132 +874,228 @@ String sdCardPath = "/storage/emulated/0/Pictures";
                 height_xiukou = 892;
                 width_cut = 2504;
                 height_cut = 1462;
+
+                x_front=0;
+                y_front = 0;
+                x_back = 3561;
+                y_back = 0;
+                x_arm_l = 7086;
+                y_arm_l = 0;
+                x_arm_r =7086;
+                y_arm_r = 3466;
+                x_maoli_r =5820;
+                y_maoli_r =6982;
+                x_maoli_l =0;
+                y_maoli_l =5015;
+                x_maomian_r =1880;
+                y_maomian_r =5015;
+                x_maomian_l =7758;
+                y_maomian_l =6942;
+                x_xiabai_front =3777;
+                y_xiabai_front =5061;
+                x_xiabai_back =3777;
+                y_xiabai_back =6027;
+                x_xiukou_l =4154;
+                y_xiukou_l =7443;
+                x_xiukou_r =4155;
+                y_xiukou_r =8523;
+                x_pocket =395;
+                y_pocket =7586;
+
+                width_combine = 9617;
+                height_combine = 9516;
                 break;
             case "XL":
-                width_front = 3556;
+                width_front = 3615;
                 height_front = 5038;
-                width_back = 3556;
+                width_back = 3615;
                 height_back = 5100;
-                width_arm = 2649;
+                width_arm = 2679;
                 height_arm = 3488;
-                width_maozi = 1894;
-                height_maozi = 2534;
-                width_xiabai = 3474;
+                width_maozi = 1926;
+                height_maozi = 2641;
+                width_xiabai = 3533;
                 height_xiabai = 892;
                 width_pocket = 2617;
                 height_pocket = 1498;
                 width_xiukou = 1591;
                 height_xiukou = 892;
-                width_cut = 2399;
+                width_cut = 2360;
                 height_cut = 1428;
+
+                x_front=0;
+                y_front = 0;
+                x_back = 0;
+                y_back = 5110;
+                x_arm_l = 3615;
+                y_arm_l = 110;
+                x_arm_r =3675;
+                y_arm_r = 3964;
+                x_maoli_r =6426;
+                y_maoli_r =4767;
+                x_maoli_l =7656;
+                y_maoli_l =7569;
+                x_maomian_r =5712;
+                y_maomian_r =7569;
+                x_maomian_l =3675;
+                y_maomian_l =7569;
+                x_xiabai_front =6059;
+                y_xiabai_front =2757;
+                x_xiabai_back =6059;
+                y_xiabai_back =3722;
+                x_xiukou_l =6224;
+                y_xiukou_l =0;
+                x_xiukou_r =7908;
+                y_xiukou_r =0;
+                x_pocket =6500;
+                y_pocket =1021;
+
+                width_combine = 9592;
+                height_combine = 10210;
                 break;
             case "2XL":
-                width_front = 3703;
+                width_front = 3822;
                 height_front = 5156;
-                width_back = 3703;
+                width_back = 3822;
                 height_back = 5218;
-                width_arm = 2768;
+                width_arm = 2829;
                 height_arm = 3577;
                 width_maozi = 1985;
                 height_maozi = 2711;
-                width_xiabai = 3624;
+                width_xiabai = 3740;
                 height_xiabai = 892;
                 width_pocket = 2617;
                 height_pocket = 1498;
                 width_xiukou = 1652;
                 height_xiukou = 892;
-                width_cut = 2304;
+                width_cut = 2232;
                 height_cut = 1395;
-                break;
-            case "XXL":
-                width_front = 3703;
-                height_front = 5156;
-                width_back = 3703;
-                height_back = 5218;
-                width_arm = 2768;
-                height_arm = 3577;
-                width_maozi = 1985;
-                height_maozi = 2711;
-                width_xiabai = 3624;
-                height_xiabai = 892;
-                width_pocket = 2617;
-                height_pocket = 1498;
-                width_xiukou = 1652;
-                height_xiukou = 892;
-                width_cut = 2304;
-                height_cut = 1395;
+
+                x_front=0;
+                y_front = 0;
+                x_back = 3886;
+                y_back = 0;
+                x_arm_l = 0;
+                y_arm_l = 5224;
+                x_arm_r =6915;
+                y_arm_r = 5432;
+                x_maoli_r =7759;
+                y_maoli_r =0;
+                x_maoli_l =7759;
+                y_maoli_l =2700;
+                x_maomian_r =2666;
+                y_maomian_r =7221;
+                x_maomian_l =4719;
+                y_maomian_l =7221;
+                x_xiabai_front =2964;
+                y_xiabai_front =5298;
+                x_xiabai_back =2964;
+                y_xiabai_back =6259;
+                x_xiukou_l =6347;
+                y_xiukou_l =9574;
+                x_xiukou_r =8093;
+                y_xiukou_r =9574;
+                x_pocket =0;
+                y_pocket =8968;
+
+                width_combine = 9744;
+                height_combine = 10466;
                 break;
             case "3XL":
-                width_front = 3851;
+                width_front = 3969;
                 height_front = 5273;
-                width_back = 3851;
+                width_back = 3969;
                 height_back = 5336;
-                width_arm = 2887;
+                width_arm = 2947;
                 height_arm = 3666;
                 width_maozi = 2044;
                 height_maozi = 2759;
-                width_xiabai = 3769;
+                width_xiabai = 3888;
                 height_xiabai = 892;
                 width_pocket = 2617;
                 height_pocket = 1498;
                 width_xiukou = 1710;
                 height_xiukou = 892;
-                width_cut = 2216;
+                width_cut = 2150;
                 height_cut = 1364;
-                break;
-            case "XXXL":
-                width_front = 3851;
-                height_front = 5273;
-                width_back = 3851;
-                height_back = 5336;
-                width_arm = 2887;
-                height_arm = 3666;
-                width_maozi = 2044;
-                height_maozi = 2759;
-                width_xiabai = 3769;
-                height_xiabai = 892;
-                width_pocket = 2617;
-                height_pocket = 1498;
-                width_xiukou = 1710;
-                height_xiukou = 892;
-                width_cut = 2216;
-                height_cut = 1364;
+
+                x_front=0;
+                y_front = 0;
+                x_back = 0;
+                y_back = 5341;
+                x_arm_l = 4089;
+                y_arm_l = 0;
+                x_arm_r =4206;
+                y_arm_r = 6586;
+                x_maoli_r =7472;
+                y_maoli_r =0;
+                x_maoli_l =7472;
+                y_maoli_l =2759;
+                x_maomian_r =7472;
+                y_maomian_r =8277;
+                x_maomian_l =7472;
+                y_maomian_l =5518;
+                x_xiabai_front =0;
+                y_xiabai_front =10742;
+                x_xiabai_back =4008;
+                y_xiabai_back =10742;
+                x_xiukou_l =3853;
+                y_xiukou_l =5518;
+                x_xiukou_r =5679;
+                y_xiukou_r =5518;
+                x_pocket =4147;
+                y_pocket =3823;
+
+                width_combine = 9516;
+                height_combine = 11634;
                 break;
             case "4XL":
-                width_front = 3999;
+                width_front = 4117;
                 height_front = 5391;
-                width_back = 3999;
+                width_back = 4117;
                 height_back = 5454;
-                width_arm = 3006;
+                width_arm = 3066;
                 height_arm = 3756;
                 width_maozi = 2104;
                 height_maozi = 2818;
-                width_xiabai = 3917;
+                width_xiabai = 4035;
                 height_xiabai = 892;
                 width_pocket = 2617;
                 height_pocket = 1498;
                 width_xiukou = 1769;
                 height_xiukou = 892;
-                width_cut = 2134;
+                width_cut = 2072;
                 height_cut = 1334;
-                break;
-            case "XXXXL":
-                width_front = 3999;
-                height_front = 5391;
-                width_back = 3999;
-                height_back = 5454;
-                width_arm = 3006;
-                height_arm = 3756;
-                width_maozi = 2104;
-                height_maozi = 2818;
-                width_xiabai = 3917;
-                height_xiabai = 892;
-                width_pocket = 2617;
-                height_pocket = 1498;
-                width_xiukou = 1769;
-                height_xiukou = 892;
-                width_cut = 2134;
-                height_cut = 1334;
+
+                x_front=0;
+                y_front = 0;
+                x_back = 0;
+                y_back = 5465;
+                x_arm_l = 4236;
+                y_arm_l = 0;
+                x_arm_r =4270;
+                y_arm_r = 6803;
+                x_maoli_r =7538;
+                y_maoli_r =0;
+                x_maoli_l =7538;
+                y_maoli_l =2830;
+                x_maomian_r =7570;
+                y_maomian_r =8490;
+                x_maomian_l =7570;
+                y_maomian_l =5660;
+                x_xiabai_front =0;
+                y_xiabai_front =10987;
+                x_xiabai_back =4101;
+                y_xiabai_back =10987;
+                x_xiukou_l =3897;
+                y_xiukou_l =5660;
+                x_xiukou_r =5769;
+                y_xiukou_r =5660;
+                x_pocket =4493;
+                y_pocket =3893;
+
+                width_combine = 9665;
+                height_combine = 11879;
                 break;
             default:
                 showDialogSizeWrong(orderItems.get(currentID).order_number);
