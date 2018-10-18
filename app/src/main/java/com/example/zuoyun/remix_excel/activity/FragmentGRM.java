@@ -539,7 +539,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvasArm.drawBitmap(bitmapTemp, 5930, 430, null);
         bitmapTemp.recycle();
 
-        bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.gq_xiabai);
+        bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.gr_xiabai);
         canvasArm.drawBitmap(bitmapDB, 0, 0, null);
         bitmapDB.recycle();
         drawTextXiabai(canvasArm);

@@ -429,18 +429,18 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         bitmapTemp.recycle();
 
         //xiabai
-        bitmapArm = Bitmap.createBitmap(7907, 860, Bitmap.Config.ARGB_8888);
+        bitmapArm = Bitmap.createBitmap(7725, 860, Bitmap.Config.ARGB_8888);
         canvasArm= new Canvas(bitmapArm);
         canvasArm.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
         canvasArm.drawColor(0xffffffff);
 
-        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapLeft, 1524, 6325, 3954, 431);
+        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 1560, 6325, 3863, 431);
         canvasArm.drawBitmap(bitmapTemp, 0, 0, null);
         canvasArm.drawBitmap(bitmapTemp, 0, 430, null);
         bitmapTemp.recycle();
-        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 1524, 6325, 3954, 431);
-        canvasArm.drawBitmap(bitmapTemp, 3953, 0, null);
-        canvasArm.drawBitmap(bitmapTemp, 3953, 430, null);
+        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapLeft, 1604, 6325, 3863, 431);
+        canvasArm.drawBitmap(bitmapTemp, 3862, 0, null);
+        canvasArm.drawBitmap(bitmapTemp, 3862, 430, null);
         bitmapTemp.recycle();
 
         bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.gq_xiabai);
