@@ -18,7 +18,7 @@ import android.widget.TextView;
 
 import com.example.zuoyun.remix_excel.R;
 import com.example.zuoyun.remix_excel.activity.start.bean.OrderItem;
-import com.example.zuoyun.remix_excel.tools.BitmapToPng;
+import com.example.zuoyun.remix_excel.tools.BitmapToJpg;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -163,25 +163,52 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     }
 
     public void remixx(){
+//        Bitmap bitmapCombine = Bitmap.createBitmap(7137, 3447, Bitmap.Config.ARGB_8888);
+//        Canvas canvasCombine= new Canvas(bitmapCombine);
+//        canvasCombine.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
+//        canvasCombine.drawBitmap(MainActivity.instance.bitmapPillow, -35, -26, null);
+//
+//        Bitmap bitmapDB = BitmapFactory.decodeResource(getResources(), R.drawable.hc);
+//        bitmapCombine = BitmapToPng.cut(bitmapCombine, bitmapDB);
+//        bitmapDB.recycle();
+//
+//        canvasCombine= new Canvas(bitmapCombine);
+//        canvasCombine.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
+//        drawText(canvasCombine);
+//
+//        Matrix matrix = new Matrix();
+//        matrix.postRotate(-90, bitmapCombine.getWidth() / 2, bitmapCombine.getHeight() / 2);
+//        bitmapCombine = Bitmap.createBitmap(bitmapCombine, 0, 0, bitmapCombine.getWidth(), bitmapCombine.getHeight(), matrix, true);
+//
+//        String nameCombine = orderItems.get(currentID).sku + "_" + orderItems.get(currentID).order_number + strPlus + ".png";
+//        String pathSave;
+//        if(MainActivity.instance.cb_classify.isChecked()){
+//            pathSave = sdCardPath + "/生产图/" + childPath + "/" + orderItems.get(currentID).sku + "/";
+//        } else
+//            pathSave = sdCardPath + "/生产图/" + childPath + "/";
+//        if(!new File(pathSave).exists())
+//            new File(pathSave).mkdirs();
+//        File fileSave = new File(pathSave + nameCombine);
+//        BitmapToPng.save(bitmapCombine, fileSave, 125);
+//        bitmapCombine.recycle();
+
         Bitmap bitmapCombine = Bitmap.createBitmap(7137, 3447, Bitmap.Config.ARGB_8888);
         Canvas canvasCombine= new Canvas(bitmapCombine);
         canvasCombine.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
         canvasCombine.drawBitmap(MainActivity.instance.bitmapPillow, -35, -26, null);
 
         Bitmap bitmapDB = BitmapFactory.decodeResource(getResources(), R.drawable.hc);
-        bitmapCombine = BitmapToPng.cut(bitmapCombine, bitmapDB);
+        canvasCombine.drawBitmap(bitmapDB, 0, 0, null);
+        drawText(canvasCombine);
         bitmapDB.recycle();
 
-        canvasCombine= new Canvas(bitmapCombine);
-        canvasCombine.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
-        drawText(canvasCombine);
+        bitmapCombine = Bitmap.createScaledBitmap(bitmapCombine, 7137, 3420, true);
 
         Matrix matrix = new Matrix();
-        matrix.reset();
         matrix.postRotate(-90, bitmapCombine.getWidth() / 2, bitmapCombine.getHeight() / 2);
         bitmapCombine = Bitmap.createBitmap(bitmapCombine, 0, 0, bitmapCombine.getWidth(), bitmapCombine.getHeight(), matrix, true);
 
-        String nameCombine = orderItems.get(currentID).sku + "_" + orderItems.get(currentID).order_number + strPlus + ".png";
+        String nameCombine = orderItems.get(currentID).sku + "_" + orderItems.get(currentID).order_number + strPlus + ".jpg";
         String pathSave;
         if(MainActivity.instance.cb_classify.isChecked()){
             pathSave = sdCardPath + "/生产图/" + childPath + "/" + orderItems.get(currentID).sku + "/";
@@ -190,7 +217,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         if(!new File(pathSave).exists())
             new File(pathSave).mkdirs();
         File fileSave = new File(pathSave + nameCombine);
-        BitmapToPng.save(bitmapCombine, fileSave, 125);
+        BitmapToJpg.save(bitmapCombine, fileSave, 125);
         bitmapCombine.recycle();
 
 
