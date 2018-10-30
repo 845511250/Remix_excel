@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.example.zuoyun.remix_excel.R;
 import com.example.zuoyun.remix_excel.activity.start.bean.OrderItem;
+import com.example.zuoyun.remix_excel.bean.Config;
 import com.example.zuoyun.remix_excel.tools.BitmapToJpg;
 
 import java.io.File;
@@ -137,25 +138,32 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     }
 
     public void remix(){
-        new Thread(){
-            @Override
-            public void run() {
-                super.run();
+        if (Config.chooseGA == 0) {
+            showDialogChoose();
+        } else {
+            new Thread(){
+                @Override
+                public void run() {
+                    super.run();
 
-                for(num=orderItems.get(currentID).num;num>=1;num--) {
-                    for(int i=0;i<currentID;i++) {
-                        if (orderItems.get(currentID).order_number.equals(orderItems.get(i).order_number)) {
-                            intPlus += 1;
+                    for(num=orderItems.get(currentID).num;num>=1;num--) {
+                        for(int i=0;i<currentID;i++) {
+                            if (orderItems.get(currentID).order_number.equals(orderItems.get(i).order_number)) {
+                                intPlus += 1;
+                            }
                         }
+                        strPlus = intPlus == 1 ? "" : "(" + intPlus + ")";
+                        if (Config.chooseGA == 100) {
+                            remixx100();
+                        } else {
+                            remixx165();
+                        }
+                        intPlus += 1;
                     }
-                    strPlus = intPlus == 1 ? "" : "(" + intPlus + ")";
-                    remixx();
-                    intPlus += 1;
+
                 }
-
-            }
-        }.start();
-
+            }.start();
+        }
     }
 
     void drawTextFrontL(Canvas canvas) {
@@ -197,7 +205,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvas.drawText(" 右 " + orderItems.get(currentID).order_number, 360, 9 + 23, paint);
     }
 
-    public void remixx(){
+    public void remixx100(){
         Bitmap bitmapCombine = Bitmap.createBitmap(4523, 16500, Bitmap.Config.ARGB_8888);
         Canvas canvasCombine= new Canvas(bitmapCombine);
         canvasCombine.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
@@ -432,6 +440,239 @@ String sdCardPath = "/storage/emulated/0/Pictures";
             });
         }
     }
+
+    public void remixx165(){
+        Bitmap bitmapCombine = Bitmap.createBitmap(7705, 8994, Bitmap.Config.ARGB_8888);
+        Canvas canvasCombine= new Canvas(bitmapCombine);
+        canvasCombine.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
+        canvasCombine.drawColor(0xffffffff);
+
+        //腰带
+        Bitmap bitmapBelt = Bitmap.createBitmap(8572, 521, Bitmap.Config.ARGB_8888);
+        Canvas canvasBelt= new Canvas(bitmapBelt);
+        canvasBelt.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
+        canvasBelt.drawColor(0xffffffff);
+
+        Bitmap bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, 2206, 2539, 4286, 521);
+        canvasBelt.drawBitmap(bitmapTemp, 0, 0, null);
+        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, 1273, 2539, 4286, 521);
+        canvasBelt.drawBitmap(bitmapTemp, 4285, 0, null);
+        bitmapTemp.recycle();
+
+        Bitmap bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.ga_belt);
+        canvasBelt.drawBitmap(bitmapDB, 0, 0, null);
+        bitmapDB.recycle();
+
+        Matrix matrix = new Matrix();
+        matrix.postRotate(90);
+        matrix.postTranslate(521 + 7184, 0);
+        canvasCombine.drawBitmap(bitmapBelt, matrix, null);
+        bitmapBelt.recycle();
+
+        //back
+        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, 2273, 678, 3255, 4400);
+        Canvas canvasTemp = new Canvas(bitmapTemp);
+        bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.ga_back);
+        canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
+        bitmapDB.recycle();
+        drawTextBack(canvasTemp);
+        canvasCombine.drawBitmap(bitmapTemp, 0, 0, null);
+        bitmapTemp.recycle();
+
+        //frontR
+        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, 2273, 678, 1883, 4451);
+        canvasTemp = new Canvas(bitmapTemp);
+        bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.ga_front_r);
+        canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
+        bitmapDB.recycle();
+        drawTextFrontR(canvasTemp);
+        canvasCombine.drawBitmap(bitmapTemp, 0, 4543, null);
+        bitmapTemp.recycle();
+
+        //frontL
+        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, 3646, 678, 1882, 4451);
+        canvasTemp = new Canvas(bitmapTemp);
+        bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.ga_front_l);
+        canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
+        bitmapDB.recycle();
+        drawTextFrontL(canvasTemp);
+        canvasCombine.drawBitmap(bitmapTemp, 2004, 4543, null);
+        bitmapTemp.recycle();
+
+        //collarL
+        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, 3649, 49, 1008, 5072);
+        canvasTemp = new Canvas(bitmapTemp);
+        bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.ga_collar_l);
+        canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
+        bitmapDB.recycle();
+        canvasCombine.drawBitmap(bitmapTemp, 3953, 2659, null);
+        bitmapTemp.recycle();
+
+        //collarR
+        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, 3145, 49, 1008, 5072);
+        canvasTemp = new Canvas(bitmapTemp);
+        bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.ga_collar_r);
+        canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
+        bitmapDB.recycle();
+        canvasCombine.drawBitmap(bitmapTemp, 6024, 0, null);
+        bitmapTemp.recycle();
+
+        //loopTop
+        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, 3567, 833, 666, 222);
+        canvasTemp = new Canvas(bitmapTemp);
+        bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.ga_loop_top);
+        canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
+        bitmapDB.recycle();
+        canvasCombine.drawBitmap(bitmapTemp, 5505, 1978, null);
+        bitmapTemp.recycle();
+
+        //armR
+        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, 108, 1561, 2209, 2478);
+        canvasTemp = new Canvas(bitmapTemp);
+        bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.ga_arm_r);
+        canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
+        bitmapDB.recycle();
+        drawTextArmR(canvasTemp);
+        canvasCombine.drawBitmap(bitmapTemp, 4766, 5551, null);
+        bitmapTemp.recycle();
+
+        //armL
+        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, 5486, 1561, 2209, 2478);
+        canvasTemp = new Canvas(bitmapTemp);
+        bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.ga_arm_l);
+        canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
+        bitmapDB.recycle();
+        drawTextArmL(canvasTemp);
+        canvasCombine.drawBitmap(bitmapTemp, 3211, 0, null);
+        bitmapTemp.recycle();
+
+        //pocketL
+        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, 4475, 2990, 808, 973);
+        canvasTemp = new Canvas(bitmapTemp);
+        bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.ga_pocket);
+        canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
+        bitmapDB.recycle();
+        drawTextPocketL(canvasTemp);
+        canvasCombine.drawBitmap(bitmapTemp, 5186, 3226, null);
+        bitmapTemp.recycle();
+
+        //pocketR
+        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, 2516, 2990, 808, 973);
+        canvasTemp = new Canvas(bitmapTemp);
+        bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.ga_pocket);
+        canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
+        bitmapDB.recycle();
+        drawTextPocketR(canvasTemp);
+        canvasCombine.drawBitmap(bitmapTemp, 4889, 4400, null);
+        bitmapTemp.recycle();
+
+        //collarBack
+        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, 2509, 219, 2782, 668);
+        canvasTemp = new Canvas(bitmapTemp);
+        bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.ga_collar_back);
+        canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
+        bitmapDB.recycle();
+        drawTextCollarBack(canvasTemp);
+        canvasCombine.drawBitmap(bitmapTemp, 4040, 8238, null);
+        bitmapTemp.recycle();
+
+        //loopL
+        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, 5337, 2532, 222, 571);
+        canvasTemp = new Canvas(bitmapTemp);
+        bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.ga_loop);
+        canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
+        bitmapDB.recycle();
+        canvasCombine.drawBitmap(bitmapTemp, 5513, 2438, null);
+        bitmapTemp.recycle();
+
+        //loopR
+        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, 2206, 2532, 222, 571);
+        canvasTemp = new Canvas(bitmapTemp);
+        bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.ga_loop);
+        canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
+        bitmapDB.recycle();
+        canvasCombine.drawBitmap(bitmapTemp, 5949, 2438, null);
+        bitmapTemp.recycle();
+
+        try {
+//            Matrix matrix = new Matrix();
+//            matrix.postRotate(-90, bitmapCombine.getWidth() / 2, bitmapCombine.getHeight() / 2);
+//            bitmapCombine = Bitmap.createBitmap(bitmapCombine, 0, 0, bitmapCombine.getWidth(), bitmapCombine.getHeight(), matrix, true);
+
+            String nameCombine = "GA女浴袍_" + orderItems.get(currentID).order_number + strPlus + ".jpg";
+
+            String pathSave;
+            if(MainActivity.instance.cb_classify.isChecked()){
+                pathSave = sdCardPath + "/生产图/" + childPath + "/" + orderItems.get(currentID).sku + "/";
+            } else
+                pathSave = sdCardPath + "/生产图/" + childPath + "/";
+            if(!new File(pathSave).exists())
+                new File(pathSave).mkdirs();
+            File fileSave = new File(pathSave + nameCombine);
+            BitmapToJpg.save(bitmapCombine, fileSave, 120);
+            bitmapCombine.recycle();
+
+            //写入excel
+            String writePath = sdCardPath + "/生产图/" + childPath + "/生产单.xls";
+            File fileWrite = new File(writePath);
+            if(!fileWrite.exists()){
+                WritableWorkbook book = Workbook.createWorkbook(fileWrite);
+                WritableSheet sheet = book.createSheet("sheet1", 0);
+                Label label0 = new Label(0, 0, "货号");
+                sheet.addCell(label0);
+                Label label1 = new Label(1, 0, "结构");
+                sheet.addCell(label1);
+                Label label2 = new Label(2, 0, "数量");
+                sheet.addCell(label2);
+                Label label3 = new Label(3, 0, "业务员");
+                sheet.addCell(label3);
+                Label label4 = new Label(4, 0, "销售日期");
+                sheet.addCell(label4);
+                Label label5 = new Label(5, 0, "备注");
+                sheet.addCell(label5);
+                Label label6 = new Label(6, 0, "部门");
+                sheet.addCell(label6);
+                book.write();
+                book.close();
+            }
+
+            Workbook book = Workbook.getWorkbook(fileWrite);
+            WritableWorkbook workbook = Workbook.createWorkbook(fileWrite,book);
+            WritableSheet sheet = workbook.getSheet(0);
+            Label label0 = new Label(0, currentID+1, orderItems.get(currentID).order_number+orderItems.get(currentID).sku);
+            sheet.addCell(label0);
+            Label label1 = new Label(1, currentID+1, orderItems.get(currentID).sku);
+            sheet.addCell(label1);
+            int num=orderItems.get(currentID).num;
+            Number number2 = new Number(2, currentID+1, num);
+            sheet.addCell(number2);
+            Label label3 = new Label(3, currentID+1, "小左");
+            sheet.addCell(label3);
+            Label label4 = new Label(4, currentID + 1, MainActivity.instance.orderDate_Excel);
+            sheet.addCell(label4);
+            Label label6 = new Label(6, currentID+1, "平台大货");
+            sheet.addCell(label6);
+
+            workbook.write();
+            workbook.close();
+
+        }catch (Exception e){
+        }
+        if (num == 1) {
+            MainActivity.instance.bitmapPillow.recycle();
+
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    MainActivity.instance.tv_finishRemixx.setText("完成");
+                    if (MainActivity.instance.tb_auto.isChecked()) {
+                        MainActivity.instance.setnext();
+                    }
+                }
+            });
+        }
+    }
+
     public void checkremix(){
         if (MainActivity.instance.tb_auto.isChecked()){
             remix();
@@ -488,17 +729,39 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         });
     }
 
-    String getColor(String color){
-        if (color.equals("White")) {
-            return "白灯";
-        } else if (color.equals("Green")) {
-            return "绿灯";
-        } else if (color.equals("Blue")) {
-            return "蓝灯";
-        } else if (color.equals("Red")) {
-            return "红灯";
-        } else {
-            return "无灯";
-        }
+    private void showDialogChoose(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.DialogTransBackGround);
+        final AlertDialog dialog_choose = builder.create();
+        dialog_choose.setCancelable(false);
+        dialog_choose.show();
+        View view_dialog = LayoutInflater.from(context).inflate(R.layout.item_dialog_confirm, null);
+        dialog_choose.setContentView(view_dialog);
+
+        TextView tv_title_update = (TextView) view_dialog.findViewById(R.id.tv_dialog_title);
+        TextView tv_content = (TextView) view_dialog.findViewById(R.id.tv_dialog_content);
+        Button bt_yes = (Button) view_dialog.findViewById(R.id.bt_dialog_yes);
+        Button bt_no = (Button) view_dialog.findViewById(R.id.bt_dialog_no);
+
+        tv_title_update.setText("GA女浴袍");
+        tv_content.setText("请选择排版宽度");
+        bt_yes.setText("1 米");
+        bt_no.setText("1.65 米");
+
+        bt_yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Config.chooseGA = 100;
+                dialog_choose.dismiss();
+                remix();
+            }
+        });
+        bt_no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Config.chooseGA = 165;
+                dialog_choose.dismiss();
+                remix();
+            }
+        });
     }
 }

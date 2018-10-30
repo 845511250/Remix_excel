@@ -17,4 +17,7 @@ public class Config {
     public final static String getSkus = BaseUrl + "/api/sku";
     public final static String markFinished = BaseUrl + "/api/printed";
     public final static String downloadImg = BaseUrl + "/api/downloads";
+
+    public static int chooseGA;//100,165
+    public static int chooseGB;//100,165
 }
