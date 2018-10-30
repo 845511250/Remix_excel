@@ -691,7 +691,6 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     }
 
     private void showDialogChoose(){
-        int i;
         AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.DialogTransBackGround);
         final AlertDialog dialog_choose = builder.create();
         dialog_choose.setCancelable(false);
