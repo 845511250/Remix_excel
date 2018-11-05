@@ -35,7 +35,7 @@ import jxl.write.WritableWorkbook;
  * Created by zuoyun on 2016/11/4.
  */
 
-public class FragmentHDD extends BaseFragment {
+public class FragmentHD extends BaseFragment {
     Context context;
 //    String sdCardPath = "/mnt/asec/share";
 String sdCardPath = "/storage/emulated/0/Pictures";
@@ -177,14 +177,14 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     void drawText1L(Canvas canvas) {
         canvas.save();
         canvas.rotate(107.1f, 204, 561);
-        canvas.drawRect(204, 561 - 23, 204 + 500, 561, rectPaint);
+        canvas.drawRect(204, 561 - 23, 204 + 530, 561, rectPaint);
         canvas.drawText(time + "  " + orderItems.get(currentID).sizeStr + "左 " + orderItems.get(currentID).order_number + "   " + orderItems.get(currentID).newCodeStr, 204, 561 - 2, paint);
         canvas.restore();
     }
     void drawText1R(Canvas canvas) {
         canvas.save();
         canvas.rotate(107.1f, 204, 561);
-        canvas.drawRect(204, 561 - 23, 204 + 500, 561, rectPaint);
+        canvas.drawRect(204, 561 - 23, 204 + 530, 561, rectPaint);
         canvas.drawText(time + "  " + orderItems.get(currentID).sizeStr + "右 " + orderItems.get(currentID).order_number + "   " + orderItems.get(currentID).newCodeStr, 204, 561 - 2, paint);
         canvas.restore();
     }
@@ -197,7 +197,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
 
         canvas.save();
         canvas.rotate(92.8f, 22, 1262);
-        canvas.drawRect(22, 1262 - 23, 22 + 250, 1262, rectPaint);
+        canvas.drawRect(22, 1262 - 23, 22 + 290, 1262, rectPaint);
         canvas.drawText(orderItems.get(currentID).sizeStr + "左  " + orderItems.get(currentID).newCodeStr, 22, 1262 - 2, paint);
         canvas.restore();
     }
@@ -209,21 +209,21 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvas.restore();
 
         canvas.save();
-        canvas.rotate(-92.8f, 739, 1479);
-        canvas.drawRect(739, 1479 - 23, 739 + 250, 1479, rectPaint);
-        canvas.drawText(orderItems.get(currentID).sizeStr + "右  " + orderItems.get(currentID).newCodeStr, 739, 1479 - 2, paint);
+        canvas.rotate(-92.6f, 740, 1532);
+        canvas.drawRect(740, 1532 - 23, 740 + 290, 1532, rectPaint);
+        canvas.drawText(orderItems.get(currentID).sizeStr + "右  " + orderItems.get(currentID).newCodeStr, 740, 1532 - 2, paint);
         canvas.restore();
     }
     void drawTextSideL(Canvas canvas) {
         canvas.save();
         canvas.rotate(-90, 210, 3780);
-        canvas.drawText(time + "  " + orderItems.get(currentID).sizeStr + "左 " + orderItems.get(currentID).order_number + "   " + orderItems.get(currentID).newCodeStr, 210, 3780 - 2, paint);
+        canvas.drawText(time + "  " + orderItems.get(currentID).sizeStr + "左 " + orderItems.get(currentID).order_number, 210, 3780 - 2, paint);
         canvas.restore();
     }
     void drawTextSideR(Canvas canvas) {
         canvas.save();
         canvas.rotate(90, 10, 3330);
-        canvas.drawText(time + "  " + orderItems.get(currentID).sizeStr + "右 " + orderItems.get(currentID).order_number + "   " + orderItems.get(currentID).newCodeStr, 10, 3330 - 2, paint);
+        canvas.drawText(time + "  " + orderItems.get(currentID).sizeStr + "右 " + orderItems.get(currentID).order_number, 10, 3330 - 2, paint);
         canvas.restore();
     }
 
