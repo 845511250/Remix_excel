@@ -228,10 +228,11 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     }
 
     public void remixx(){
-        int margin = 60;
+        int margin = 30;
         Matrix matrix = new Matrix();
+        int combineHeight = Math.max(height_side, height_1 * 2 + height_2);
 
-        Bitmap bitmapCombine = Bitmap.createBitmap(width_2 * 2 + width_side * 2 + margin * 3, height_1 * 2 + height_2, Bitmap.Config.ARGB_8888);
+        Bitmap bitmapCombine = Bitmap.createBitmap(width_2 * 2 + width_side * 2 + margin * 3, combineHeight, Bitmap.Config.ARGB_8888);
         Canvas canvasCombine= new Canvas(bitmapCombine);
         canvasCombine.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
         canvasCombine.drawColor(0xffffffff);
@@ -244,7 +245,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         bitmapDB.recycle();
         drawText1L(canvasTemp);
         bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_1, height_1, true);
-        canvasCombine.drawBitmap(bitmapTemp, 0, 0, null);
+        canvasCombine.drawBitmap(bitmapTemp, (width_side * 2 + width_2 * 2) / 2 - width_1 / 2, height_2, null);
         bitmapTemp.recycle();
 
         bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 0, 6, 1387, 1239);
@@ -254,7 +255,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         bitmapDB.recycle();
         drawText1R(canvasTemp);
         bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_1, height_1, true);
-        canvasCombine.drawBitmap(bitmapTemp, 0, height_1, null);
+        canvasCombine.drawBitmap(bitmapTemp, (width_side * 2 + width_2 * 2) / 2 - width_1 / 2, height_2 + height_1, null);
         bitmapTemp.recycle();
 
         //2
@@ -275,7 +276,10 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         bitmapDB.recycle();
         drawText2L(canvasTemp);
         bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_2, height_2, true);
-        canvasCombine.drawBitmap(bitmapTemp, 0, height_1 * 2, null);
+        matrix.reset();
+        matrix.postRotate(180);
+        matrix.postTranslate(width_2 + width_side + width_2 + margin, height_2);
+        canvasCombine.drawBitmap(bitmapTemp, matrix, null);
         bitmapTemp.recycle();
 
         bitmapCut = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 326, 1359, 750, 1924);
@@ -295,7 +299,10 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         bitmapDB.recycle();
         drawText2R(canvasTemp);
         bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_2, height_2, true);
-        canvasCombine.drawBitmap(bitmapTemp, width_2 + margin, height_1 * 2, null);
+        matrix.reset();
+        matrix.postRotate(180);
+        matrix.postTranslate(width_2 + width_side, height_2);
+        canvasCombine.drawBitmap(bitmapTemp, matrix, null);
         bitmapTemp.recycle();
 
         //sideL
@@ -317,7 +324,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvasSide.drawBitmap(bitmapDB, 0, 0, null);
         drawTextSideL(canvasSide);
         bitmapSide = Bitmap.createScaledBitmap(bitmapSide, width_side, height_side, true);
-        canvasCombine.drawBitmap(bitmapSide, width_2 * 2 + margin * 2, 0, null);
+        canvasCombine.drawBitmap(bitmapSide, 0, 0, null);
         bitmapSide.recycle();
 
         //sideR
@@ -340,7 +347,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         bitmapDB.recycle();
         drawTextSideR(canvasSide);
         bitmapSide = Bitmap.createScaledBitmap(bitmapSide, width_side, height_side, true);
-        canvasCombine.drawBitmap(bitmapSide, width_2 * 2 + width_side + margin * 3, 0, null);
+        canvasCombine.drawBitmap(bitmapSide, width_side + width_2 * 2 + margin, 0, null);
         bitmapSide.recycle();
 
 
@@ -447,28 +454,28 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     void setScale(String size) {
         switch (size) {
             case "29.5":
-                width_1 = 1022;
+                width_1 = 1034;
                 height_1 = 792;
                 width_2 = 588;
                 height_2 = 1242;
                 width_side = 230;
-                height_side = 2768;
+                height_side = 2889;
                 break;
             case "31.5":
-                width_1 = 1073;
+                width_1 = 1086;
                 height_1 = 846;
                 width_2 = 606;
                 height_2 = 1322;
                 width_side = 230;
-                height_side = 2953;
+                height_side = 3059;
                 break;
             case "34.5":
-                width_1 = 1099;
+                width_1 = 1163;
                 height_1 = 926;
-                width_2 = 642;
-                height_2 = 1451;
+                width_2 = 625;
+                height_2 = 1445;
                 width_side = 230;
-                height_side = 3231;
+                height_side = 3315;
                 break;
             case "36.5":
                 width_1 = 1150;
@@ -479,36 +486,36 @@ String sdCardPath = "/storage/emulated/0/Pictures";
                 height_side = 3416;
                 break;
             case "38.5":
-                width_1 = 1202;
-                height_1 = 1034;
+                width_1 = 1266;
+                height_1 = 1035;
                 width_2 = 676;
                 height_2 = 1609;
                 width_side = 230;
-                height_side = 3600;
+                height_side = 3657;
                 break;
             case "40.5":
-                width_1 = 1254;
-                height_1 = 1087;
+                width_1 = 1318;
+                height_1 = 1089;
                 width_2 = 694;
                 height_2 = 1689;
                 width_side = 230;
-                height_side = 3785;
+                height_side = 3828;
                 break;
             case "41.5":
-                width_1 = 1279;
-                height_1 = 1114;
+                width_1 = 1344;
+                height_1 = 1116;
                 width_2 = 703;
                 height_2 = 1728;
                 width_side = 230;
-                height_side = 3878;
+                height_side = 3913;
                 break;
             case "43.5":
-                width_1 = 1331;
-                height_1 = 1168;
+                width_1 = 1395;
+                height_1 = 1170;
                 width_2 = 721;
                 height_2 = 1808;
                 width_side = 230;
-                height_side = 4063;
+                height_side = 4084;
                 break;
             case "46.5":
                 width_1 = 1408;

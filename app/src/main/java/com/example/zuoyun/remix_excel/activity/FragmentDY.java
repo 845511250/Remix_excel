@@ -51,7 +51,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     int num;
     String strPlus = "";
 
-    Paint rectPaint, paint, paintRed, paintBlue;
+    Paint rectPaint, paint, paintRed, paintBlue,paintRectBlack;
     String time;
 
     @Override
@@ -70,6 +70,10 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         rectPaint = new Paint();
         rectPaint.setColor(0xffffffff);
         rectPaint.setStyle(Paint.Style.FILL);
+
+        paintRectBlack = new Paint();
+        paintRectBlack.setColor(0xff000000);
+        paintRectBlack.setStyle(Paint.Style.FILL);
 
         paint = new Paint();
         paint.setColor(0xff000000);
@@ -325,6 +329,10 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvasCombine.drawBitmap(bitmapPart4R, part4RX, part4RY, null);
         bitmapPart4R.recycle();
         bitmapDBPart4.recycle();
+
+        //
+        canvasCombine.drawRect(2200, 0, 2300, 1, paintRectBlack);
+        canvasCombine.drawRect(2200, 2778, 2300, 2779, paintRectBlack);
 
         try {
             String printColor = orderItems.get(currentID).color.equals("黑") ? "B" : "W";
