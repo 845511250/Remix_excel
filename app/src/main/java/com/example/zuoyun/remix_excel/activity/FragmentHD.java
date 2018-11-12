@@ -190,29 +190,23 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     }
     void drawText2L(Canvas canvas) {
         canvas.save();
-        canvas.rotate(86.1f, 13, 828);
-        canvas.drawRect(13, 828 - 23, 13 + 250, 828, rectPaint);
-        canvas.drawText(orderItems.get(currentID).order_number + "  " + time, 13, 828 - 2, paint);
+        canvas.rotate(-91.8f, 721, 577);
+        canvas.drawRect(721, 577 - 23, 721 + 250, 577, rectPaint);
+        canvas.drawText(orderItems.get(currentID).order_number + " " + time, 721, 577 - 2, paint);
         canvas.restore();
 
-        canvas.save();
-        canvas.rotate(92.8f, 22, 1262);
-        canvas.drawRect(22, 1262 - 23, 22 + 290, 1262, rectPaint);
-        canvas.drawText(orderItems.get(currentID).sizeStr + "左  " + orderItems.get(currentID).newCodeStr, 22, 1262 - 2, paint);
-        canvas.restore();
+        canvas.drawRect(390, 25, 390 + 90, 25+23, rectPaint);
+        canvas.drawText(orderItems.get(currentID).sizeStr + " 左", 390, 25 + 21, paint);
     }
     void drawText2R(Canvas canvas) {
         canvas.save();
-        canvas.rotate(-86.3f, 727, 969);
-        canvas.drawRect(727, 969 - 23, 727 + 250, 969, rectPaint);
-        canvas.drawText(orderItems.get(currentID).order_number + "  " + time, 727, 969 - 2, paint);
+        canvas.rotate(92.1f, 36, 325);
+        canvas.drawRect(36, 325 - 23, 36 + 250, 325, rectPaint);
+        canvas.drawText(orderItems.get(currentID).order_number + " " + time, 36, 325 - 2, paint);
         canvas.restore();
 
-        canvas.save();
-        canvas.rotate(-92.6f, 740, 1532);
-        canvas.drawRect(740, 1532 - 23, 740 + 290, 1532, rectPaint);
-        canvas.drawText(orderItems.get(currentID).sizeStr + "右  " + orderItems.get(currentID).newCodeStr, 740, 1532 - 2, paint);
-        canvas.restore();
+        canvas.drawRect(264, 24, 264 + 90, 24+23, rectPaint);
+        canvas.drawText(orderItems.get(currentID).sizeStr + " 右", 264, 24 + 21, paint);
     }
     void drawTextSideL(Canvas canvas) {
         canvas.save();
