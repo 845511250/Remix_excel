@@ -471,7 +471,7 @@ public class MainActivity extends FragmentActivity {
                 break;
             case "HF":
                 tv_title.setText("落肩衣 " + orderItems.get(currentID).order_number);
-                transaction.replace(R.id.frame_main, new FragmentHF165());
+                transaction.replace(R.id.frame_main, new FragmentHF100());
                 break;
 
             default:

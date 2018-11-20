@@ -76,7 +76,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         rectBorderPaint = new Paint();
         rectBorderPaint.setColor(0xff000000);
         rectBorderPaint.setStyle(Paint.Style.STROKE);
-        rectBorderPaint.setStrokeWidth(6);
+        rectBorderPaint.setStrokeWidth(10);
 
         paint = new Paint();
         paint.setColor(0xff000000);
@@ -157,25 +157,28 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     }
 
     void drawText(Canvas canvas) {
-        canvas.drawRect(3500, 6, 4000, 6+22, rectPaint);
-        canvas.drawText(time + "   " + orderItems.get(currentID).order_number + "    " + orderItems.get(currentID).newCode, 3520, 6+20, paintSmall);
+        canvas.drawRect(2500, 10, 3000, 10 + 22, rectPaint);
+        canvas.drawText(time + "   " + orderItems.get(currentID).order_number + "    " + orderItems.get(currentID).newCode, 2520, 10 + 20, paintSmall);
     }
 
     public void remixx(){
-        Bitmap bitmapCombine = Bitmap.createBitmap(8000 + 60, 5300, Bitmap.Config.ARGB_8888);
+        Bitmap bitmapCombine = Bitmap.createBitmap(5300, 8000 + 60, Bitmap.Config.ARGB_8888);
         Canvas canvasCombine= new Canvas(bitmapCombine);
         canvasCombine.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
         canvasCombine.drawColor(0xffffffff);
 
-        canvasCombine.drawBitmap(MainActivity.instance.bitmapPillow, 0, 0, null);
-        canvasCombine.drawRect(3, 3, 7997, 5297, rectBorderPaint);
-        canvasCombine.drawRect(0, 0, 7997, 5297, rectBorderPaint);
+        Matrix matrix = new Matrix();
+        matrix.postRotate(90);
+        matrix.postTranslate(5300, 0);
+
+        canvasCombine.drawBitmap(MainActivity.instance.bitmapPillow, matrix, null);
+        canvasCombine.drawRect(0, 0, 5295, 7995, rectBorderPaint);
+        canvasCombine.drawRect(5, 5, 5295, 7995, rectBorderPaint);
         drawText(canvasCombine);
 
-        Matrix matrix = new Matrix();
-        matrix.reset();
-        matrix.postRotate(-90, bitmapCombine.getWidth() / 2, bitmapCombine.getHeight() / 2);
-        bitmapCombine = Bitmap.createBitmap(bitmapCombine, 0, 0, bitmapCombine.getWidth(), bitmapCombine.getHeight(), matrix, true);
+//        matrix.reset();
+//        matrix.postRotate(-90, bitmapCombine.getWidth() / 2, bitmapCombine.getHeight() / 2);
+//        bitmapCombine = Bitmap.createBitmap(bitmapCombine, 0, 0, bitmapCombine.getWidth(), bitmapCombine.getHeight(), matrix, true);
 
         try {
             String nameCombine = orderItems.get(currentID).sku + "_" + orderItems.get(currentID).order_number + strPlus + ".jpg";
