@@ -354,7 +354,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         if(!new File(pathSave).exists())
             new File(pathSave).mkdirs();
         File fileSave = new File(pathSave + nameCombine);
-        BitmapToJpg.save(bitmapCombine, fileSave, 145);
+        BitmapToJpg.save(bitmapCombine, fileSave, 150);
         bitmapCombine.recycle();
 
 
@@ -448,84 +448,84 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     void setScale(String size) {
         switch (size) {
             case "29.5":
-                width_1 = 1034;
-                height_1 = 792;
-                width_2 = 588;
-                height_2 = 1242;
-                width_side = 230;
-                height_side = 2889;
+                width_1 = 1037;
+                height_1 = 809;
+                width_2 = 580;
+                height_2 = 1276;
+                width_side = 236;
+                height_side = 2926;
                 break;
             case "31.5":
-                width_1 = 1086;
-                height_1 = 846;
-                width_2 = 606;
-                height_2 = 1322;
-                width_side = 230;
-                height_side = 3059;
+                width_1 = 1088;
+                height_1 = 865;
+                width_2 = 599;
+                height_2 = 1356;
+                width_side = 235;
+                height_side = 3100;
                 break;
             case "34.5":
-                width_1 = 1163;
-                height_1 = 926;
-                width_2 = 625;
-                height_2 = 1445;
-                width_side = 230;
-                height_side = 3315;
+                width_1 = 1164;
+                height_1 = 950;
+                width_2 = 627;
+                height_2 = 1479;
+                width_side = 236;
+                height_side = 3359;
                 break;
             case "36.5":
-                width_1 = 1150;
-                height_1 = 980;
-                width_2 = 659;
-                height_2 = 1533;
-                width_side = 230;
-                height_side = 3416;
+                width_1 = 1216;
+                height_1 = 1005;
+                width_2 = 643;
+                height_2 = 1563;
+                width_side = 236;
+                height_side = 3532;
                 break;
             case "38.5":
-                width_1 = 1266;
-                height_1 = 1035;
-                width_2 = 676;
-                height_2 = 1609;
-                width_side = 230;
-                height_side = 3657;
+                width_1 = 1268;
+                height_1 = 1058;
+                width_2 = 663;
+                height_2 = 1647;
+                width_side = 236;
+                height_side = 3705;
                 break;
             case "40.5":
-                width_1 = 1318;
-                height_1 = 1089;
-                width_2 = 694;
-                height_2 = 1689;
-                width_side = 230;
-                height_side = 3828;
+                width_1 = 1319;
+                height_1 = 1116;
+                width_2 = 680;
+                height_2 = 1728;
+                width_side = 236;
+                height_side = 3877;
                 break;
             case "41.5":
-                width_1 = 1344;
-                height_1 = 1116;
-                width_2 = 703;
-                height_2 = 1728;
-                width_side = 230;
-                height_side = 3913;
+                width_1 = 1346;
+                height_1 = 1142;
+                width_2 = 690;
+                height_2 = 1768;
+                width_side = 236;
+                height_side = 3964;
                 break;
             case "43.5":
-                width_1 = 1395;
-                height_1 = 1170;
-                width_2 = 721;
-                height_2 = 1808;
-                width_side = 230;
-                height_side = 4084;
+                width_1 = 1396;
+                height_1 = 1199;
+                width_2 = 706;
+                height_2 = 1851;
+                width_side = 236;
+                height_side = 4137;
                 break;
             case "46.5":
-                width_1 = 1408;
-                height_1 = 1249;
-                width_2 = 748;
-                height_2 = 1927;
-                width_side = 230;
-                height_side = 4340;
+                width_1 = 1409;
+                height_1 = 1280;
+                width_2 = 742;
+                height_2 = 1983;
+                width_side = 236;
+                height_side = 4396;
                 break;
             case "48.5":
-                width_1 = 1460;
-                height_1 = 1303;
-                width_2 = 766;
-                height_2 = 2006;
-                width_side = 230;
-                height_side = 4525;
+                width_1 = 1461;
+                height_1 = 1336;
+                width_2 = 759;
+                height_2 = 2065;
+                width_side = 236;
+                height_side = 4569;
                 break;
             default:
                 showDialogSizeWrong(orderItems.get(currentID).order_number);
@@ -533,6 +533,95 @@ String sdCardPath = "/storage/emulated/0/Pictures";
                 break;
         }
     }
+
+//    void setScale(String size) {
+//        switch (size) {
+//            case "29.5":
+//                width_1 = 1034;
+//                height_1 = 792;
+//                width_2 = 588;
+//                height_2 = 1242;
+//                width_side = 230;
+//                height_side = 2889;
+//                break;
+//            case "31.5":
+//                width_1 = 1086;
+//                height_1 = 846;
+//                width_2 = 606;
+//                height_2 = 1322;
+//                width_side = 230;
+//                height_side = 3059;
+//                break;
+//            case "34.5":
+//                width_1 = 1163;
+//                height_1 = 926;
+//                width_2 = 625;
+//                height_2 = 1445;
+//                width_side = 230;
+//                height_side = 3315;
+//                break;
+//            case "36.5":
+//                width_1 = 1150;
+//                height_1 = 980;
+//                width_2 = 659;
+//                height_2 = 1533;
+//                width_side = 230;
+//                height_side = 3416;
+//                break;
+//            case "38.5":
+//                width_1 = 1266;
+//                height_1 = 1035;
+//                width_2 = 676;
+//                height_2 = 1609;
+//                width_side = 230;
+//                height_side = 3657;
+//                break;
+//            case "40.5":
+//                width_1 = 1318;
+//                height_1 = 1089;
+//                width_2 = 694;
+//                height_2 = 1689;
+//                width_side = 230;
+//                height_side = 3828;
+//                break;
+//            case "41.5":
+//                width_1 = 1344;
+//                height_1 = 1116;
+//                width_2 = 703;
+//                height_2 = 1728;
+//                width_side = 230;
+//                height_side = 3913;
+//                break;
+//            case "43.5":
+//                width_1 = 1395;
+//                height_1 = 1170;
+//                width_2 = 721;
+//                height_2 = 1808;
+//                width_side = 230;
+//                height_side = 4084;
+//                break;
+//            case "46.5":
+//                width_1 = 1408;
+//                height_1 = 1249;
+//                width_2 = 748;
+//                height_2 = 1927;
+//                width_side = 230;
+//                height_side = 4340;
+//                break;
+//            case "48.5":
+//                width_1 = 1460;
+//                height_1 = 1303;
+//                width_2 = 766;
+//                height_2 = 2006;
+//                width_side = 230;
+//                height_side = 4525;
+//                break;
+//            default:
+//                showDialogSizeWrong(orderItems.get(currentID).order_number);
+//                sizeOK = false;
+//                break;
+//        }
+//    }
 
     public void showDialogSizeWrong(final String order_number){
         getActivity().runOnUiThread(new Runnable() {
