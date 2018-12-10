@@ -287,7 +287,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvasCombine.drawColor(0xffffffff);
 
         //front
-        Bitmap bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 1428, 2257, 2072, 4193);
+        Bitmap bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 1458 + 30, 2257, 2072, 4193);
         Canvas canvasTemp = new Canvas(bitmapTemp);
         Bitmap bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.gr_front_r);
         canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
@@ -297,7 +297,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvasCombine.drawBitmap(bitmapTemp, 0, 0, null);
         bitmapTemp.recycle();
 
-        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 3500, 2257, 2072, 4193);
+        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 3530 - 30, 2257, 2072, 4193);
         canvasTemp = new Canvas(bitmapTemp);
         bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.gr_front_l);
         canvasTemp.drawBitmap(bitmapDB, 0, 0, null);

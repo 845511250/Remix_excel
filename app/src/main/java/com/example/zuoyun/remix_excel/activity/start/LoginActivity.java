@@ -179,8 +179,8 @@ public class LoginActivity extends AppCompatActivity {
                     if (fileOldApk.exists()) {
                         fileOldApk.delete();
                     }
-                    if (!response.get().equals(getVersionName())) {
-                        showDialogUpdate("更新", "检测到新版本V" + response.get() + "，请更新");
+                    if (!response.get().split("#")[0].equals(getVersionName())) {
+                        showDialogUpdate("更新", "检测到新版本V" + response.get().split("#")[0] + "\n" + response.get().split("#")[1]);
                     }
                 } else {
                     Toast.makeText(context, "服务器返回码：" + response.responseCode(), Toast.LENGTH_SHORT).show();

@@ -22,7 +22,7 @@
             android:id="@+id/tv_dialog_content"
             android:layout_width="204dp"
             android:layout_height="wrap_content"
-            android:text="工作人员将尽快与您取得联系，通过审核，您将可以在也趣进行直播"
+            android:text="工作人员直播\nnnnnnnnnnnnndfgdf"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/tv_dialog_title"
             android:gravity="center"
