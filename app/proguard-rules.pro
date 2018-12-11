@@ -39,3 +39,20 @@
 -keep public class * implements com.bumptech.glide.module.GlideModule
 -keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {**[] $VALUES;public *;}
 
+-ignorewarnings
+
+-keep class aavax.xml.** { *; }
+-keep class org.apache.** { *; }
+-keep class org.dom4j.** { *; }
+-keep class org.w3c.** { *; }
+-keep class org.repackage.** { *; }
+-keep class schemaorg_apache_xmlbeans.** { *; }
+
+-keep class org.openxmlformats.** { *; }
+-keep class schemaorg_apache_xmlbeans.system.** { *; }
+-keep class schemasMicrosoftComOfficeExcel.** { *; }
+-keep class schemasMicrosoftComOfficeOffice.** { *; }
+-keep class schemasMicrosoftComOfficePowerpoint.** { *; }
+-keep class schemasMicrosoftComOfficeWord.** { *; }
+-keep class schemasMicrosoftComVml.** { *; }
+

@@ -76,7 +76,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         rectBorderPaint = new Paint();
         rectBorderPaint.setColor(0xff000000);
         rectBorderPaint.setStyle(Paint.Style.STROKE);
-        rectBorderPaint.setStrokeWidth(10);
+        rectBorderPaint.setStrokeWidth(6);
 
         paint = new Paint();
         paint.setColor(0xff000000);
@@ -172,8 +172,8 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         matrix.postTranslate(5300, 0);
 
         canvasCombine.drawBitmap(MainActivity.instance.bitmapPillow, matrix, null);
-        canvasCombine.drawRect(0, 0, 5295, 7995, rectBorderPaint);
-        canvasCombine.drawRect(5, 5, 5295, 7995, rectBorderPaint);
+        canvasCombine.drawRect(0, 0, 5297, 7997, rectBorderPaint);
+        canvasCombine.drawRect(3, 3, 5297, 7997, rectBorderPaint);
         drawText(canvasCombine);
 
 //        matrix.reset();

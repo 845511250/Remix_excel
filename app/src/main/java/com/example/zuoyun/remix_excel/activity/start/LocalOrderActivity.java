@@ -23,17 +23,19 @@ import com.example.zuoyun.remix_excel.activity.start.bean.Order;
 import com.example.zuoyun.remix_excel.activity.start.bean.OrderItem;
 import com.example.zuoyun.remix_excel.bean.ShareData;
 
+import org.apache.poi.ss.usermodel.DataFormatter;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
+
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FilenameFilter;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import jxl.Sheet;
-import jxl.Workbook;
 
 public class LocalOrderActivity extends AppCompatActivity {
     @BindView(R.id.lv_orders)
@@ -45,6 +47,8 @@ public class LocalOrderActivity extends AppCompatActivity {
     ArrayList<Order> orders = new ArrayList<>();
     String childPath,orderDate_Print, orderDate_Excel, orderDate_Request;
     int totalNum;
+
+    DataFormatter dataFormatter = new DataFormatter();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,9 +74,15 @@ public class LocalOrderActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.e("aaa", orders.get(position).path);
 
-                childPath = orders.get(position).name.substring(0, orders.get(position).name.length() - 4);
+                if(orders.get(position).path.endsWith("xls")){
+                    childPath = orders.get(position).name.substring(0, orders.get(position).name.length() - 4);
+                    readExcelOrderOld(orders.get(position).path);
+                }else {
+                    childPath = orders.get(position).name.substring(0, orders.get(position).name.length() - 5);
+                    readExcelOrderNew(orders.get(position).path);
+                }
+
                 childPath = childPath.replace("...", "");
-                readExcelOrder(orders.get(position).path);
                 totalNum = orderItems.size();
             }
         });
@@ -81,79 +91,68 @@ public class LocalOrderActivity extends AppCompatActivity {
     FilenameFilter filenameFilter = new FilenameFilter() {
         @Override
         public boolean accept(File dir, String name) {
-            return name.endsWith(".xls");
+            return name.endsWith(".xls") || name.endsWith(".xlsx");
         }
     };
 
-    public void readExcelOrder(String path){
+    public void readExcelOrderOld(String path){
         orderItems.clear();
-        Sheet sheet=null;
-        InputStream is = null;
-        Workbook workbook = null;
         try{
-            is = new FileInputStream(path);
-            workbook = Workbook.getWorkbook(is);
-            int sheetNum = workbook.getNumberOfSheets();
-            Log.e("as","the num of sheets is " + sheetNum+ "\n");
+            Workbook workbook = WorkbookFactory.create(new File(path));
+            Sheet sheet = workbook.getSheetAt(0);
+            Row row;
+            int rows = sheet.getLastRowNum() + 1;
+            Log.e("aaa", "total rows: " + rows);
 
-            sheet = workbook.getSheet(0);
-            int rows = sheet.getRows();
-            int cols = sheet.getColumns();
-            Log.e("sdss","the name of sheet is " + sheet.getName() + "\n");
-            Log.e("sdss","total rows is " + rows + "\n");
-            Log.e("sdss","total cols is " + cols + "\n");
+            for (int i = 0; i < rows; i++) {
+                row = sheet.getRow(i);
+                if (row != null && getContent(row, 0) != "" && getContent(row, 13).contains(".")) {
+                    OrderItem orderItem = new OrderItem();
+                    orderItem.order_number = getContent(row, 0);
+                    orderItem.num = Integer.parseInt(getContent(row, 2));
+                    orderItem.codeE = getContent(row, 4);
 
-            for(int i=2;i<rows;i++){
-                OrderItem orderItem = new OrderItem();
-                if (sheet.getCell(0, i).getContents() != "" && sheet.getCell(13, i).getContents().contains(".")) {
-                    orderItem.order_number = sheet.getCell(0, i).getContents();
-                    orderItem.num = Integer.parseInt(sheet.getCell(2, i).getContents());
-                    orderItem.codeE = sheet.getCell(4, i).getContents();
-                    if (cols >= 16) {
-                        orderItem.colorStr = sheet.getCell(15, i).getContents();
-                        orderItem.color = sheet.getCell(15, i).getContents();
-                        if(orderItem.color.equalsIgnoreCase("Black"))
-                            orderItem.color = "黑";
-                        else if (orderItem.color.equalsIgnoreCase("Trans"))
-                            orderItem.color = "透";
-                        else if(orderItem.color.equalsIgnoreCase("White"))
-                            orderItem.color = "白";
-                        else if(orderItem.color.equalsIgnoreCase("Brown"))
-                            orderItem.color = "棕色";
-                        else if(orderItem.color.equalsIgnoreCase("Beige"))
-                            orderItem.color = "米色";
-                        else if(orderItem.color.equalsIgnoreCase(""))
-                            orderItem.color = "白";
-                    }
+                    orderItem.colorStr = getContent(row, 15);
+                    orderItem.color = orderItem.colorStr;
+                    if (orderItem.color.equalsIgnoreCase("Black"))
+                        orderItem.color = "黑";
+                    else if (orderItem.color.equalsIgnoreCase("Trans"))
+                        orderItem.color = "透";
+                    else if (orderItem.color.equalsIgnoreCase("White"))
+                        orderItem.color = "白";
+                    else if (orderItem.color.equalsIgnoreCase("Brown"))
+                        orderItem.color = "棕色";
+                    else if (orderItem.color.equalsIgnoreCase("Beige"))
+                        orderItem.color = "米色";
+                    else if (orderItem.color.equalsIgnoreCase(""))
+                        orderItem.color = "白";
 
-                    if (cols >= 17) {
-                        String sizestr = sheet.getCell(16, i).getContents();
-                        orderItem.sizeStr = sizestr;
-                        if (sizestr != "") {
-                            if (sizestr.equalsIgnoreCase("S/M")) {
-                                orderItem.size = 0;
-                            } else if (sizestr.equalsIgnoreCase("L/XL")) {
-                                orderItem.size = 1;
-                            } else if (sizestr.endsWith(")")) {
-                                try {
-                                    orderItem.size = Integer.parseInt(sizestr.substring(sizestr.length() - 3, sizestr.length() - 1));
-                                } catch (Exception e) {
-                                    Log.e("aaa", "size parseInt Error!!!");
-                                }
-                            } else {
-                                try {
-                                    orderItem.size = Integer.parseInt(sizestr);
-                                } catch (Exception e) {
-                                    Log.e("aaa", "size parseInt Error!!!");
-                                }
+                    String sizestr = getContent(row, 16);
+                    orderItem.sizeStr = sizestr;
+                    if (sizestr != "") {
+                        if (sizestr.equalsIgnoreCase("S/M")) {
+                            orderItem.size = 0;
+                        } else if (sizestr.equalsIgnoreCase("L/XL")) {
+                            orderItem.size = 1;
+                        } else if (sizestr.endsWith(")")) {
+                            try {
+                                orderItem.size = Integer.parseInt(sizestr.substring(sizestr.length() - 3, sizestr.length() - 1));
+                            } catch (Exception e) {
+                                Log.e("aaa", "size parseInt Error!!!");
                             }
-
+                        } else {
+                            try {
+                                orderItem.size = Integer.parseInt(sizestr);
+                            } catch (Exception e) {
+                                Log.e("aaa", "size parseInt Error!!!");
+                            }
                         }
+
                     }
 
-                    String print_index = sheet.getCell(3, i).getContents();
-                    orderItem.newCode = sheet.getCell(3, i).getContents();
-                    orderItem.newCodeStr = sheet.getCell(3, i).getContents();
+                    String print_index = getContent(row, 3);
+                    orderItem.newCode = print_index;
+                    orderItem.newCodeStr = print_index;
                     String size = orderItem.sizeStr.equals("S/M") ? "中码" : orderItem.sizeStr.equals("L/XL") ? "大码" : orderItem.size == 0 ? orderItem.sizeStr : orderItem.size + "";
                     if (print_index.startsWith("A")) {
                         orderItem.newCode = size + "-A-" + getNewCode(print_index);
@@ -164,11 +163,9 @@ public class LocalOrderActivity extends AppCompatActivity {
                         orderItem.newCode = size + "-" + print_index;
                     }
 
-                    if (cols >= 18) {
-                        orderItem.printCode = sheet.getCell(17, i).getContents();
-                    }
+                    orderItem.printCode = "";
 
-                    String SKU = sheet.getCell(1, i).getContents();
+                    String SKU = getContent(row, 1);
                     orderItem.skuStr = SKU;
                     orderItem.sku = SKU;
                     if (SKU.equals("CASCS30") || SKU.equals("CASCS37") || SKU.equals("CASCS65") || SKU.equals("CASCS30DHL") || SKU.equals("CASCS37DHL") || SKU.equals("CASCS65DHL") || SKU.equals("WOMENHIGHTOP") || SKU.equals("WOMENHIGHTOPDHL") || SKU.equals("MENHIGHTOP") || SKU.equals("MENHIGHTOPDHL") || SKU.equals("WOMENHIGHTOPFEDEX") || SKU.equals("MENHIGHTOPFEDEX"))
@@ -195,7 +192,7 @@ public class LocalOrderActivity extends AppCompatActivity {
                         orderItem.sku = "DQ";//跑鞋
                     else if (SKU.equals("KIDRUNNINGSHOE") || SKU.equals("KIDRUNNINGSHOEDHL") || SKU.equals("KIDRUNNINGSHOEFEDEX"))
                         orderItem.sku = "DV";//儿童跑鞋
-                    else if (SKU.equals("MENSLIPON") || SKU.equals("WOMENSLIPON") || SKU.equals("MENSLIPONDHL") || SKU.equals("WOMENSLIPONDHL")|| SKU.equals("MENSLIPONFEDEX") || SKU.equals("WOMENSLIPONFEDEX"))
+                    else if (SKU.equals("MENSLIPON") || SKU.equals("WOMENSLIPON") || SKU.equals("MENSLIPONDHL") || SKU.equals("WOMENSLIPONDHL") || SKU.equals("MENSLIPONFEDEX") || SKU.equals("WOMENSLIPONFEDEX"))
                         orderItem.sku = "DT";//新一脚蹬成人
                     else if (SKU.equals("KIDSLIPON") || SKU.equals("KIDSLIPONDHL"))
                         orderItem.sku = "DU";//新一脚蹬儿童
@@ -207,7 +204,7 @@ public class LocalOrderActivity extends AppCompatActivity {
                         orderItem.sku = "DY";//靴子
                     else if (SKU.equals("MENLEATHERBOOTS") || SKU.equals("WOMENLEATHERBOOTS") || SKU.equals("MENLEATHERBOOTSDHL") || SKU.equals("WOMENLEATHERBOOTSDHL") || SKU.equals("MENLEATHERBOOTSFEDEX") || SKU.equals("WOMENLEATHERBOOTSFEDEX"))
                         orderItem.sku = "FC";//靴子
-                    else if (SKU.equals("BACKPACK") || SKU.equals("BACKPACKDHL")|| SKU.equals("BACKPACKFEDEX"))
+                    else if (SKU.equals("BACKPACK") || SKU.equals("BACKPACKDHL") || SKU.equals("BACKPACKFEDEX"))
                         orderItem.sku = "DX";//全印花背包
                     else if (SKU.equals("DUVET") || SKU.equals("DUVETDHL") || SKU.equals("DUVETFEDEX"))
                         orderItem.sku = "FA";//被罩
@@ -219,7 +216,7 @@ public class LocalOrderActivity extends AppCompatActivity {
                         orderItem.sku = "FH";//新跑鞋
 
 
-                    String[] images = sheet.getCell(13, i).getContents().trim().split(" ");
+                    String[] images = getContent(row, 13).trim().split(" ");
                     if (images.length == 2) {
                         orderItem.img_right = getImageName(images[0]);
                         orderItem.img_left = getImageName(images[1]);
@@ -231,22 +228,112 @@ public class LocalOrderActivity extends AppCompatActivity {
             }
             //for循环结束
             showDialogDatePicker();
-            is.close();
-            workbook.close();
         }
         catch (Exception e){
             Toast.makeText(context, "读取订单失败！", Toast.LENGTH_SHORT).show();
-            try {
-                is.close();
-                workbook.close();
-            } catch (Exception e1) {
-            }
+            Log.e("aaa", e.getMessage());
         }
+    }
+    public void readExcelOrderNew(String path){
+        orderItems.clear();
+        try{
+            Workbook workbook = WorkbookFactory.create(new File(path));
+            Sheet sheet = workbook.getSheetAt(0);
+            Row row;
+            int rows = sheet.getLastRowNum() + 1;
+            Log.e("aaa", "total rows: " + rows);
+
+            for (int i = 0; i < rows; i++) {
+                OrderItem orderItem = new OrderItem();
+                row = sheet.getRow(i);
+                if (row != null && getContent(row, 0) != "" && getContent(row, 5).contains(".")) {
+                    orderItem.order_number = getContent(row, 0);
+                    orderItem.num = Integer.parseInt(getContent(row, 2));
+                    orderItem.codeE = getContent(row, 4);
+
+                    orderItem.colorStr = getContent(row, 7);
+                    orderItem.color = orderItem.colorStr;
+                    if (orderItem.color.equalsIgnoreCase("Black"))
+                        orderItem.color = "黑";
+                    else if (orderItem.color.equalsIgnoreCase("Trans"))
+                        orderItem.color = "透";
+                    else if (orderItem.color.equalsIgnoreCase("White"))
+                        orderItem.color = "白";
+                    else if (orderItem.color.equalsIgnoreCase("Brown"))
+                        orderItem.color = "棕色";
+                    else if (orderItem.color.equalsIgnoreCase("Beige"))
+                        orderItem.color = "米色";
+                    else if (orderItem.color.equalsIgnoreCase(""))
+                        orderItem.color = "白";
+
+                    String sizestr = getContent(row, 8);
+                    orderItem.sizeStr = sizestr;
+                    if (!sizestr.equals("")) {
+                        if (sizestr.equalsIgnoreCase("S/M")) {
+                            orderItem.size = 0;
+                        } else if (sizestr.equalsIgnoreCase("L/XL")) {
+                            orderItem.size = 1;
+                        } else if (sizestr.endsWith(")")) {
+                            try {
+                                orderItem.size = Integer.parseInt(sizestr.substring(sizestr.length() - 3, sizestr.length() - 1));
+                            } catch (Exception e) {
+                                Log.e("aaa", "size parseInt Error!!!");
+                            }
+                        } else {
+                            try {
+                                orderItem.size = Integer.parseInt(sizestr);
+                            } catch (Exception e) {
+                                Log.e("aaa", "size parseInt Error!!!");
+                            }
+                        }
+
+                    }
+
+                    String print_index = getContent(row, 3);
+                    orderItem.newCode = print_index;
+                    orderItem.newCodeStr = print_index;
+                    String size = orderItem.sizeStr.equals("S/M") ? "中码" : orderItem.sizeStr.equals("L/XL") ? "大码" : orderItem.sizeStr;
+                    if (print_index.startsWith("A")) {
+                        orderItem.newCode = size + "-A-" + getNewCode(print_index);
+                    } else if (print_index.startsWith("B")) {
+//                        orderItem.newCode = size + "-B-" + print_index.substring(print_index.lastIndexOf("-") + 1);
+                        orderItem.newCode = size + "-B-" + getNewCode(print_index);
+                    } else {
+                        orderItem.newCode = size + "-" + print_index;
+                    }
+
+                    String SKU = getContent(row, 1);
+                    orderItem.skuStr = SKU;
+                    orderItem.sku = SKU;
+                    if (SKU.equals("MENFLIPFLOP") || SKU.equals("WOMENFLIPFLOP") || SKU.equals("MENFLIPFLOPDHL") || SKU.equals("WOMENFLIPFLOPDHL"))
+                        orderItem.sku = "AB";//拖鞋
+
+                    String[] images = getContent(row, 5).trim().split(" ");
+                    if (images.length == 2) {
+                        orderItem.img_right = getImageName(images[0]);
+                        orderItem.img_left = getImageName(images[1]);
+                    } else if (images.length == 1) {
+                        orderItem.img_pillow = getImageName(images[0]);
+                    }
+                    orderItems.add(orderItem);
+                }
+            }
+            //for循环结束
+            showDialogDatePicker();
+        }
+        catch (Exception e){
+            Toast.makeText(context, "读取订单失败！", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private String getContent(Row row, int column) {
+        return dataFormatter.formatCellValue(row.getCell(column));
     }
 
     String getImageName(String str){
         return str.substring(str.lastIndexOf("/")+1, str.length());
     }
+
     private static String getNewCode(String str){
         String str1 = str.substring(0, str.lastIndexOf("-"));
         return str.substring(str1.lastIndexOf("-") + 1, str.length());
