@@ -389,7 +389,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         bitmapArm.recycle();
 
         //pocket
-        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 2099, 4874, 1397, 1576);
+        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 2133 + 30, 4874, 1397, 1576);
         canvasTemp = new Canvas(bitmapTemp);
         bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.gr_pocket_r);
         canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
@@ -399,7 +399,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvasCombine.drawBitmap(bitmapTemp, 0, height_back + height_front + height_arm * 2 + margin * 4, null);
         bitmapTemp.recycle();
 
-        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 3500, 4874, 1397, 1576);
+        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 3530 - 30, 4874, 1397, 1576);
         canvasTemp = new Canvas(bitmapTemp);
         bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.gr_pocket_l);
         canvasTemp.drawBitmap(bitmapDB, 0, 0, null);

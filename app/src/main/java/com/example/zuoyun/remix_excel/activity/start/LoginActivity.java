@@ -95,7 +95,9 @@ public class LoginActivity extends AppCompatActivity {
             finish();
         }
 
-        showDialogPassword();
+        if (!new File("/storage/emulated/0/Movies/admin.txt").exists()) {
+            showDialogPassword();
+        }
     }
 
     void initListener() {
