@@ -144,11 +144,6 @@ String sdCardPath = "/storage/emulated/0/Pictures";
 
     }
 
-    void drawText(Canvas canvas, int left, int bottom) {
-        canvas.drawRect(left, bottom - 28, left + 420, bottom, rectPaint);
-        canvas.drawText(time + "   " + orderItems.get(currentID).order_number + "   " + orderItems.get(currentID).sizeStr, left, bottom - 2, paint);
-        canvas.drawText((currentID + 1) + "", left + 330, bottom - 2, paintRed);
-    }
 
     void drawTextRotate1(Canvas canvas, int degree, int left, int bottom, String LR) {
         canvas.save();

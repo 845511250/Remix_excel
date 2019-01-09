@@ -477,6 +477,14 @@ public class MainActivity extends FragmentActivity {
                 tv_title.setText("沙滩裤 " + orderItems.get(currentID).order_number);
                 transaction.replace(R.id.frame_main, new FragmentHG());
                 break;
+            case "HI":
+                tv_title.setText("加绒马丁靴 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentHI());
+                break;
+            case "HK":
+                tv_title.setText("新款 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentHK());
+                break;
 
             default:
                 firstOK = false;
