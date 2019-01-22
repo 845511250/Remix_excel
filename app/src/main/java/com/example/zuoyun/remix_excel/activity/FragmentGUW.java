@@ -218,7 +218,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         Bitmap bitmapF = orderItems.get(currentID).img_left == null ? MainActivity.instance.bitmapPillow : MainActivity.instance.bitmapRight;
         Bitmap bitmapB = orderItems.get(currentID).img_left == null ? MainActivity.instance.bitmapPillow : MainActivity.instance.bitmapLeft;
 
-        Bitmap bitmapCombine = Bitmap.createBitmap(width_front + width_arm + margin, height_back + height_front * 2 + margin * 2, Bitmap.Config.ARGB_8888);
+        Bitmap bitmapCombine = Bitmap.createBitmap(width_arm * 2 + width_front * 2 + width_back + margin * 2, height_arm + height_pocket_in + margin, Bitmap.Config.ARGB_8888);
         Canvas canvasCombine= new Canvas(bitmapCombine);
         canvasCombine.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
         canvasCombine.drawColor(0xffffffff);
@@ -228,85 +228,69 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         Canvas canvasTemp = new Canvas(bitmapTemp);
         Bitmap bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.guw_front_r);
         canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
-        bitmapDB.recycle();
         drawTextFrontR(canvasTemp);
         bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_front, height_front, true);
-        canvasCombine.drawBitmap(bitmapTemp, 0, height_back + margin, null);
-        bitmapTemp.recycle();
+        canvasCombine.drawBitmap(bitmapTemp,  width_arm, 0, null);
 
         bitmapTemp = Bitmap.createBitmap(bitmapF, 4082, 76, 1666, 4090);
         canvasTemp = new Canvas(bitmapTemp);
         bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.guw_front_l);
         canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
-        bitmapDB.recycle();
         drawTextFrontL(canvasTemp);
         bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_front, height_front, true);
-        canvasCombine.drawBitmap(bitmapTemp, 0, height_back + height_front + margin, null);
-        bitmapTemp.recycle();
+        canvasCombine.drawBitmap(bitmapTemp, width_arm + width_front + margin, 0, null);
 
         //back
         bitmapTemp = Bitmap.createBitmap(bitmapB, 2452, 33, 3296, 3480);
         canvasTemp = new Canvas(bitmapTemp);
         bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.guw_back);
         canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
-        bitmapDB.recycle();
         drawTextBack(canvasTemp);
         bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_back, height_back, true);
-        canvasCombine.drawBitmap(bitmapTemp, 0, 0, null);
-        bitmapTemp.recycle();
+        canvasCombine.drawBitmap(bitmapTemp, width_arm * 2 + width_front * 2 + margin, 0, null);
 
         //arm_l
         bitmapTemp = Bitmap.createBitmap(bitmapF, 5747, 708, 2437, 3191);
         canvasTemp = new Canvas(bitmapTemp);
         bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.guw_arm_l);
         canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
-        bitmapDB.recycle();
         drawTextXiuziL(canvasTemp);
         bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_arm, height_arm, true);
-        canvasCombine.drawBitmap(bitmapTemp, width_front + margin, height_back + margin, null);
-        bitmapTemp.recycle();
+        canvasCombine.drawBitmap(bitmapTemp, width_arm + width_front * 2 + margin, 0, null);
 
         //arm_r
         bitmapTemp = Bitmap.createBitmap(bitmapF, 15, 708, 2437, 3191);
         canvasTemp = new Canvas(bitmapTemp);
         bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.guw_arm_r);
         canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
-        bitmapDB.recycle();
         drawTextXiuziR(canvasTemp);
         bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_arm, height_arm, true);
-        canvasCombine.drawBitmap(bitmapTemp, width_front + margin, height_back + height_arm + margin * 2, null);
-        bitmapTemp.recycle();
+        canvasCombine.drawBitmap(bitmapTemp, 0, 0, null);
 
         //pocket
         bitmapTemp = Bitmap.createBitmap(bitmapF, 5010, 2278, 297, 983);
         canvasTemp = new Canvas(bitmapTemp);
         bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.gum_pocket_in_l);
         canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
-        bitmapDB.recycle();
         drawTextPocketInL(canvasTemp);
         bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_pocket_in, height_pocket_in, true);
-        canvasCombine.drawBitmap(bitmapTemp, width_front + margin, height_back + height_arm * 2 + margin * 3, null);
-        bitmapTemp.recycle();
+        canvasCombine.drawBitmap(bitmapTemp, 0, height_arm + margin, null);
 
         bitmapTemp = Bitmap.createBitmap(bitmapF, 2893, 2278, 297, 983);
         canvasTemp = new Canvas(bitmapTemp);
         bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.gum_pocket_in_r);
         canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
-        bitmapDB.recycle();
         drawTextPocketInR(canvasTemp);
         bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_pocket_in, height_pocket_in, true);
-        canvasCombine.drawBitmap(bitmapTemp, width_front + width_pocket_in + margin * 2, height_back + height_arm * 2 + margin * 3, null);
-        bitmapTemp.recycle();
+        canvasCombine.drawBitmap(bitmapTemp, width_pocket_in + margin, height_arm + margin, null);
 
         bitmapTemp = Bitmap.createBitmap(bitmapF, 5010, 2278, 421, 954);
         canvasTemp = new Canvas(bitmapTemp);
         bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.gum_pocket_out);
         canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
-        bitmapDB.recycle();
         drawTextPocketOutL(canvasTemp);
         bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_pocket_out, height_pocket_out, true);
-        canvasCombine.drawBitmap(bitmapTemp, width_front + width_pocket_in * 2 + margin * 3, height_back + height_arm * 2 + margin * 3, null);
-        bitmapTemp.recycle();
+        canvasCombine.drawBitmap(bitmapTemp, width_pocket_in * 2 + margin * 2, height_arm + margin, null);
 
         bitmapTemp = Bitmap.createBitmap(bitmapF, 2769, 2278, 421, 954);
         canvasTemp = new Canvas(bitmapTemp);
@@ -315,10 +299,12 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         bitmapDB.recycle();
         drawTextPocketOutR(canvasTemp);
         bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_pocket_out, height_pocket_out, true);
-        canvasCombine.drawBitmap(bitmapTemp, width_front + width_pocket_in * 2 + width_pocket_out + margin * 4, height_back + height_arm * 2 + margin * 3, null);
+        canvasCombine.drawBitmap(bitmapTemp, width_pocket_in * 2 + width_pocket_out + margin * 3, height_arm + margin, null);
         bitmapTemp.recycle();
 
-
+        matrix.reset();
+        matrix.postRotate(-90, bitmapCombine.getWidth() / 2, bitmapCombine.getHeight() / 2);
+        bitmapCombine = Bitmap.createBitmap(bitmapCombine, 0, 0, bitmapCombine.getWidth(), bitmapCombine.getHeight(), matrix, true);
 
 
         String nameCombine = orderItems.get(currentID).sku + "_" + orderItems.get(currentID).sizeStr + "_" + orderItems.get(currentID).order_number + strPlus + ".jpg";
@@ -335,13 +321,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
 
 
 
-
         try {
-//            matrix.reset();
-//            matrix.postRotate(-90, bitmapCombine.getWidth() / 2, bitmapCombine.getHeight() / 2);
-//            bitmapCombine = Bitmap.createBitmap(bitmapCombine, 0, 0, bitmapCombine.getWidth(), bitmapCombine.getHeight(), matrix, true);
-
-
             //写入excel
             String writePath = sdCardPath + "/生产图/" + childPath + "/生产单.xls";
             File fileWrite = new File(writePath);

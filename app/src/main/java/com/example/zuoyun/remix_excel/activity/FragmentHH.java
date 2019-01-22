@@ -48,8 +48,8 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     @BindView(R.id.iv_pillow)
     ImageView iv_pillow;
 
-    int width_front, width_back, width_pocket;
-    int height_front,height_back,height_pocket;
+    int width_up, width_down, width_pocket;
+    int height_up,height_down,height_pocket;
 
     int num;
     String strPlus = "";
@@ -84,25 +84,25 @@ String sdCardPath = "/storage/emulated/0/Pictures";
 
         paint = new Paint();
         paint.setColor(0xff000000);
-        paint.setTextSize(26);
+        paint.setTextSize(22);
         paint.setTypeface(Typeface.DEFAULT_BOLD);
         paint.setAntiAlias(true);
 
         paintRed = new Paint();
         paintRed.setColor(0xffff0000);
-        paintRed.setTextSize(26);
+        paintRed.setTextSize(22);
         paintRed.setTypeface(Typeface.DEFAULT_BOLD);
         paintRed.setAntiAlias(true);
 
         paintBlue = new Paint();
         paintBlue.setColor(0xff0000ff);
-        paintBlue.setTextSize(26);
+        paintBlue.setTextSize(22);
         paintBlue.setTypeface(Typeface.DEFAULT_BOLD);
         paintBlue.setAntiAlias(true);
 
         paintSmall = new Paint();
         paintSmall.setColor(0xff000000);
-        paintSmall.setTextSize(26);
+        paintSmall.setTextSize(22);
         paintSmall.setTypeface(Typeface.DEFAULT_BOLD);
         paintSmall.setAntiAlias(true);
 
@@ -174,128 +174,156 @@ String sdCardPath = "/storage/emulated/0/Pictures";
 
     }
 
-    void drawTextFrontR(Canvas canvas) {
-        canvas.drawRect(640, 20, 640 + 500, 20 + 25, rectPaint);
-        canvas.drawText(time + "HG 前右 " + orderItems.get(currentID).sizeStr + "  " + orderItems.get(currentID).order_number + "   " + orderItems.get(currentID).newCodeStr, 640, 20 + 23, paint);
+    void drawTextUp(Canvas canvas, String LR) {
+        canvas.drawRect(670, 1905 - 22, 670 + 350, 1905, rectPaint);
+        canvas.drawText("HH-" + LR + " " + orderItems.get(currentID).sizeStr + "  " + orderItems.get(currentID).order_number, 670, 1905 - 2, paint);
+        canvas.drawRect(1090, 1905 - 22, 1090 + 300, 1905, rectPaint);
+        canvas.drawText(time + "   " + orderItems.get(currentID).newCodeStr, 1090, 1905 - 2, paint);
     }
-    void drawTextFrontL(Canvas canvas) {
-        canvas.drawRect(640, 20, 640 + 500, 20 + 25, rectPaint);
-        canvas.drawText(time + "HG 前左 " + orderItems.get(currentID).sizeStr + "  " + orderItems.get(currentID).order_number + "   " + orderItems.get(currentID).newCodeStr, 640, 20 + 23, paint);
+
+
+    void drawTextDown(Canvas canvas, String LR) {
+        canvas.save();
+        canvas.rotate(4.5f, 3499, 427);
+        canvas.drawRect(3499, 427, 3499 + 165, 427 + 22, rectPaint);
+        canvas.drawText(time + "  " + orderItems.get(currentID).sizeStr + LR, 3500, 427 + 20, paint);
+        canvas.restore();
+
+        canvas.save();
+        canvas.rotate(-4.5f, 3698, 439);
+        canvas.drawRect(3698, 439, 3698 + 160, 439 + 22, rectPaint);
+        canvas.drawText(orderItems.get(currentID).order_number, 3700, 439 + 20, paint);
+        canvas.restore();
     }
-    void drawTextBackL(Canvas canvas) {
-        canvas.drawRect(950, 35, 950 + 500, 35 + 25, rectPaint);
-        canvas.drawText(time + "HG 后左 " + orderItems.get(currentID).sizeStr + "  " + orderItems.get(currentID).order_number + "   " + orderItems.get(currentID).newCodeStr, 950, 35 + 23, paint);
+    void drawTextPocket1(Canvas canvas,String LR) {
+        canvas.save();
+        canvas.rotate(90, 6, 510);
+        canvas.drawRect(6, 510 - 22, 6 + 500, 510, rectPaint);
+        canvas.drawText(" " + LR + " " + orderItems.get(currentID).sizeStr + "  " + time + "  " + orderItems.get(currentID).order_number + "   " + orderItems.get(currentID).newCodeStr, 6, 510 - 2, paint);
+        canvas.restore();
     }
-    void drawTextBackR(Canvas canvas) {
-        canvas.drawRect(950, 35, 950 + 500, 35 + 25, rectPaint);
-        canvas.drawText(time + "HG 后右 " + orderItems.get(currentID).sizeStr + "  " + orderItems.get(currentID).order_number + "   " + orderItems.get(currentID).newCodeStr, 950, 35 + 23, paint);
-    }
-    void drawTextPocketL(Canvas canvas) {
-        canvas.drawRect(20, 5, 20 + 290, 5 + 25, rectPaint);
-        canvas.drawText("左 " + orderItems.get(currentID).sizeStr + " " + time + "  " + orderItems.get(currentID).order_number, 20, 5 + 23, paint);
-    }
-    void drawTextPocketR(Canvas canvas) {
-        canvas.drawRect(20, 5, 20 + 290, 5 + 25, rectPaint);
-        canvas.drawText("右 " + orderItems.get(currentID).sizeStr + " " + time + "  " + orderItems.get(currentID).order_number, 20, 5 + 23, paint);
+    void drawTextPocket2(Canvas canvas,String LR) {
+        canvas.save();
+        canvas.rotate(-90, 918, 1100);
+        canvas.drawRect(918, 1100 - 22, 918 + 500, 1100, rectPaint);
+        canvas.drawText(" " + LR + " " + orderItems.get(currentID).sizeStr + "  " + time + "  " + orderItems.get(currentID).order_number + "   " + orderItems.get(currentID).newCodeStr, 918, 1100 - 2, paint);
+        canvas.restore();
     }
 
 
     public void remixx(){
         int margin = 120;
         Matrix matrix = new Matrix();
+        int combineHeight = Math.max(height_down * 2 + height_pocket + margin * 2, height_down * 2 + height_up + margin);
 
         Bitmap bitmapF = orderItems.get(currentID).img_left == null ? MainActivity.instance.bitmapPillow : MainActivity.instance.bitmapRight;
         Bitmap bitmapB = orderItems.get(currentID).img_left == null ? MainActivity.instance.bitmapPillow : MainActivity.instance.bitmapLeft;
 
-        Bitmap bitmapCombine = Bitmap.createBitmap(width_back * 2 + margin, height_back + height_pocket * 2 + +margin * 4, Bitmap.Config.ARGB_8888);
+        Bitmap bitmapCombine = Bitmap.createBitmap(width_down, combineHeight, Bitmap.Config.ARGB_8888);
         Canvas canvasCombine= new Canvas(bitmapCombine);
         canvasCombine.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
         canvasCombine.drawColor(0xffffffff);
 
-        //back
-        Bitmap bitmapTemp = Bitmap.createBitmap(bitmapB, 17, 46, 2671, 4420);
+        //down
+        Bitmap bitmapTemp = Bitmap.createBitmap(bitmapF, 20, 1947, 7360, 3818);
         Canvas canvasTemp = new Canvas(bitmapTemp);
-        Bitmap bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.hg_b_l);
+        canvasTemp.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
+        Bitmap bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.hh_down);
         canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
-        drawTextBackL(canvasTemp);
-        bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_back, height_back, true);
+        drawTextDown(canvasTemp, "前");
+        bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_down, height_down, true);
         canvasCombine.drawBitmap(bitmapTemp, 0, 0, null);
-        bitmapTemp.recycle();
 
-        bitmapTemp = Bitmap.createBitmap(bitmapB, 1402, 34, 2671, 4420);
+        bitmapTemp = Bitmap.createBitmap(bitmapB, 20, 1947, 7360, 3818);
         canvasTemp = new Canvas(bitmapTemp);
+        canvasTemp.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
+        canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
+        drawTextDown(canvasTemp, "后");
+        bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_down, height_down, true);
+        canvasCombine.drawBitmap(bitmapTemp, 0, height_down + margin, null);
+
+        //up
+        bitmapTemp = Bitmap.createBitmap(bitmapF, 2636, 35, 2129, 1913);
+        canvasTemp = new Canvas(bitmapTemp);
+        canvasTemp.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
+        bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.hh_up);
+        canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
+        drawTextUp(canvasTemp, "前");
+        bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_up, height_up, true);
+        canvasCombine.drawBitmap(bitmapTemp, 0, combineHeight - height_up, null);
+
+        bitmapTemp = Bitmap.createBitmap(bitmapB, 2636, 35, 2129, 1913);
+        canvasTemp = new Canvas(bitmapTemp);
+        canvasTemp.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
+        canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
+        bitmapDB.recycle();
+        drawTextUp(canvasTemp, "后");
+        bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_up, height_up, true);
+        canvasCombine.drawBitmap(bitmapTemp, width_down - width_up, combineHeight - height_up, null);
+
+        //pocketL后
+        bitmapTemp = Bitmap.createBitmap(924, 1503, Bitmap.Config.ARGB_8888);
+        canvasTemp = new Canvas(bitmapTemp);
+        canvasTemp.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
+
         matrix.reset();
-        matrix.postScale(-1, 1);
-        bitmapDB = Bitmap.createBitmap(bitmapDB, 0, 0, 2671, 4420, matrix, true);
-        canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
-        bitmapDB.recycle();
-        drawTextBackR(canvasTemp);
-        bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_back, height_back, true);
-        canvasCombine.drawBitmap(bitmapTemp, width_back + margin, 0, null);
-        bitmapTemp.recycle();
+        matrix.postRotate(-61.9f);
+        matrix.postTranslate(-218, 1217);
+        canvasTemp.drawBitmap(Bitmap.createBitmap(bitmapB, 1484, 1555, 1483, 990), matrix, null);
 
-        //front
-        bitmapTemp = Bitmap.createBitmap(bitmapF, 289, 157, 2077, 4186);
-        canvasTemp = new Canvas(bitmapTemp);
-        bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.hg_f_r);
+        bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.hh_pocket_r);
         canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
-        drawTextFrontR(canvasTemp);
-        bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_front, height_front, true);
-        canvasCombine.drawBitmap(bitmapTemp, 0, height_back + margin, null);
-        bitmapTemp.recycle();
+        drawTextPocket2(canvasTemp, "左后");
+        bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_pocket, height_pocket, true);
+        canvasCombine.drawBitmap(bitmapTemp, 0, height_down - height_pocket / 2, null);
 
-        bitmapTemp = Bitmap.createBitmap(bitmapF, 1734, 157, 2077, 4186);
+        //pocketL前
+        bitmapTemp = Bitmap.createBitmap(924, 1503, Bitmap.Config.ARGB_8888);
         canvasTemp = new Canvas(bitmapTemp);
+        canvasTemp.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
+
         matrix.reset();
-        matrix.postScale(-1, 1);
-        bitmapDB = Bitmap.createBitmap(bitmapDB, 0, 0, 2077, 4186, matrix, true);
-        canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
-        bitmapDB.recycle();
-        drawTextFrontL(canvasTemp);
-        bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_front, height_front, true);
-        canvasCombine.drawBitmap(bitmapTemp, width_front + margin, height_back + margin, null);
-        bitmapTemp.recycle();
+        matrix.postRotate(61.9f);
+        matrix.postTranslate(443, -91);
+        canvasTemp.drawBitmap(Bitmap.createBitmap(bitmapF, 4434, 1557, 1483, 990), matrix, null);
 
-        //pocketL
-        bitmapTemp = Bitmap.createBitmap(bitmapB, 264, 316, 325, 2067);
-        canvasTemp = new Canvas(bitmapTemp);
-        bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.hg_pocket_r);
+        bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.hh_pocket_l);
         canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
-        bitmapDB.recycle();
-        drawTextPocketL(canvasTemp);
+        drawTextPocket1(canvasTemp, "左前");
         bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_pocket, height_pocket, true);
-        canvasCombine.drawBitmap(bitmapTemp, width_front * 2 + margin * 2, height_back + margin, null);
-        bitmapTemp.recycle();
+        canvasCombine.drawBitmap(bitmapTemp, width_down-width_pocket, height_down - height_pocket / 2, null);
 
-        bitmapTemp = Bitmap.createBitmap(bitmapF, 3426, 426, 325, 2067);
+        //pocketR后
+        bitmapTemp = Bitmap.createBitmap(924, 1503, Bitmap.Config.ARGB_8888);
         canvasTemp = new Canvas(bitmapTemp);
-        bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.hg_pocket_l);
-        canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
-        bitmapDB.recycle();
-        drawTextPocketL(canvasTemp);
-        bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_pocket, height_pocket, true);
-        canvasCombine.drawBitmap(bitmapTemp, width_front * 2 + width_pocket + margin * 3, height_back + margin, null);
-        bitmapTemp.recycle();
+        canvasTemp.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
 
-        //pocketR
-        bitmapTemp = Bitmap.createBitmap(bitmapF, 349, 426, 325, 2067);
-        canvasTemp = new Canvas(bitmapTemp);
-        bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.hg_pocket_r);
-        canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
-        bitmapDB.recycle();
-        drawTextPocketR(canvasTemp);
-        bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_pocket, height_pocket, true);
-        canvasCombine.drawBitmap(bitmapTemp, width_front * 2 + margin * 2, height_back + height_pocket + margin * 2, null);
-        bitmapTemp.recycle();
+        matrix.reset();
+        matrix.postRotate(61.9f);
+        matrix.postTranslate(443, -91);
+        canvasTemp.drawBitmap(Bitmap.createBitmap(bitmapB, 4434, 1557, 1483, 990), matrix, null);
 
-        bitmapTemp = Bitmap.createBitmap(bitmapB, 3488, 316, 325, 2067);
-        canvasTemp = new Canvas(bitmapTemp);
-        bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.hg_pocket_l);
+        bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.hh_pocket_l);
         canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
-        bitmapDB.recycle();
-        drawTextPocketR(canvasTemp);
+        drawTextPocket1(canvasTemp, "右后");
         bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_pocket, height_pocket, true);
-        canvasCombine.drawBitmap(bitmapTemp, width_front * 2 + width_pocket + margin * 3, height_back + height_pocket + margin * 2, null);
+        canvasCombine.drawBitmap(bitmapTemp, width_down / 2 + margin, height_down * 2 + margin * 2, null);
+
+        //pocketR前
+        bitmapTemp = Bitmap.createBitmap(924, 1503, Bitmap.Config.ARGB_8888);
+        canvasTemp = new Canvas(bitmapTemp);
+        canvasTemp.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
+
+        matrix.reset();
+        matrix.postRotate(-61.9f);
+        matrix.postTranslate(-218, 1217);
+        canvasTemp.drawBitmap(Bitmap.createBitmap(bitmapF, 1484, 1555, 1483, 990), matrix, null);
+
+        bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.hh_pocket_r);
+        canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
+        drawTextPocket2(canvasTemp, "右前");
+        bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_pocket, height_pocket, true);
+        canvasCombine.drawBitmap(bitmapTemp, width_down / 2 - width_pocket - margin, height_down * 2 + margin * 2, null);
         bitmapTemp.recycle();
 
 
@@ -309,11 +337,8 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         if(!new File(pathSave).exists())
             new File(pathSave).mkdirs();
         File fileSave = new File(pathSave + nameCombine);
-        BitmapToJpg.save(bitmapCombine, fileSave, 149);
+        BitmapToJpg.save(bitmapCombine, fileSave, 120);
         bitmapCombine.recycle();
-
-
-
 
         try {
 //            matrix.reset();
@@ -403,61 +428,69 @@ String sdCardPath = "/storage/emulated/0/Pictures";
 
     void setScale(String size) {
         switch (size) {
+            case "XS":
+                width_up = 1705;
+                height_up = 1674;
+                width_down = 6333;
+                height_down = 3379;
+                width_pocket = 881;
+                height_pocket = 1439;
+                break;
             case "S":
-                width_front = 1905;
-                height_front = 3884;
-                width_back = 2529;
-                height_back = 4122;
-                width_pocket = 325;
-                height_pocket = 2067;
+                width_up = 1799;
+                height_up = 1723;
+                width_down = 6600;
+                height_down = 3481;
+                width_pocket = 881;
+                height_pocket = 1444;
                 break;
             case "M":
-                width_front = 1955;
-                height_front = 3988;
-                width_back = 2561;
-                height_back = 4203;
-                width_pocket = 325;
-                height_pocket = 2067;
+                width_up = 1894;
+                height_up = 1770;
+                width_down = 6865;
+                height_down = 3583;
+                width_pocket = 881;
+                height_pocket = 1449;
                 break;
             case "L":
-                width_front = 2022;
-                height_front = 4075;
-                width_back = 2605;
-                height_back = 4268;
-                width_pocket = 325;
-                height_pocket = 2067;
+                width_up = 2012;
+                height_up = 1841;
+                width_down = 7140;
+                height_down = 3700;
+                width_pocket = 928;
+                height_pocket = 1515;
                 break;
             case "XL":
-                width_front = 2077;
-                height_front = 4186;
-                width_back = 2682;
-                height_back = 4434;
-                width_pocket = 325;
-                height_pocket = 2067;
+                width_up = 2129;
+                height_up = 1913;
+                width_down = 7360;
+                height_down = 3818;
+                width_pocket = 924;
+                height_pocket = 1503;
                 break;
             case "2XL":
-                width_front = 2134;
-                height_front = 4247;
-                width_back = 2687;
-                height_back = 4489;
-                width_pocket = 325;
-                height_pocket = 2067;
+                width_up = 2248;
+                height_up = 1986;
+                width_down = 7561;
+                height_down = 3937;
+                width_pocket = 922;
+                height_pocket = 1490;
                 break;
             case "3XL":
-                width_front = 2204;
-                height_front = 4313;
-                width_back = 2759;
-                height_back = 4551;
-                width_pocket = 325;
-                height_pocket = 2067;
+                width_up = 2367;
+                height_up = 2057;
+                width_down = 7516;
+                height_down = 4052;
+                width_pocket = 994;
+                height_pocket = 1543;
                 break;
             case "4XL":
-                width_front = 2275;
-                height_front = 4388;
-                width_back = 2864;
-                height_back = 4616;
-                width_pocket = 325;
-                height_pocket = 2067;
+                width_up = 2485;
+                height_up = 2130;
+                width_down = 7611;
+                height_down = 4166;
+                width_pocket = 993;
+                height_pocket = 1525;
                 break;
             default:
                 showDialogSizeWrong(orderItems.get(currentID).order_number);

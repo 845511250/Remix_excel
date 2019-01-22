@@ -388,6 +388,14 @@ public class MainActivity extends FragmentActivity {
                 tv_title.setText("浴袍男 " + orderItems.get(currentID).order_number);
                 transaction.replace(R.id.frame_main, new FragmentGB());
                 break;
+            case "GC":
+                tv_title.setText("男背心 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentGC());
+                break;
+            case "GD":
+                tv_title.setText("女背心 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentGD());
+                break;
             case "GI":
                 tv_title.setText("挂毯 " + orderItems.get(currentID).order_number);
                 transaction.replace(R.id.frame_main, new FragmentGI());
@@ -477,13 +485,41 @@ public class MainActivity extends FragmentActivity {
                 tv_title.setText("沙滩裤 " + orderItems.get(currentID).order_number);
                 transaction.replace(R.id.frame_main, new FragmentHG());
                 break;
+            case "HGM":
+                tv_title.setText("沙滩裤 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentHG());
+                break;
+            case "HGW":
+                tv_title.setText("沙滩裤 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentHGW());
+                break;
+            case "HH":
+                tv_title.setText("裙子 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentHH());
+                break;
             case "HI":
                 tv_title.setText("加绒马丁靴 " + orderItems.get(currentID).order_number);
                 transaction.replace(R.id.frame_main, new FragmentHI());
                 break;
+            case "HJY":
+                tv_title.setText("毛毯 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentHJ());
+                break;
+            case "HJS":
+                tv_title.setText("毛毯 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentHJ());
+                break;
+            case "HJM":
+                tv_title.setText("毛毯 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentHJ());
+                break;
             case "HK":
                 tv_title.setText("新款 " + orderItems.get(currentID).order_number);
                 transaction.replace(R.id.frame_main, new FragmentHK());
+                break;
+            case "R":
+                tv_title.setText("围裙 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentR());
                 break;
 
             default:
