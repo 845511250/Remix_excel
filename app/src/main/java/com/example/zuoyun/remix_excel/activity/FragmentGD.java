@@ -317,6 +317,12 @@ String sdCardPath = "/storage/emulated/0/Pictures";
 
     void setScale(String size) {
         switch (size) {
+            case "XS":
+                width_front = 3507;
+                height_front = 4005;
+                width_back = 3487;
+                height_back = 4036;
+                break;
             case "S":
                 width_front = 3545;
                 height_front = 4016;

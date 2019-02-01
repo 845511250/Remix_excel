@@ -531,6 +531,7 @@ public class MainActivity extends FragmentActivity {
         if (firstOK) {
             transaction.commitAllowingStateLoss();
             tv_progress.setText((currentID + 1) + " / " + totalNum);
+
             getsetBitmap();
         }
     }
@@ -592,7 +593,6 @@ public class MainActivity extends FragmentActivity {
                                 }
                             }.start();
                         } else {
-                            writeWrong();
                             tv_tip.setText("当前图片不存在 请操作下一个");
                             messageListener.listen(3, "");
                         }
@@ -622,6 +622,18 @@ public class MainActivity extends FragmentActivity {
         dialog.hide();
     }
 
+    String[] gqList = new String[]{"1539795", "1596072", "1602647", "1597401", "1526215", "154352", "1596173",
+            "1605154", "1573050", "1609073", "1551699", "1490506", "1609073", "1600986", "1585723", "1553543",
+            "1577504"
+    };
+    boolean findWrongGQ(){
+        for (String str : gqList) {
+            if (orderItems.get(currentID).img_right.contains(str)) {
+                return true;
+            }
+        }
+        return false;
+    }
     public void writeWrong(){
         //写入excel
         try{
@@ -629,12 +641,12 @@ public class MainActivity extends FragmentActivity {
             if(!file.exists())
                 file.mkdirs();
             totalWrong++;
-            String writePath = "/storage/emulated/0/Pictures/生产图/" + childPath + "/出错列表.xls";
+            String writePath = "/storage/emulated/0/Pictures/生产图/" + childPath + "/问题卫衣过滤列表.xls";
             File fileWrite = new File(writePath);
             if(!fileWrite.exists()){
                 WritableWorkbook book = Workbook.createWorkbook(fileWrite);
                 WritableSheet sheet = book.createSheet("sheet1", 0);
-                Label label0 = new Label(0, 0, "出错订单号");
+                Label label0 = new Label(0, 0, "订单号");
                 sheet.addCell(label0);
                 book.write();
                 book.close();
@@ -715,7 +727,7 @@ public class MainActivity extends FragmentActivity {
         final AlertDialog dialog_noimage;
         AlertDialog.Builder builder = new AlertDialog.Builder(context,R.style.DialogTransBackGround);
         dialog_noimage = builder.create();
-        dialog_noimage.setCancelable(false);
+        dialog_noimage.setCancelable(true);
         dialog_noimage.show();
         View view_dialog = LayoutInflater.from(context).inflate(R.layout.item_dialog_noimage, null);
         dialog_noimage.setContentView(view_dialog);

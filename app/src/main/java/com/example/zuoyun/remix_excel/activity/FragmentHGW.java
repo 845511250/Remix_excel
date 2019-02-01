@@ -338,6 +338,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         matrix.postScale(-1, 1);
         bitmapDB = Bitmap.createBitmap(bitmapDB, 0, 0, bitmapDB.getWidth(), bitmapDB.getHeight(), matrix, true);
         canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
+        bitmapDB.recycle();
         drawTextborderPocketR(canvasTemp);
         bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_borderPocket, height_borderPocket, true);
         canvasCombine.drawBitmap(bitmapTemp, width_back + margin, height_front + height_back + margin * 2, null);
