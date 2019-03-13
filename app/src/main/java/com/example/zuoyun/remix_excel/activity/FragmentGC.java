@@ -188,7 +188,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvasCombine.drawColor(0xffffffff);
 
         //前
-        Bitmap bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 92, 110, 3416, 4780);
+        Bitmap bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 78, 97, 3416, 4780);
         Canvas canvasTemp = new Canvas(bitmapTemp);
         canvasTemp.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
         Bitmap bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.gc_front);
@@ -312,52 +312,52 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     void setScale(String size) {
         switch (size) {
             case "S":
-                width_front = 3068;
-                height_front = 4426;
-                width_back = 3098;
-                height_back = 4438;
+                width_front = 2890;
+                height_front = 4511;
+                width_back = 2908;
+                height_back = 4525;
                 break;
             case "M":
-                width_front = 3186;
-                height_front = 4546;
-                width_back = 3216;
-                height_back = 4561;
+                width_front = 3185;
+                height_front = 4664;
+                width_back = 3215;
+                height_back = 4678;
                 break;
             case "L":
-                width_front = 3304;
-                height_front = 4666;
-                width_back = 3334;
-                height_back = 4683;
+                width_front = 3480;
+                height_front = 4817;
+                width_back = 3522;
+                height_back = 4832;
                 break;
             case "XL":
-                width_front = 3422;
-                height_front = 4786;
-                width_back = 3452;
-                height_back = 4806;
+                width_front = 3776;
+                height_front = 4970;
+                width_back = 3828;
+                height_back = 4985;
                 break;
             case "XXL":
-                width_front = 3540;
-                height_front = 4906;
-                width_back = 3570;
-                height_back = 4928;
+                width_front = 4071;
+                height_front = 5125;
+                width_back = 4136;
+                height_back = 5139;
                 break;
             case "2XL":
-                width_front = 3540;
-                height_front = 4906;
-                width_back = 3570;
-                height_back = 4928;
+                width_front = 4071;
+                height_front = 5125;
+                width_back = 4136;
+                height_back = 5139;
                 break;
             case "XXXL":
-                width_front = 3659;
-                height_front = 5026;
-                width_back = 3689;
-                height_back = 5050;
+                width_front = 4366;
+                height_front = 5278;
+                width_back = 4443;
+                height_back = 5292;
                 break;
             case "3XL":
-                width_front = 3659;
-                height_front = 5026;
-                width_back = 3689;
-                height_back = 5050;
+                width_front = 4366;
+                height_front = 5278;
+                width_back = 4443;
+                height_back = 5292;
                 break;
             default:
                 showDialogSizeWrong(orderItems.get(currentID).order_number);

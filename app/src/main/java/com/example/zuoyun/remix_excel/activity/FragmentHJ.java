@@ -74,11 +74,11 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         rectBorderPaint = new Paint();
         rectBorderPaint.setColor(0xff000000);
         rectBorderPaint.setStyle(Paint.Style.STROKE);
-        rectBorderPaint.setStrokeWidth(4);
+        rectBorderPaint.setStrokeWidth(10);
 
         paint = new Paint();
         paint.setColor(0xff000000);
-        paint.setTextSize(22);
+        paint.setTextSize(24);
         paint.setTypeface(Typeface.DEFAULT_BOLD);
         paint.setAntiAlias(true);
 
@@ -170,8 +170,8 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     }
 
     void drawText(Canvas canvas) {
-        canvas.drawRect(3000, 8180 - 22, 3000 + 500, 8180, rectPaint);
-        canvas.drawText("毛毯 尺码" + orderItems.get(currentID).sku.substring(2) + "  " + time + "  " + orderItems.get(currentID).order_number + "   " + orderItems.get(currentID).newCodeStr, 3000, 8180 - 2, paint);
+        canvas.drawRect(3000, 8190 - 24, 3000 + 800, 8190, rectPaint);
+        canvas.drawText("毛毯 尺码" + orderItems.get(currentID).sku.substring(2) + "  " + time + "  " + orderItems.get(currentID).order_number + "   " + orderItems.get(currentID).newCodeStr, 3000, 8190 - 2, paint);
     }
 
     public void remixx(){
@@ -181,6 +181,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
 
         canvasTemp.drawBitmap(MainActivity.instance.bitmapPillow, 0, 0, null);
         canvasTemp.drawRect(0, 0, 6200, 8200, rectBorderPaint);
+        canvasTemp.drawRect(5, 5, 6200, 8200, rectBorderPaint);
         drawText(canvasTemp);
         bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width, height, true);
 

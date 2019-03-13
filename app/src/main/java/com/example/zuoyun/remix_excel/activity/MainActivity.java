@@ -230,7 +230,7 @@ public class MainActivity extends FragmentActivity {
                 break;
             case "DK":
                 tv_title.setText("袜子 " + orderItems.get(currentID).order_number);
-                transaction.replace(R.id.frame_main, new FragmentSock());
+                transaction.replace(R.id.frame_main, new FragmentDK());
                 break;
             case "DQ":
                 tv_title.setText("跑鞋 " + orderItems.get(currentID).order_number);
@@ -516,6 +516,10 @@ public class MainActivity extends FragmentActivity {
             case "HK":
                 tv_title.setText("新款 " + orderItems.get(currentID).order_number);
                 transaction.replace(R.id.frame_main, new FragmentHK());
+                break;
+            case "HM":
+                tv_title.setText("围裙 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentR());
                 break;
             case "R":
                 tv_title.setText("围裙 " + orderItems.get(currentID).order_number);

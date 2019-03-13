@@ -47,8 +47,9 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     @BindView(R.id.iv_pillow)
     ImageView iv_pillow;
 
-    int width_front,width_back;
-    int height_front,height_back;
+    int width_front, width_back;
+    int height_front, height_back;
+    int id_front, id_back;
 
     int num;
     String strPlus = "";
@@ -174,16 +175,16 @@ String sdCardPath = "/storage/emulated/0/Pictures";
 
     void drawTextFront(Canvas canvas) {
         canvas.save();
-        canvas.rotate(-104.3f, 3739, 3461);
-        canvas.drawRect(3739, 3461 - 25, 3739 + 500, 3461, rectPaint);
-        canvas.drawText("GD女背心  " + orderItems.get(currentID).sizeStr + "   " + time + "  " + orderItems.get(currentID).order_number, 3739, 3461 - 2, paint);
+        canvas.rotate(-104.3f, 3736, 3448);
+        canvas.drawRect(3736, 3448 - 25, 3736 + 500, 3448, rectPaint);
+        canvas.drawText("GD女背心  " + orderItems.get(currentID).sizeStr + "   " + time + "  " + orderItems.get(currentID).order_number, 3736, 3448 - 2, paint);
         canvas.restore();
     }
     void drawTextBack(Canvas canvas) {
         canvas.save();
-        canvas.rotate(-104.6f, 3764, 3588);
-        canvas.drawRect(3764, 3588 - 25, 3764 + 500, 3588, rectPaint);
-        canvas.drawText("GD女背心  " + orderItems.get(currentID).sizeStr + "   " + time + "  " + orderItems.get(currentID).order_number, 3764, 3588 - 2, paint);
+        canvas.rotate(-104.8f, 3738, 3513);
+        canvas.drawRect(3738, 3513 - 25, 3738 + 500, 3513, rectPaint);
+        canvas.drawText("GD女背心  " + orderItems.get(currentID).sizeStr + "   " + time + "  " + orderItems.get(currentID).order_number, 3738, 3513 - 2, paint);
         canvas.restore();
     }
 
@@ -194,20 +195,20 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvasCombine.drawColor(0xffffffff);
 
         //前
-        Bitmap bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 10, 21, 3779, 4258);
+        Bitmap bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 10, 132, 3779, 4147);
         Canvas canvasTemp = new Canvas(bitmapTemp);
         canvasTemp.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
-        Bitmap bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.gd_front);
+        Bitmap bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), id_front);
         canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
         drawTextFront(canvasTemp);
         bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_front, height_front, true);
         canvasCombine.drawBitmap(bitmapTemp, 0, 0, null);
 
         //后面
-        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 10, 2, 3779, 4295);
+        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 10, 96, 3779, 4201);
         canvasTemp = new Canvas(bitmapTemp);
         canvasTemp.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
-        bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.gd_back);
+        bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), id_back);
         canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
         bitmapDB.recycle();
         drawTextBack(canvasTemp);
@@ -318,34 +319,52 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     void setScale(String size) {
         switch (size) {
             case "XS":
-                width_front = 3507;
-                height_front = 4005;
-                width_back = 3487;
-                height_back = 4036;
+                width_front = 3149;
+                height_front = 4439;
+                width_back = 3149;
+                height_back = 4488;
+                id_front = R.drawable.gd_front_s;
+                id_back = R.drawable.gd_back_s;
                 break;
             case "S":
-                width_front = 3545;
-                height_front = 4016;
-                width_back = 3545;
-                height_back = 4077;
+                width_front = 3298;
+                height_front = 4516;
+                width_back = 3298;
+                height_back = 4566;
+                id_front = R.drawable.gd_front_s;
+                id_back = R.drawable.gd_back_s;
                 break;
             case "M":
-                width_front = 3662;
-                height_front = 4137;
-                width_back = 3662;
-                height_back = 4171;
+                width_front = 3449;
+                height_front = 4593;
+                width_back = 3447;
+                height_back = 4643;
+                id_front = R.drawable.gd_front_s;
+                id_back = R.drawable.gd_back_s;
                 break;
             case "L":
-                width_front = 3779;
-                height_front = 4258;
-                width_back = 3779;
-                height_back = 4295;
+                width_front = 3599;
+                height_front = 4671;
+                width_back = 3599;
+                height_back = 4720;
+                id_front = R.drawable.gd_front_xl;
+                id_back = R.drawable.gd_back_xl;
                 break;
             case "XL":
-                width_front = 3895;
-                height_front = 4379;
-                width_back = 3895;
-                height_back = 4418;
+                width_front = 3749;
+                height_front = 4748;
+                width_back = 3749;
+                height_back = 4798;
+                id_front = R.drawable.gd_front_xl;
+                id_back = R.drawable.gd_back_xl;
+                break;
+            case "2XL":
+                width_front = 3898;
+                height_front = 4825;
+                width_back = 3898;
+                height_back = 4847;
+                id_front = R.drawable.gd_front_xl;
+                id_back = R.drawable.gd_back_xl;
                 break;
             default:
                 showDialogSizeWrong(orderItems.get(currentID).order_number);

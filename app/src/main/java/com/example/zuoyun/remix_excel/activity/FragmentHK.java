@@ -73,12 +73,12 @@ String sdCardPath = "/storage/emulated/0/Pictures";
 
         paint = new Paint();
         paint.setColor(0xff000000);
-        paint.setTextSize(26);
+        paint.setTextSize(23);
         paint.setAntiAlias(true);
 
         paintRed = new Paint();
         paintRed.setColor(0xffff0000);
-        paintRed.setTextSize(26);
+        paintRed.setTextSize(23);
         paintRed.setAntiAlias(true);
 
         paintSmall = new Paint();
@@ -141,13 +141,13 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     }
 
     void drawTextMain(Canvas canvas, String LR) {
-        canvas.drawRect(562, 1338, 562 + 120, 1338 + 26, rectPaint);
-        canvas.drawText(orderItems.get(currentID).size + "码" + orderItems.get(currentID).color + LR, 562, 1338 + 24, paint);
+        canvas.drawRect(562, 1338, 562 + 120, 1338 + 23, rectPaint);
+        canvas.drawText(orderItems.get(currentID).size + "码" + orderItems.get(currentID).color + LR, 562, 1338 + 21, paint);
 
         canvas.save();
-        canvas.rotate(-74.2f, 969, 995);
-        canvas.drawRect(969, 995 - 26, 969 + 480, 995, rectPaint);
-        canvas.drawText(time + " " + orderItems.get(currentID).order_number + orderItems.get(currentID).newCodeStr, 969, 995 - 2, paint);
+        canvas.rotate(-74.9f, 1038, 772);
+        canvas.drawRect(1038, 772 - 23, 1038 + 465, 772, rectPaint);
+        canvas.drawText(time + " " + orderItems.get(currentID).order_number + orderItems.get(currentID).newCodeStr, 1038, 772 - 2, paint);
         canvas.restore();
     }
 
@@ -293,71 +293,77 @@ String sdCardPath = "/storage/emulated/0/Pictures";
 
     void setScale(int size){
         switch (size) {
+            case 35:
+                mainWidth = 1425;
+                mainHeight = 1565;
+                tongueWidth = 467;
+                tongueHeight = 501;
+                break;
             case 36:
-                mainWidth = 1453;
-                mainHeight = 1609;
-                tongueWidth = 481;
-                tongueHeight = 522;
+                mainWidth = 1452;
+                mainHeight = 1563;
+                tongueWidth = 476;
+                tongueHeight = 514;
                 break;
             case 37:
-                mainWidth = 1483;
-                mainHeight = 1654;
-                tongueWidth = 489;
-                tongueHeight = 536;
+                mainWidth = 1487;
+                mainHeight = 1652;
+                tongueWidth = 485;
+                tongueHeight = 527;
                 break;
             case 38:
-                mainWidth = 1513;
-                mainHeight = 1697;
-                tongueWidth = 498;
-                tongueHeight = 549;
+                mainWidth = 1511;
+                mainHeight = 1696;
+                tongueWidth = 494;
+                tongueHeight = 541;
                 break;
             case 39:
-                mainWidth = 1542;
-                mainHeight = 1742;
-                tongueWidth = 507;
-                tongueHeight = 563;
+                mainWidth = 1550;
+                mainHeight = 1740;
+                tongueWidth = 503;
+                tongueHeight = 554;
                 break;
             case 40:
-                mainWidth = 1572;
-                mainHeight = 1786;
-                tongueWidth = 515;
-                tongueHeight = 576;
+                mainWidth = 1576;
+                mainHeight = 1785;
+                tongueWidth = 512;
+                tongueHeight = 567;
                 break;
             case 41:
-                mainWidth = 1601;
-                mainHeight = 1830;
-                tongueWidth = 524;
-                tongueHeight = 590;
+                mainWidth = 1606;
+                mainHeight = 1829;
+                tongueWidth = 521;
+                tongueHeight = 581;
                 break;
             case 42:
-                mainWidth = 1631;
-                mainHeight = 1874;
-                tongueWidth = 533;
-                tongueHeight = 603;
+                mainWidth = 1636;
+                mainHeight = 1873;
+                tongueWidth = 530;
+                tongueHeight = 594;
                 break;
             case 43:
-                mainWidth = 1659;
-                mainHeight = 1920;
-                tongueWidth = 542;
-                tongueHeight = 617;
+                mainWidth = 1669;
+                mainHeight = 1918;
+                tongueWidth = 539;
+                tongueHeight = 607;
                 break;
             case 44:
-                mainWidth = 1689;
-                mainHeight = 1963;
-                tongueWidth = 552;
-                tongueHeight = 632;
+                mainWidth = 1701;
+                mainHeight = 1962;
+                tongueWidth = 548;
+                tongueHeight = 620;
                 break;
             case 45:
-                mainWidth = 1720;
-                mainHeight = 2008;
-                tongueWidth = 560;
-                tongueHeight = 646;
+                mainWidth = 1734;
+                mainHeight = 2007;
+                tongueWidth = 557;
+                tongueHeight = 634;
                 break;
             case 46:
-                mainWidth = 1749;
-                mainHeight = 2052;
-                tongueWidth = 571;
-                tongueHeight = 658;
+                mainWidth = 1760;
+                mainHeight = 2051;
+                tongueWidth = 566;
+                tongueHeight = 647;
                 break;
 
         }
