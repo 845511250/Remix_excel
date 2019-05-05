@@ -124,8 +124,6 @@ String sdCardPath = "/storage/emulated/0/Pictures";
                 } else if (message == 4) {
                     Log.e("fragmentSheet", "message4");
                     bt_remix.setClickable(true);
-//                    if(!MainActivity.instance.cb_fastmode.isChecked())
-//                        iv_pillow.setImageBitmap(MainActivity.instance.bitmapPillow);
                     checkremix();
                 } else if (message == 3) {
                     bt_remix.setClickable(false);

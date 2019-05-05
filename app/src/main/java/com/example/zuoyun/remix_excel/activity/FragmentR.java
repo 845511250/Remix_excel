@@ -110,19 +110,13 @@ String sdCardPath = "/storage/emulated/0/Pictures";
                 } else if (message == 1) {
                     Log.e("fragment2", "message1");
                     bt_remix.setClickable(true);
-                    if(!MainActivity.instance.cb_fastmode.isChecked())
-//                        iv_pillow.setImageBitmap(MainActivity.instance.bitmapLeft);
                     checkremix();
                 } else if (message == 2) {
                     Log.e("fragment2", "message2");
                     bt_remix.setClickable(true);
-                    if(!MainActivity.instance.cb_fastmode.isChecked())
-//                        iv_pillow.setImageBitmap(MainActivity.instance.bitmapRight);
                     checkremix();
                 } else if (message == 4) {
                     Log.e("fy", "message4");
-                    if(!MainActivity.instance.cb_fastmode.isChecked())
-                        iv_pillow.setImageBitmap(MainActivity.instance.bitmapPillow);
                     bt_remix.setClickable(true);
                     checkremix();
                 } else if (message == 3) {

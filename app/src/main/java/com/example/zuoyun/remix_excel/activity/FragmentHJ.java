@@ -3,6 +3,7 @@ package com.example.zuoyun.remix_excel.activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PaintFlagsDrawFilter;
 import android.graphics.Typeface;
@@ -111,19 +112,13 @@ String sdCardPath = "/storage/emulated/0/Pictures";
                 } else if (message == 1) {
                     Log.e("fragment2", "message1");
                     bt_remix.setClickable(true);
-                    if(!MainActivity.instance.cb_fastmode.isChecked())
-//                        iv_pillow.setImageBitmap(MainActivity.instance.bitmapLeft);
                     checkremix();
                 } else if (message == 2) {
                     Log.e("fragment2", "message2");
                     bt_remix.setClickable(true);
-                    if(!MainActivity.instance.cb_fastmode.isChecked())
-//                        iv_pillow.setImageBitmap(MainActivity.instance.bitmapRight);
                     checkremix();
                 } else if (message == 4) {
                     Log.e("fy", "message4");
-                    if(!MainActivity.instance.cb_fastmode.isChecked())
-                        iv_pillow.setImageBitmap(MainActivity.instance.bitmapPillow);
                     bt_remix.setClickable(true);
                     checkremix();
                 } else if (message == 3) {
@@ -186,6 +181,13 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width, height, true);
 
 
+        Matrix matrix = new Matrix();
+        switch (orderItems.get(currentID).sku) {
+            case "HJY":
+                matrix.postRotate(90, bitmapTemp.getWidth() / 2, bitmapTemp.getHeight() / 2);
+                bitmapTemp = Bitmap.createBitmap(bitmapTemp, 0, 0, bitmapTemp.getWidth(), bitmapTemp.getHeight(), matrix, true);
+                break;
+        }
 
         String nameCombine = orderItems.get(currentID).sku + "_" + orderItems.get(currentID).order_number + strPlus + ".jpg";
         String pathSave;

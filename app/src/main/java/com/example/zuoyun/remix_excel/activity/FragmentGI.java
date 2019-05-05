@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PaintFlagsDrawFilter;
 import android.graphics.Typeface;
@@ -169,10 +170,6 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         drawText(canvasCombine);
 
         try {
-//            Matrix matrix = new Matrix();
-//            matrix.postRotate(-90, bitmapCombine.getWidth() / 2, bitmapCombine.getHeight() / 2);
-//            bitmapCombine = Bitmap.createBitmap(bitmapCombine, 0, 0, bitmapCombine.getWidth(), bitmapCombine.getHeight(), matrix, true);
-
             String nameCombine = orderItems.get(currentID).sku + "_" + orderItems.get(currentID).sizeStr + "_" + orderItems.get(currentID).order_number + strPlus + ".jpg";
 
             String pathSave;
@@ -191,6 +188,10 @@ String sdCardPath = "/storage/emulated/0/Pictures";
                     BitmapToJpg.save(bitmapCombine, fileSave, 93);
                     break;
                 case "L":
+                    Matrix matrix = new Matrix();
+                    matrix.postRotate(-90, bitmapCombine.getWidth() / 2, bitmapCombine.getHeight() / 2);
+                    bitmapCombine = Bitmap.createBitmap(bitmapCombine, 0, 0, bitmapCombine.getWidth(), bitmapCombine.getHeight(), matrix, true);
+
                     BitmapToJpg.save(bitmapCombine, fileSave, 72);
                     break;
             }

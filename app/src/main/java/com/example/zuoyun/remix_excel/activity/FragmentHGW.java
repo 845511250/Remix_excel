@@ -118,19 +118,13 @@ String sdCardPath = "/storage/emulated/0/Pictures";
                 } else if (message == 1) {
                     Log.e("fragment2", "message1");
                     bt_remix.setClickable(true);
-                    if(!MainActivity.instance.cb_fastmode.isChecked())
-//                        iv_pillow.setImageBitmap(MainActivity.instance.bitmapLeft);
                     checkremix();
                 } else if (message == 2) {
                     Log.e("fragment2", "message2");
                     bt_remix.setClickable(true);
-                    if(!MainActivity.instance.cb_fastmode.isChecked())
-//                        iv_pillow.setImageBitmap(MainActivity.instance.bitmapRight);
                     checkremix();
                 } else if (message == 4) {
                     Log.e("fy", "message4");
-                    if(!MainActivity.instance.cb_fastmode.isChecked())
-                        iv_pillow.setImageBitmap(MainActivity.instance.bitmapPillow);
                     bt_remix.setClickable(true);
                     checkremix();
                 } else if (message == 3) {
@@ -179,29 +173,45 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvas.save();
         canvas.rotate(2.4f, 827, 18);
         canvas.drawRect(827, 18, 827 + 500, 18 + 22, rectPaint);
-        canvas.drawText(time + "  HGW_" + orderItems.get(currentID).sizeStr + "  前右  " + orderItems.get(currentID).order_number + "   " + orderItems.get(currentID).newCodeStr, 827, 18 + 20, paint);
+        canvas.drawText(time + "  HGW女" + orderItems.get(currentID).sizeStr + "  前右  " + orderItems.get(currentID).order_number + "   " + orderItems.get(currentID).newCodeStr, 827, 18 + 20, paint);
         canvas.restore();
     }
     void drawTextFrontL(Canvas canvas) {
         canvas.save();
         canvas.rotate(-2.4f, 541, 41);
         canvas.drawRect(541, 41, 541 + 500, 41 + 22, rectPaint);
-        canvas.drawText(time + "  HGW_" + orderItems.get(currentID).sizeStr + "  前左  " + orderItems.get(currentID).order_number + "   " + orderItems.get(currentID).newCodeStr, 541, 41 + 20, paint);
+        canvas.drawText(time + "  HGW女" + orderItems.get(currentID).sizeStr + "  前左  " + orderItems.get(currentID).order_number + "   " + orderItems.get(currentID).newCodeStr, 541, 41 + 20, paint);
         canvas.restore();
     }
     void drawTextBackL(Canvas canvas) {
-        canvas.save();
-        canvas.rotate(-10f, 830, 158);
-        canvas.drawRect(830, 158, 830 + 500, 158 + 22, rectPaint);
-        canvas.drawText(time + "  HGW_" + orderItems.get(currentID).sizeStr + "  后左  " + orderItems.get(currentID).order_number + "   " + orderItems.get(currentID).newCodeStr, 830, 158 + 20, paint);
-        canvas.restore();
+        if (orderItems.get(currentID).sizeStr.equals("3XL") || orderItems.get(currentID).sizeStr.equals("4XL")) {
+            canvas.save();
+            canvas.rotate(-4.5f, 333, 158);
+            canvas.drawRect(333, 158, 333 + 500, 158 + 22, rectPaint);
+            canvas.drawText(time + "  HGW女" + orderItems.get(currentID).sizeStr + "  后左  " + orderItems.get(currentID).order_number + "   " + orderItems.get(currentID).newCodeStr, 333, 158 + 20, paint);
+            canvas.restore();
+        } else {
+            canvas.save();
+            canvas.rotate(-10f, 830, 158);
+            canvas.drawRect(830, 158, 830 + 500, 158 + 22, rectPaint);
+            canvas.drawText(time + "  HGW女" + orderItems.get(currentID).sizeStr + "  后左  " + orderItems.get(currentID).order_number + "   " + orderItems.get(currentID).newCodeStr, 830, 158 + 20, paint);
+            canvas.restore();
+        }
     }
     void drawTextBackR(Canvas canvas) {
-        canvas.save();
-        canvas.rotate(10f, 1019, 53);
-        canvas.drawRect(1019, 53, 1019 + 500, 53 + 22, rectPaint);
-        canvas.drawText(time + "  HGW_" + orderItems.get(currentID).sizeStr + "  后右  " + orderItems.get(currentID).order_number + "   " + orderItems.get(currentID).newCodeStr, 1019, 53 + 20, paint);
-        canvas.restore();
+        if (orderItems.get(currentID).sizeStr.equals("3XL") || orderItems.get(currentID).sizeStr.equals("4XL")) {
+            canvas.save();
+            canvas.rotate(4.4f, 1628, 120);
+            canvas.drawRect(1628, 120, 1628 + 500, 120 + 22, rectPaint);
+            canvas.drawText(time + "  HGW女" + orderItems.get(currentID).sizeStr + "  后右  " + orderItems.get(currentID).order_number + "   " + orderItems.get(currentID).newCodeStr, 1628, 120 + 20, paint);
+            canvas.restore();
+        } else {
+            canvas.save();
+            canvas.rotate(10f, 1019, 53);
+            canvas.drawRect(1019, 53, 1019 + 500, 53 + 22, rectPaint);
+            canvas.drawText(time + "  HGW女" + orderItems.get(currentID).sizeStr + "  后右  " + orderItems.get(currentID).order_number + "   " + orderItems.get(currentID).newCodeStr, 1019, 53 + 20, paint);
+            canvas.restore();
+        }
     }
     void drawTextPocketR(Canvas canvas) {
         canvas.save();
@@ -240,18 +250,22 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     public void remixx(){
         int margin = 120;
         Matrix matrix = new Matrix();
+        int combineWidth = width_front + width_back + height_borderTop + margin;
         int combineHeight = Math.max(width_borderTop, height_front + height_pocket + height_back + margin * 2);
+        if (orderItems.get(currentID).sizeStr.equals("4XL")) {
+            combineWidth = width_front + width_back + height_borderTop + margin * 2 - 350;
+        }
 
         Bitmap bitmapF = orderItems.get(currentID).img_left == null ? MainActivity.instance.bitmapPillow : MainActivity.instance.bitmapRight;
         Bitmap bitmapB = orderItems.get(currentID).img_left == null ? MainActivity.instance.bitmapPillow : MainActivity.instance.bitmapLeft;
 
-        Bitmap bitmapCombine = Bitmap.createBitmap(width_front + width_back + height_borderTop + margin * 2, combineHeight, Bitmap.Config.ARGB_8888);
+        Bitmap bitmapCombine = Bitmap.createBitmap(combineWidth, combineHeight, Bitmap.Config.ARGB_8888);
         Canvas canvasCombine= new Canvas(bitmapCombine);
         canvasCombine.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
         canvasCombine.drawColor(0xffffffff);
 
         //front
-        Bitmap bitmapTemp = Bitmap.createBitmap(bitmapF, 440, 747, 1898, 1923);
+        Bitmap bitmapTemp = Bitmap.createBitmap(bitmapF, 552, 747, 1898, 1923);
         Canvas canvasTemp = new Canvas(bitmapTemp);
         Bitmap bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), id_frontR);
         canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
@@ -259,7 +273,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_front, height_front, true);
         canvasCombine.drawBitmap(bitmapTemp, 0, 0, null);
 
-        bitmapTemp = Bitmap.createBitmap(bitmapB, 1561, 746, 1898, 1923);
+        bitmapTemp = Bitmap.createBitmap(bitmapF, 2450, 746, 1898, 1923);
         canvasTemp = new Canvas(bitmapTemp);
         matrix.reset();
         matrix.postScale(-1, 1);
@@ -274,7 +288,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvasTemp = new Canvas(bitmapTemp);
         canvasTemp.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
         matrix.reset();
-        matrix.postTranslate(-31, -481);
+        matrix.postTranslate(-10, -481);
         matrix.postRotate(-8.3f);
         matrix.postTranslate(-232, 282);
         canvasTemp.drawBitmap(bitmapB, matrix, null);
@@ -282,14 +296,19 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
         drawTextBackL(canvasTemp);
         bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_back, height_back, true);
-        canvasCombine.drawBitmap(bitmapTemp, 0, height_front + height_pocket + margin * 2, null);
+        if (orderItems.get(currentID).sizeStr.equals("4XL")) {
+            canvasCombine.drawBitmap(bitmapTemp, 0, height_front + height_back + margin * 3, null);
+        } else {
+            canvasCombine.drawBitmap(bitmapTemp, 0, height_front + height_pocket + margin * 2, null);
+        }
+
 
         //backR
         bitmapTemp = Bitmap.createBitmap(2438, 2315, Bitmap.Config.ARGB_8888);
         canvasTemp = new Canvas(bitmapTemp);
         canvasTemp.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
         matrix.reset();
-        matrix.postTranslate(-1429, -481);
+        matrix.postTranslate(-2450, -481);
         matrix.postRotate(8.3f);
         matrix.postTranslate(252, -71);
         canvasTemp.drawBitmap(bitmapB, matrix, null);
@@ -300,19 +319,23 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
         drawTextBackR(canvasTemp);
         bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_back, height_back, true);
-        canvasCombine.drawBitmap(bitmapTemp, width_front + margin, height_front + margin, null);
+        if (orderItems.get(currentID).sizeStr.equals("4XL")) {
+            canvasCombine.drawBitmap(bitmapTemp, width_front + margin - 350, height_front + margin, null);
+        } else {
+            canvasCombine.drawBitmap(bitmapTemp, width_front + margin, height_front + margin, null);
+        }
 
         //pocketR
-        bitmapTemp = Bitmap.createBitmap(bitmapF, 444, 685, 1079, 1298);
+        bitmapTemp = Bitmap.createBitmap(bitmapF, 556, 685, 1079, 1298);
         canvasTemp = new Canvas(bitmapTemp);
         bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.hgw_pocket_r);
         canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
         drawTextPocketR(canvasTemp);
         bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_pocket, height_pocket, true);
-        canvasCombine.drawBitmap(bitmapTemp, 0, height_front + margin, null);
+        canvasCombine.drawBitmap(bitmapTemp, 0, height_front, null);
 
         //pocketL
-        bitmapTemp = Bitmap.createBitmap(bitmapF, 2380, 685, 1079, 1298);
+        bitmapTemp = Bitmap.createBitmap(bitmapF, 3269, 685, 1079, 1298);
         canvasTemp = new Canvas(bitmapTemp);
         matrix.reset();
         matrix.postScale(-1, 1);
@@ -323,16 +346,16 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvasCombine.drawBitmap(bitmapTemp, width_pocket + margin, height_front + margin, null);
 
         //borderPocketL
-        bitmapTemp = Bitmap.createBitmap(bitmapF, 440, 746, 936, 736);
+        bitmapTemp = Bitmap.createBitmap(bitmapF, 552, 746, 936, 736);
         canvasTemp = new Canvas(bitmapTemp);
         bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.hgw_border_pocket_l);
         canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
         drawTextborderPocketL(canvasTemp);
         bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_borderPocket, height_borderPocket, true);
-        canvasCombine.drawBitmap(bitmapTemp, width_front + width_back + margin - width_borderPocket, width_borderTop - height_borderPocket, null);
+        canvasCombine.drawBitmap(bitmapTemp, combineWidth - width_borderPocket - height_borderTop - margin, combineHeight - height_borderPocket, null);
 
         //borderPocketR
-        bitmapTemp = Bitmap.createBitmap(bitmapF, 2522, 746, 937, 736);
+        bitmapTemp = Bitmap.createBitmap(bitmapF, 3411, 746, 937, 736);
         canvasTemp = new Canvas(bitmapTemp);
         matrix.reset();
         matrix.postScale(-1, 1);
@@ -348,7 +371,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvasTemp = new Canvas(bitmapTemp);
         canvasTemp.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
 
-        Bitmap bitmapCut = Bitmap.createBitmap(bitmapB, 1891, 32, 1615, 562);
+        Bitmap bitmapCut = Bitmap.createBitmap(bitmapB, 2912, 32, 1615, 562);
         canvasTemp.drawBitmap(bitmapCut, 0, 0, null);
 
         bitmapCut = Bitmap.createBitmap(1368, 562, Bitmap.Config.ARGB_8888);
@@ -356,7 +379,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         matrix.reset();
         matrix.postRotate(-4f);
         matrix.postTranslate(-40, 0);
-        canvasCut.drawBitmap(Bitmap.createBitmap(bitmapF, 562, 230, 1405, 662), matrix, null);
+        canvasCut.drawBitmap(Bitmap.createBitmap(bitmapF, 674, 230, 1405, 662), matrix, null);
         canvasTemp.drawBitmap(bitmapCut, 1615, 0, null);
 
         bitmapCut = Bitmap.createBitmap(1368, 562, Bitmap.Config.ARGB_8888);
@@ -364,10 +387,10 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         matrix.reset();
         matrix.postRotate(4f);
         matrix.postTranslate(6, -100);
-        canvasCut.drawBitmap(Bitmap.createBitmap(bitmapF, 1934, 230, 1405, 662), matrix, null);
+        canvasCut.drawBitmap(Bitmap.createBitmap(bitmapF, 2823, 230, 1405, 662), matrix, null);
         canvasTemp.drawBitmap(bitmapCut, 1615 + 1368, 0, null);
 
-        bitmapCut = Bitmap.createBitmap(bitmapB, 396, 32, 1615, 562);
+        bitmapCut = Bitmap.createBitmap(bitmapB, 375, 32, 1615, 562);
         canvasTemp.drawBitmap(bitmapCut, 1615 + 1368 * 2, 0, null);
         bitmapCut.recycle();
         canvasTemp.drawRect(0, 0, 1615 * 2 + 1368 * 2, 562, rectBorderPaint);
@@ -376,7 +399,11 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_borderTop, height_borderTop, true);
         matrix.reset();
         matrix.postRotate(90);
-        matrix.postTranslate(height_borderTop + width_front + width_back + margin * 2, 0);
+        if (orderItems.get(currentID).sizeStr.equals("4XL")) {
+            matrix.postTranslate(height_borderTop + width_front + width_back + margin * 2 - 350, 0);
+        } else {
+            matrix.postTranslate(height_borderTop + width_front + width_back + margin * 2, 0);
+        }
         canvasCombine.drawBitmap(bitmapTemp, matrix, null);
         bitmapTemp.recycle();
 
@@ -487,13 +514,13 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     void setSize(String size) {
         switch (size) {
             case "XS":
-                width_front = 1720;
-                height_front = 1747;
-                width_back = 2259;
-                height_back = 2136;
+                width_front = 1631;
+                height_front = 1745;
+                width_back = 2171;
+                height_back = 2140;
                 width_pocket = 1037;
                 height_pocket = 1244;
-                width_borderTop = 5339;
+                width_borderTop = 4984;
                 height_borderTop = 562;
                 width_borderPocket = 907;
                 height_borderPocket = 706;
@@ -501,13 +528,13 @@ String sdCardPath = "/storage/emulated/0/Pictures";
                 id_backL = R.drawable.hgw_back_l_s;
                 break;
             case "S":
-                width_front = 1779;
-                height_front = 1806;
-                width_back = 2318;
-                height_back = 2196;
+                width_front = 1750;
+                height_front = 1804;
+                width_back = 2290;
+                height_back = 2199;
                 width_pocket = 1037;
                 height_pocket = 1244;
-                width_borderTop = 5575;
+                width_borderTop = 5457;
                 height_borderTop = 562;
                 width_borderPocket = 907;
                 height_borderPocket = 706;
@@ -515,13 +542,13 @@ String sdCardPath = "/storage/emulated/0/Pictures";
                 id_backL = R.drawable.hgw_back_l_s;
                 break;
             case "M":
-                width_front = 1839;
+                width_front = 1868;
                 height_front = 1864;
-                width_back = 2378;
+                width_back = 2408;
                 height_back = 2256;
                 width_pocket = 1079;
                 height_pocket = 1298;
-                width_borderTop = 5811;
+                width_borderTop = 5929;
                 height_borderTop = 562;
                 width_borderPocket = 937;
                 height_borderPocket = 736;
@@ -529,13 +556,13 @@ String sdCardPath = "/storage/emulated/0/Pictures";
                 id_backL = R.drawable.hgw_back_l_s;
                 break;
             case "L":
-                width_front = 1898;
+                width_front = 1958;
                 height_front = 1923;
-                width_back = 2438;
+                width_back = 2498;
                 height_back = 2315;
                 width_pocket = 1079;
                 height_pocket = 1298;
-                width_borderTop = 6048;
+                width_borderTop = 6283;
                 height_borderTop = 562;
                 width_borderPocket = 936;
                 height_borderPocket = 736;
@@ -543,27 +570,27 @@ String sdCardPath = "/storage/emulated/0/Pictures";
                 id_backL = R.drawable.hgw_back_l_xl;
                 break;
             case "XL":
-                width_front = 1958;
-                height_front = 1982;
-                width_back = 2498;
-                height_back = 2375;
-                width_pocket = 1121;
-                height_pocket = 1354;
-                width_borderTop = 6284;
+                width_front = 2077;
+                height_front = 2012;
+                width_back = 2617;
+                height_back = 2408;
+                width_pocket = 1127;
+                height_pocket = 1383;
+                width_borderTop = 6756;
                 height_borderTop = 562;
-                width_borderPocket = 936;
-                height_borderPocket = 736;
+                width_borderPocket = 965;
+                height_borderPocket = 765;
                 id_frontR = R.drawable.hgw_front_r_xl;
                 id_backL = R.drawable.hgw_back_l_xl;
                 break;
             case "2XL":
-                width_front = 2017;
-                height_front = 2041;
-                width_back = 2557;
-                height_back = 2435;
-                width_pocket = 1121;
-                height_pocket = 1354;
-                width_borderTop = 6520;
+                width_front = 2166;
+                height_front = 2101;
+                width_back = 2706;
+                height_back = 2499;
+                width_pocket = 1134;
+                height_pocket = 1413;
+                width_borderTop = 7110;
                 height_borderTop = 562;
                 width_borderPocket = 965;
                 height_borderPocket = 765;
@@ -571,30 +598,30 @@ String sdCardPath = "/storage/emulated/0/Pictures";
                 id_backL = R.drawable.hgw_back_l_xl;
                 break;
             case "3XL":
-                width_front = 2077;
-                height_front = 2100;
-                width_back = 2617;
-                height_back = 2495;
-                width_pocket = 1121;
-                height_pocket = 1354;
-                width_borderTop = 6756;
+                width_front = 2374;
+                height_front = 2249;
+                width_back = 2914;
+                height_back = 2588;
+                width_pocket = 1153;
+                height_pocket = 1502;
+                width_borderTop = 7937;
                 height_borderTop = 562;
                 width_borderPocket = 965;
-                height_borderPocket = 765;
+                height_borderPocket = 819;
                 id_frontR = R.drawable.hgw_front_r_3xl;
                 id_backL = R.drawable.hgw_back_l_3xl;
                 break;
             case "4XL":
-                width_front = 2137;
-                height_front = 2158;
-                width_back = 2677;
-                height_back = 2555;
-                width_pocket = 1121;
-                height_pocket = 1354;
-                width_borderTop = 6992;
+                width_front = 2527;
+                height_front = 2344;
+                width_back = 3071;
+                height_back = 2678;
+                width_pocket = 1160;
+                height_pocket = 1533;
+                width_borderTop = 8527;
                 height_borderTop = 562;
                 width_borderPocket = 965;
-                height_borderPocket = 765;
+                height_borderPocket = 819;
                 id_frontR = R.drawable.hgw_front_r_3xl;
                 id_backL = R.drawable.hgw_back_l_3xl;
                 break;

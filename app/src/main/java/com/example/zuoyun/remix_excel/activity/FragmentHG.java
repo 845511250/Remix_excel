@@ -48,8 +48,9 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     @BindView(R.id.iv_pillow)
     ImageView iv_pillow;
 
-    int width_front, width_back, width_pocket;
-    int height_front,height_back,height_pocket;
+    int width_front, width_back, width_pocket,width_border_small,width_border_big;
+    int height_front,height_back,height_pocket,height_border_small,height_border_big;
+    int id_frontR,id_backL;
 
     int num;
     String strPlus = "";
@@ -117,19 +118,13 @@ String sdCardPath = "/storage/emulated/0/Pictures";
                 } else if (message == 1) {
                     Log.e("fragment2", "message1");
                     bt_remix.setClickable(true);
-                    if(!MainActivity.instance.cb_fastmode.isChecked())
-//                        iv_pillow.setImageBitmap(MainActivity.instance.bitmapLeft);
                     checkremix();
                 } else if (message == 2) {
                     Log.e("fragment2", "message2");
                     bt_remix.setClickable(true);
-                    if(!MainActivity.instance.cb_fastmode.isChecked())
-//                        iv_pillow.setImageBitmap(MainActivity.instance.bitmapRight);
                     checkremix();
                 } else if (message == 4) {
                     Log.e("fy", "message4");
-                    if(!MainActivity.instance.cb_fastmode.isChecked())
-                        iv_pillow.setImageBitmap(MainActivity.instance.bitmapPillow);
                     bt_remix.setClickable(true);
                     checkremix();
                 } else if (message == 3) {
@@ -176,117 +171,137 @@ String sdCardPath = "/storage/emulated/0/Pictures";
 
     void drawTextFrontR(Canvas canvas) {
         canvas.drawRect(640, 20, 640 + 500, 20 + 25, rectPaint);
-        canvas.drawText(time + "HG 前右 " + orderItems.get(currentID).sizeStr + "  " + orderItems.get(currentID).order_number + "   " + orderItems.get(currentID).newCodeStr, 640, 20 + 23, paint);
+        canvas.drawText(time + "HGM男 前右 " + orderItems.get(currentID).sizeStr + "  " + orderItems.get(currentID).order_number + "   " + orderItems.get(currentID).newCodeStr, 640, 20 + 23, paint);
     }
     void drawTextFrontL(Canvas canvas) {
-        canvas.drawRect(640, 20, 640 + 500, 20 + 25, rectPaint);
-        canvas.drawText(time + "HG 前左 " + orderItems.get(currentID).sizeStr + "  " + orderItems.get(currentID).order_number + "   " + orderItems.get(currentID).newCodeStr, 640, 20 + 23, paint);
+        canvas.drawRect(640, 30, 640 + 500, 30 + 25, rectPaint);
+        canvas.drawText(time + "HGM男 前左 " + orderItems.get(currentID).sizeStr + "  " + orderItems.get(currentID).order_number + "   " + orderItems.get(currentID).newCodeStr, 640, 30 + 23, paint);
     }
     void drawTextBackL(Canvas canvas) {
-        canvas.drawRect(950, 35, 950 + 500, 35 + 25, rectPaint);
-        canvas.drawText(time + "HG 后左 " + orderItems.get(currentID).sizeStr + "  " + orderItems.get(currentID).order_number + "   " + orderItems.get(currentID).newCodeStr, 950, 35 + 23, paint);
+        canvas.drawRect(950, 25, 950 + 500, 25 + 25, rectPaint);
+        canvas.drawText(time + "HGM男 后左 " + orderItems.get(currentID).sizeStr + "  " + orderItems.get(currentID).order_number + "   " + orderItems.get(currentID).newCodeStr, 950, 25 + 23, paint);
     }
     void drawTextBackR(Canvas canvas) {
-        canvas.drawRect(950, 35, 950 + 500, 35 + 25, rectPaint);
-        canvas.drawText(time + "HG 后右 " + orderItems.get(currentID).sizeStr + "  " + orderItems.get(currentID).order_number + "   " + orderItems.get(currentID).newCodeStr, 950, 35 + 23, paint);
+        canvas.drawRect(950, 25, 950 + 500, 25 + 25, rectPaint);
+        canvas.drawText(time + "HGM男 后右 " + orderItems.get(currentID).sizeStr + "  " + orderItems.get(currentID).order_number + "   " + orderItems.get(currentID).newCodeStr, 950, 25 + 23, paint);
     }
     void drawTextPocketL(Canvas canvas) {
-        canvas.drawRect(20, 5, 20 + 290, 5 + 25, rectPaint);
-        canvas.drawText("左 " + orderItems.get(currentID).sizeStr + " " + time + "  " + orderItems.get(currentID).order_number, 20, 5 + 23, paint);
+        canvas.drawRect(300, 16, 300 + 290, 16 + 25, rectPaint);
+        canvas.drawText(orderItems.get(currentID).sizeStr + " " + time + "  " + orderItems.get(currentID).order_number, 300, 16 + 23, paint);
     }
     void drawTextPocketR(Canvas canvas) {
-        canvas.drawRect(20, 5, 20 + 290, 5 + 25, rectPaint);
-        canvas.drawText("右 " + orderItems.get(currentID).sizeStr + " " + time + "  " + orderItems.get(currentID).order_number, 20, 5 + 23, paint);
+        canvas.drawRect(20, 8, 20 + 290, 8 + 25, rectPaint);
+        canvas.drawText(orderItems.get(currentID).sizeStr + " " + time + "  " + orderItems.get(currentID).order_number, 20, 8 + 23, paint);
     }
 
 
     public void remixx(){
         int margin = 120;
         Matrix matrix = new Matrix();
+        int width_combine = Math.max(width_front + width_back + margin, width_pocket * 4 + width_border_small * 2 + margin * 5);
 
-        Bitmap bitmapF = orderItems.get(currentID).img_left == null ? MainActivity.instance.bitmapPillow : MainActivity.instance.bitmapRight;
-        Bitmap bitmapB = orderItems.get(currentID).img_left == null ? MainActivity.instance.bitmapPillow : MainActivity.instance.bitmapLeft;
-
-        Bitmap bitmapCombine = Bitmap.createBitmap(width_back * 2 + margin, height_back + height_pocket * 2 + +margin * 4, Bitmap.Config.ARGB_8888);
+        Bitmap bitmapCombine = Bitmap.createBitmap(width_combine, height_back * 2 + height_pocket + margin * 2, Bitmap.Config.ARGB_8888);
         Canvas canvasCombine= new Canvas(bitmapCombine);
         canvasCombine.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
         canvasCombine.drawColor(0xffffffff);
 
-        //back
-        Bitmap bitmapTemp = Bitmap.createBitmap(bitmapB, 17, 46, 2671, 4420);
+        //front
+        Bitmap bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 623, 157, 2077, 4186);
         Canvas canvasTemp = new Canvas(bitmapTemp);
-        Bitmap bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.hg_b_l);
+        Bitmap bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), id_frontR);
+        canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
+        drawTextFrontR(canvasTemp);
+        bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_front, height_front, true);
+        canvasCombine.drawBitmap(bitmapTemp, width_back + margin, 0, null);
+
+        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 2700, 157, 2077, 4186);
+        canvasTemp = new Canvas(bitmapTemp);
+        matrix.reset();
+        matrix.postScale(-1, 1);
+        bitmapDB = Bitmap.createBitmap(bitmapDB, 0, 0, bitmapDB.getWidth(), bitmapDB.getHeight(), matrix, true);
+        canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
+        drawTextFrontL(canvasTemp);
+        bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_front, height_front, true);
+        canvasCombine.drawBitmap(bitmapTemp, width_back + margin, height_back + margin, null);
+
+        //backL
+        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapLeft, 29, 40, 2671, 4420);
+        canvasTemp = new Canvas(bitmapTemp);
+        bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), id_backL);
         canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
         drawTextBackL(canvasTemp);
         bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_back, height_back, true);
         canvasCombine.drawBitmap(bitmapTemp, 0, 0, null);
 
-        bitmapTemp = Bitmap.createBitmap(bitmapB, 1402, 34, 2671, 4420);
+        //backR
+        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapLeft, 2700, 40, 2671, 4420);
         canvasTemp = new Canvas(bitmapTemp);
         matrix.reset();
         matrix.postScale(-1, 1);
-        bitmapDB = Bitmap.createBitmap(bitmapDB, 0, 0, 2671, 4420, matrix, true);
+        bitmapDB = Bitmap.createBitmap(bitmapDB, 0, 0, bitmapDB.getWidth(), bitmapDB.getHeight(), matrix, true);
         canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
         drawTextBackR(canvasTemp);
         bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_back, height_back, true);
-        canvasCombine.drawBitmap(bitmapTemp, width_back + margin, 0, null);
-
-        //front
-        bitmapTemp = Bitmap.createBitmap(bitmapF, 289, 157, 2077, 4186);
-        canvasTemp = new Canvas(bitmapTemp);
-        bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.hg_f_r);
-        canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
-        drawTextFrontR(canvasTemp);
-        bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_front, height_front, true);
         canvasCombine.drawBitmap(bitmapTemp, 0, height_back + margin, null);
 
-        bitmapTemp = Bitmap.createBitmap(bitmapF, 1734, 157, 2077, 4186);
+        //pocketR
+        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 623, 613, 1212, 2055);
         canvasTemp = new Canvas(bitmapTemp);
-        matrix.reset();
-        matrix.postScale(-1, 1);
-        bitmapDB = Bitmap.createBitmap(bitmapDB, 0, 0, 2077, 4186, matrix, true);
+        bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.hgm_pocket_r);
         canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
-        drawTextFrontL(canvasTemp);
-        bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_front, height_front, true);
-        canvasCombine.drawBitmap(bitmapTemp, width_front + margin, height_back + margin, null);
+        drawTextPocketR(canvasTemp);
+        bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_pocket, height_pocket, true);
+        canvasCombine.drawBitmap(bitmapTemp, width_pocket + margin, height_back * 2 + margin * 2, null);
+        canvasCombine.drawBitmap(bitmapTemp, width_pocket * 3 + margin * 3, height_back * 2 + margin * 2, null);
 
         //pocketL
-        bitmapTemp = Bitmap.createBitmap(bitmapB, 264, 316, 325, 2067);
+        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 3565, 613, 1212, 2055);
         canvasTemp = new Canvas(bitmapTemp);
-        bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.hg_pocket_r);
+        bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.hgm_pocket_l);
         canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
         drawTextPocketL(canvasTemp);
         bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_pocket, height_pocket, true);
-        canvasCombine.drawBitmap(bitmapTemp, width_front * 2 + margin * 2, height_back + margin, null);
+        canvasCombine.drawBitmap(bitmapTemp, 0, height_back * 2 + margin * 2, null);
+        canvasCombine.drawBitmap(bitmapTemp, width_pocket * 2 + margin * 2, height_back * 2 + margin * 2, null);
 
-        bitmapTemp = Bitmap.createBitmap(bitmapF, 3426, 426, 325, 2067);
+        //borderBigR
+        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 623, 613, 389, 1974);
         canvasTemp = new Canvas(bitmapTemp);
-        bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.hg_pocket_l);
+        bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.hgm_border_big_r);
         canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
-        drawTextPocketL(canvasTemp);
-        bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_pocket, height_pocket, true);
-        canvasCombine.drawBitmap(bitmapTemp, width_front * 2 + width_pocket + margin * 3, height_back + margin, null);
+//        drawTextPocketR(canvasTemp);
+        bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_border_big, height_border_big, true);
+        canvasCombine.drawBitmap(bitmapTemp, width_back - width_border_big, 0, null);
 
-        //pocketR
-        bitmapTemp = Bitmap.createBitmap(bitmapF, 349, 426, 325, 2067);
+        //borderBigL
+        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 4388, 613, 389, 1974);
         canvasTemp = new Canvas(bitmapTemp);
-        bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.hg_pocket_r);
+        bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.hgm_border_big_l);
         canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
-        drawTextPocketR(canvasTemp);
-        bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_pocket, height_pocket, true);
-        canvasCombine.drawBitmap(bitmapTemp, width_front * 2 + margin * 2, height_back + height_pocket + margin * 2, null);
+//        drawTextPocketL(canvasTemp);
+        bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_border_big, height_border_big, true);
+        canvasCombine.drawBitmap(bitmapTemp, 0, height_back + margin, null);
 
-        bitmapTemp = Bitmap.createBitmap(bitmapB, 3488, 316, 325, 2067);
+        //borderSmallR
+        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 623, 613, 222, 1669);
         canvasTemp = new Canvas(bitmapTemp);
-        bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.hg_pocket_l);
+        bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.hgm_border_small_r);
         canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
+//        drawTextPocketR(canvasTemp);
+        bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_border_small, height_border_small, true);
+        canvasCombine.drawBitmap(bitmapTemp, width_pocket * 4 + margin * 4, height_back * 2 + margin * 2, null);
+
+        //borderSmallL
+        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 4555, 613, 222, 1669);
+        canvasTemp = new Canvas(bitmapTemp);
+        bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.hgm_border_small_l);
+        canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
+//        drawTextPocketL(canvasTemp);
+        bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_border_small, height_border_small, true);
+        canvasCombine.drawBitmap(bitmapTemp, width_pocket * 4 + width_border_small + margin * 5, height_back * 2 + margin * 2, null);
+
         bitmapDB.recycle();
-        drawTextPocketR(canvasTemp);
-        bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_pocket, height_pocket, true);
-        canvasCombine.drawBitmap(bitmapTemp, width_front * 2 + width_pocket + margin * 3, height_back + height_pocket + margin * 2, null);
         bitmapTemp.recycle();
-
-
 
         String nameCombine = orderItems.get(currentID).sku + "_" + orderItems.get(currentID).sizeStr + "_" + orderItems.get(currentID).order_number + strPlus + ".jpg";
         String pathSave;
@@ -390,62 +405,68 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     }
 
     void setScale(String size) {
+        width_pocket = 1266;
+        height_pocket = 1989;
+        width_border_small = 232;
+        height_border_small = 1615;
+        width_border_big = 403;
+        height_border_big = 1910;
         switch (size) {
             case "S":
                 width_front = 1905;
                 height_front = 3884;
-                width_back = 2529;
-                height_back = 4122;
-                width_pocket = 325;
-                height_pocket = 2067;
+                width_back = 2547;
+                height_back = 4135;
+                id_frontR = R.drawable.hgm_front_m;
+                id_backL = R.drawable.hgm_back_m;
                 break;
             case "M":
-                width_front = 1955;
-                height_front = 3988;
-                width_back = 2561;
-                height_back = 4203;
-                width_pocket = 325;
-                height_pocket = 2067;
+                width_front = 1993;
+                height_front = 3946;
+                width_back = 2626;
+                height_back = 4196;
+                id_frontR = R.drawable.hgm_front_m;
+                id_backL = R.drawable.hgm_back_m;
                 break;
             case "L":
-                width_front = 2022;
-                height_front = 4075;
-                width_back = 2605;
-                height_back = 4268;
-                width_pocket = 325;
-                height_pocket = 2067;
+                width_front = 2081;
+                height_front = 4007;
+                width_back = 2703;
+                height_back = 4254;
+                id_frontR = R.drawable.hgm_front_m;
+                id_backL = R.drawable.hgm_back_m;
                 break;
             case "XL":
-                width_front = 2077;
-                height_front = 4186;
-                width_back = 2682;
-                height_back = 4434;
-                width_pocket = 325;
-                height_pocket = 2067;
+                width_front = 2170;
+                height_front = 4051;
+                width_back = 2787;
+                height_back = 4304;
+                id_frontR = R.drawable.hgm_front_2xl;
+                id_backL = R.drawable.hgm_back_2xl;
                 break;
             case "2XL":
-                width_front = 2134;
-                height_front = 4247;
-                width_back = 2687;
-                height_back = 4489;
-                width_pocket = 325;
-                height_pocket = 2067;
+                width_front = 2407;
+                height_front = 4115;
+                width_back = 3020;
+                height_back = 4387;
+                id_frontR = R.drawable.hgm_front_2xl;
+                id_backL = R.drawable.hgm_back_2xl;
                 break;
             case "3XL":
-                width_front = 2204;
-                height_front = 4313;
-                width_back = 2759;
-                height_back = 4551;
-                width_pocket = 325;
-                height_pocket = 2067;
+                width_front = 2525;
+                height_front = 4234;
+                width_back = 3126;
+                height_back = 4500;
+                id_frontR = R.drawable.hgm_front_2xl;
+                id_backL = R.drawable.hgm_back_2xl;
                 break;
             case "4XL":
-                width_front = 2275;
-                height_front = 4388;
-                width_back = 2864;
-                height_back = 4616;
-                width_pocket = 325;
-                height_pocket = 2067;
+                width_front = 2584;
+                height_front = 4295;
+                width_back = 3185;
+                height_back = 4615;
+                id_frontR = R.drawable.hgm_front_4xl;
+                id_backL = R.drawable.hgm_back_4xl;
                 break;
             default:
                 showDialogSizeWrong(orderItems.get(currentID).order_number);

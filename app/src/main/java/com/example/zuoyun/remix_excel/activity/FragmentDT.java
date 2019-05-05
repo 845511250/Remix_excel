@@ -14,8 +14,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.zuoyun.remix_excel.R;
-import com.example.zuoyun.remix_excel.tools.BitmapToJpg;
 import com.example.zuoyun.remix_excel.activity.start.bean.OrderItem;
+import com.example.zuoyun.remix_excel.tools.BitmapToJpg;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -27,8 +27,6 @@ import jxl.write.Label;
 import jxl.write.Number;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
-
-import static com.example.zuoyun.remix_excel.activity.MainActivity.getLastNewCode;
 
 /**
  * Created by zuoyun on 2016/11/4.
@@ -173,19 +171,19 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         //paint
         Paint paint = new Paint();
         paint.setColor(0xff000000);
-        paint.setTextSize(46);
+        paint.setTextSize(23);
         paint.setTypeface(Typeface.DEFAULT_BOLD);
         paint.setAntiAlias(true);
 
         Paint paintRed = new Paint();
         paintRed.setColor(0xffff0000);
-        paintRed.setTextSize(46);
+        paintRed.setTextSize(23);
         paintRed.setTypeface(Typeface.DEFAULT_BOLD);
         paintRed.setAntiAlias(true);
 
         Paint paintBlue = new Paint();
         paintBlue.setColor(0xff0000ff);
-        paintBlue.setTextSize(46);
+        paintBlue.setTextSize(23);
         paintBlue.setTypeface(Typeface.DEFAULT_BOLD);
         paintBlue.setAntiAlias(true);
 
@@ -195,10 +193,12 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         String time = MainActivity.instance.orderDate_Print;
         //Bitmap bitmapBarCode = BarCodeUtil.creatBarcode(orderItems.get(currentID).order_number.replace("_", ""), 500, 50);
 
-        canvasLeftSide.drawRect(1655, 48, 1805, 88, rectPaint);
-        canvasLeftSide.drawText(getLastNewCode(orderItems.get(currentID).newCode) + "左", 1656, 84, paintRed);
+        canvasLeftSide.drawRect(1655, 48, 1805, 48 + 23, rectPaint);
+        canvasLeftSide.drawText(orderItems.get(currentID).size + "码 左", 1656, 48 + 21, paintRed);
+        canvasLeftSide.drawRect(370, 48, 512, 48 + 23, rectPaint);
+        canvasLeftSide.drawText(orderItems.get(currentID).order_number, 370, 48 + 21, paint);
         canvasLeftMain.drawRect(615, 1160, 1011, 1212, rectPaint);
-        canvasLeftMain.drawText("     左", 612, 1206, paintRed);
+        canvasLeftMain.drawText("    左", 612, 1206, paintRed);
         canvasLeftMain.drawText(orderItems.get(currentID).size + "码" + orderItems.get(currentID).color, 860, 1206, paint);
         canvasLeftMain.save();
         canvasLeftMain.rotate(-68.5f, 1296, 882);
@@ -213,8 +213,10 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvasLeftMain.drawText(orderItems.get(currentID).newCode, 373, 846, paintRed);
         canvasLeftMain.restore();
 
-        canvasRightSide.drawRect(1655, 48, 1805, 88, rectPaint);
-        canvasRightSide.drawText(getLastNewCode(orderItems.get(currentID).newCode) + "右", 1656, 84, paintRed);
+        canvasRightSide.drawRect(1655, 48, 1805, 48 + 23, rectPaint);
+        canvasRightSide.drawText(orderItems.get(currentID).size + "码 右", 1656, 48 + 21, paintRed);
+        canvasRightSide.drawRect(370, 48, 512, 48 + 23, rectPaint);
+        canvasRightSide.drawText(orderItems.get(currentID).order_number, 370, 48 + 21, paint);
         canvasRightMain.drawRect(615, 1160, 1011, 1212, rectPaint);
         canvasRightMain.drawText(orderItems.get(currentID).size + "码" + orderItems.get(currentID).color, 612, 1206, paint);
         canvasRightMain.drawText(" 右", 860, 1206, paintRed);

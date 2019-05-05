@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PaintFlagsDrawFilter;
 import android.graphics.Typeface;
@@ -116,19 +117,13 @@ String sdCardPath = "/storage/emulated/0/Pictures";
                 } else if (message == 1) {
                     Log.e("fragment2", "message1");
                     bt_remix.setClickable(true);
-                    if(!MainActivity.instance.cb_fastmode.isChecked())
-//                        iv_pillow.setImageBitmap(MainActivity.instance.bitmapLeft);
-                        checkremix();
+                    checkremix();
                 } else if (message == 2) {
                     Log.e("fragment2", "message2");
                     bt_remix.setClickable(true);
-                    if(!MainActivity.instance.cb_fastmode.isChecked())
-//                        iv_pillow.setImageBitmap(MainActivity.instance.bitmapRight);
-                        checkremix();
+                    checkremix();
                 } else if (message == 4) {
                     Log.e("fy", "message4");
-                    if(!MainActivity.instance.cb_fastmode.isChecked())
-                        iv_pillow.setImageBitmap(MainActivity.instance.bitmapPillow);
                     bt_remix.setClickable(true);
                     checkremix();
                 } else if (message == 3) {
@@ -198,7 +193,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvasCombine.drawBitmap(bitmapTemp, 0, 0, null);
 
         //后面
-        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 74, 97, 3452, 4806);
+        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapLeft, 74, 97, 3452, 4806);
         canvasTemp = new Canvas(bitmapTemp);
         canvasTemp.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
         bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.gc_back);
@@ -211,9 +206,9 @@ String sdCardPath = "/storage/emulated/0/Pictures";
 
 
         try {
-//            Matrix matrix = new Matrix();
-//            matrix.postRotate(90, bitmapCombine.getWidth() / 2, bitmapCombine.getHeight() / 2);
-//            bitmapCombine = Bitmap.createBitmap(bitmapCombine, 0, 0, bitmapCombine.getWidth(), bitmapCombine.getHeight(), matrix, true);
+            Matrix matrix = new Matrix();
+            matrix.postRotate(90, bitmapCombine.getWidth() / 2, bitmapCombine.getHeight() / 2);
+            bitmapCombine = Bitmap.createBitmap(bitmapCombine, 0, 0, bitmapCombine.getWidth(), bitmapCombine.getHeight(), matrix, true);
 
             String nameCombine = "男背心_" + orderItems.get(currentID).sizeStr + "_" + orderItems.get(currentID).order_number + strPlus + ".jpg";
 

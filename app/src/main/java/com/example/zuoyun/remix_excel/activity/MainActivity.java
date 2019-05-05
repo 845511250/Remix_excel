@@ -192,6 +192,10 @@ public class MainActivity extends FragmentActivity {
         boolean firstOK = true;
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         switch (orderItems.get(currentID).sku) {
+            case "BV":
+                tv_title.setText("女T恤 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentBV());
+                break;
             case "DD":
                 tv_title.setText("高帮鞋 " + orderItems.get(currentID).order_number);
                 transaction.replace(R.id.frame_main, new FragmentDD());
@@ -396,6 +400,10 @@ public class MainActivity extends FragmentActivity {
                 tv_title.setText("女背心 " + orderItems.get(currentID).order_number);
                 transaction.replace(R.id.frame_main, new FragmentGD());
                 break;
+            case "GH":
+                tv_title.setText("男T " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentGH());
+                break;
             case "GI":
                 tv_title.setText("挂毯 " + orderItems.get(currentID).order_number);
                 transaction.replace(R.id.frame_main, new FragmentGI());
@@ -457,6 +465,14 @@ public class MainActivity extends FragmentActivity {
                 tv_title.setText("Adam女夹克 " + orderItems.get(currentID).order_number);
                 transaction.replace(R.id.frame_main, new FragmentGUW());
                 break;
+            case "GVM":
+                tv_title.setText("男Polo " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentGV());
+                break;
+            case "GVW":
+                tv_title.setText("女Polo " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentGVW());
+                break;
             case "GWW":
                 tv_title.setText("帽巾 " + orderItems.get(currentID).order_number);
                 transaction.replace(R.id.frame_main, new FragmentGW());
@@ -517,9 +533,17 @@ public class MainActivity extends FragmentActivity {
                 tv_title.setText("新款 " + orderItems.get(currentID).order_number);
                 transaction.replace(R.id.frame_main, new FragmentHK());
                 break;
+            case "HL":
+                tv_title.setText("空调毯 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentHL());
+                break;
             case "HM":
                 tv_title.setText("围裙 " + orderItems.get(currentID).order_number);
                 transaction.replace(R.id.frame_main, new FragmentR());
+                break;
+            case "HO":
+                tv_title.setText("沙发垫 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentHO());
                 break;
             case "R":
                 tv_title.setText("围裙 " + orderItems.get(currentID).order_number);
@@ -543,20 +567,20 @@ public class MainActivity extends FragmentActivity {
     public void getsetBitmap(){
         currentSKU = orderItems.get(currentID).sku;
         tv_finishRemixx.setText("加载中...");
+        Log.e("aaa", "开始 "+orderItems.get(currentID).order_number);
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Log.e("aaa", "开始 "+orderItems.get(currentID).order_number);
-                        if(orderItems.get(currentID).img_left!=null){
-                            String img_left = orderItems.get(currentID).img_left;
-                            bitmapLeft = BitmapFactory.decodeFile(picturesPath + "/" + img_left);
-                            String img_right = orderItems.get(currentID).img_right;
-                            bitmapRight = BitmapFactory.decodeFile(picturesPath + "/" + img_right);
+        if(orderItems.get(currentID).img_left!=null){
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    String img_left = orderItems.get(currentID).img_left;
+                    bitmapLeft = BitmapFactory.decodeFile(picturesPath + "/" + img_left);
+                    String img_right = orderItems.get(currentID).img_right;
+                    bitmapRight = BitmapFactory.decodeFile(picturesPath + "/" + img_right);
 
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
                             if (bitmapLeft == null || bitmapRight == null) {
                                 showDialogNoImage();
                             }else{
@@ -567,43 +591,37 @@ public class MainActivity extends FragmentActivity {
                                 rightsucceed = true;
                                 messageListener.listen(2,orderItems.get(currentID).img_design_right);
                             }
-                        } else if (orderItems.get(currentID).img_pillow!=null) {
-                            final String img_pillow = orderItems.get(currentID).img_pillow;
-                            new Thread(){
-                                @Override
-                                public void run() {
-                                    super.run();
-                                    if(bitmapPillow!=null){
-                                        bitmapPillow.recycle();
-                                    }
-                                    bitmapPillow = BitmapFactory.decodeFile(picturesPath + "/" + img_pillow);
-                                    if (bitmapPillow == null) {
-                                        Log.e("aaa", img_pillow);
-                                        runOnUiThread(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                showDialogNoImage();
-                                            }
-                                        });
-                                    } else {
-                                        runOnUiThread(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                tv_finishRemixx.setText("加载完成");
-                                                messageListener.listen(4,orderItems.get(currentID).img_pillow);
-                                            }
-                                        });
-                                    }
-                                }
-                            }.start();
-                        } else {
-                            tv_tip.setText("当前图片不存在 请操作下一个");
-                            messageListener.listen(3, "");
                         }
+                    });
+                }
+            }).start();
+        } else if (orderItems.get(currentID).img_pillow!=null) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    if(bitmapPillow!=null){
+                        bitmapPillow.recycle();
                     }
-                });
-            }
-        }).start();
+                    String img_pillow = orderItems.get(currentID).img_pillow;
+                    bitmapPillow = BitmapFactory.decodeFile(picturesPath + "/" + img_pillow);
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (bitmapPillow == null) {
+                                showDialogNoImage();
+                            } else {
+                                tv_finishRemixx.setText("加载完成");
+                                messageListener.listen(4,orderItems.get(currentID).img_pillow);
+                            }
+                        }
+                    });
+                }
+            }).start();
+        } else {
+            tv_tip.setText("当前图片不存在 请操作下一个");
+            messageListener.listen(3, "");
+        }
     }
 
     public static String getLastNewCode(String str){

@@ -70,13 +70,13 @@ public class FragmentDQ extends BaseFragment {
         //paint
         paint = new Paint();
         paint.setColor(0xff000000);
-        paint.setTextSize(30);
+        paint.setTextSize(25);
         paint.setTypeface(Typeface.DEFAULT_BOLD);
         paint.setAntiAlias(true);
 
         paintRed = new Paint();
         paintRed.setColor(0xffff0000);
-        paintRed.setTextSize(30);
+        paintRed.setTextSize(25);
         paintRed.setTypeface(Typeface.DEFAULT_BOLD);
         paintRed.setAntiAlias(true);
 
@@ -154,20 +154,14 @@ public class FragmentDQ extends BaseFragment {
     void drawTextMain(Canvas canvas, String LR) {
         canvas.save();
         canvas.rotate(77.4f, 69, 323);
-        canvas.drawRect(69, 295, 420, 323, rectPaint);
+        canvas.drawRect(69, 323 - 25, 420, 323, rectPaint);
         canvas.drawText(time + "     " + orderItems.get(currentID).newCode, 69, 323 - 2, paintRed);
         canvas.restore();
 
         canvas.save();
-        canvas.rotate(66f, 135, 778);
-        canvas.drawRect(135, 778 - 28, 135 + 240, 778, rectPaint);
-        canvas.drawText(orderItems.get(currentID).order_number, 135, 776, paint);
-        canvas.restore();
-
-        canvas.save();
-        canvas.rotate(-64.9f, 751, 1000);
-        canvas.drawRect(751, 1000-28, 751+240, 1000, rectPaint);
-        canvas.drawText(orderItems.get(currentID).size + "码" + orderItems.get(currentID).color + LR, 751, 998, paint);
+        canvas.rotate(-76.8f, 846, 641);
+        canvas.drawRect(846, 641 - 25, 846 + 500, 641, rectPaint);
+        canvas.drawText(orderItems.get(currentID).size + "码" + orderItems.get(currentID).color + LR + "   " + orderItems.get(currentID).order_number, 846, 641 - 2, paint);
         canvas.restore();
     }
 
@@ -184,7 +178,7 @@ public class FragmentDQ extends BaseFragment {
     public void remixx(){
         setScale(orderItems.get(currentID).size);
 
-        Bitmap bitmapDB_main = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.dq40_main);
+        Bitmap bitmapDB_main = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.dq_adam);
         Bitmap bitmapDB_tongue = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.dq40_tongue);
 
         //left
@@ -293,9 +287,9 @@ public class FragmentDQ extends BaseFragment {
             Workbook book = Workbook.getWorkbook(fileWrite);
             WritableWorkbook workbook = Workbook.createWorkbook(fileWrite,book);
             WritableSheet sheet = workbook.getSheet(0);
-            Label label0 = new Label(0, currentID+1, orderItems.get(currentID).order_number+orderItems.get(currentID).sku+orderItems.get(currentID).size+printColor);
+            Label label0 = new Label(0, currentID + 1, orderItems.get(currentID).order_number + orderItems.get(currentID).sku + orderItems.get(currentID).size + printColor);
             sheet.addCell(label0);
-            Label label1 = new Label(1, currentID+1, orderItems.get(currentID).sku+orderItems.get(currentID).size+printColor);
+            Label label1 = new Label(1, currentID + 1, orderItems.get(currentID).sku + orderItems.get(currentID).size + printColor);
             sheet.addCell(label1);
             Number number2 = new Number(2, currentID+1, orderItems.get(currentID).num);
             sheet.addCell(number2);
@@ -337,92 +331,92 @@ public class FragmentDQ extends BaseFragment {
     void setScale(int size){
         switch (size) {
             case 35:
-                mainWidth = 1361;
-                mainHeight = 1663;
-                tongueWidth = 593;
-                tongueHeight = 689;
+                mainWidth = 1441;
+                mainHeight = 1701;
+                tongueWidth = 606;
+                tongueHeight = 695;
                 break;
             case 36:
-                mainWidth = 1385;
-                mainHeight = 1708;
-                tongueWidth = 593;
-                tongueHeight = 689;
+                mainWidth = 1469;
+                mainHeight = 1745;
+                tongueWidth = 606;
+                tongueHeight = 695;
                 break;
             case 37:
-                mainWidth = 1412;
-                mainHeight = 1747;
-                tongueWidth = 613;
-                tongueHeight = 724;
+                mainWidth = 1497;
+                mainHeight = 1788;
+                tongueWidth = 629;
+                tongueHeight = 732;
                 break;
             case 38:
-                mainWidth = 1445;
-                mainHeight = 1792;
-                tongueWidth = 613;
-                tongueHeight = 724;
+                mainWidth = 1524;
+                mainHeight = 1831;
+                tongueWidth = 629;
+                tongueHeight = 732;
                 break;
             case 39:
-                mainWidth = 1477;
-                mainHeight = 1835;
-                tongueWidth = 636;
-                tongueHeight = 755;
+                mainWidth = 1552;
+                mainHeight = 1874;
+                tongueWidth = 652;
+                tongueHeight = 769;
                 break;
             case 40:
-                mainWidth = 1503;
-                mainHeight = 1876;
-                tongueWidth = 636;
-                tongueHeight = 755;
+                mainWidth = 1580;
+                mainHeight = 1918;
+                tongueWidth = 652;
+                tongueHeight = 769;
                 break;
             case 41:
-                mainWidth = 1527;
-                mainHeight = 1916;
-                tongueWidth = 673;
-                tongueHeight = 799;
+                mainWidth = 1607;
+                mainHeight = 1961;
+                tongueWidth = 675;
+                tongueHeight = 806;
                 break;
             case 42:
-                mainWidth = 1560;
-                mainHeight = 1960;
-                tongueWidth = 673;
-                tongueHeight = 799;
+                mainWidth = 1635;
+                mainHeight = 2004;
+                tongueWidth = 675;
+                tongueHeight = 806;
                 break;
             case 43:
-                mainWidth = 1592;
-                mainHeight = 2002;
-                tongueWidth = 691;
-                tongueHeight = 834;
+                mainWidth = 1663;
+                mainHeight = 2062;
+                tongueWidth = 698;
+                tongueHeight = 843;
                 break;
             case 44:
-                mainWidth = 1616;
-                mainHeight = 2050;
-                tongueWidth = 691;
-                tongueHeight = 834;
+                mainWidth = 1690;
+                mainHeight = 2106;
+                tongueWidth = 698;
+                tongueHeight = 843;
                 break;
             case 45:
-                mainWidth = 1644;
-                mainHeight = 2093;
-                tongueWidth = 705;
-                tongueHeight = 853;
+                mainWidth = 1718;
+                mainHeight = 2150;
+                tongueWidth = 721;
+                tongueHeight = 880;
                 break;
             case 46:
-                mainWidth = 1683;
-                mainHeight = 2130;
-                tongueWidth = 711;
-                tongueHeight = 861;
+                mainWidth = 1746;
+                mainHeight = 2193;
+                tongueWidth = 721;
+                tongueHeight = 880;
                 break;
             case 47:
-                mainWidth = 1700;
-                mainHeight = 2165;
-                tongueWidth = 730;
-                tongueHeight = 912;
+                mainWidth = 1773;
+                mainHeight = 2237;
+                tongueWidth = 744;
+                tongueHeight = 917;
                 break;
             case 48:
-                mainWidth = 1730;
-                mainHeight = 2205;
-                tongueWidth = 740;
-                tongueHeight = 930;
+                mainWidth = 1801;
+                mainHeight = 2281;
+                tongueWidth = 744;
+                tongueHeight = 917;
                 break;
         }
-        tongueWidth += 30;
-        tongueHeight += 8;
+        tongueWidth += 10;
+        tongueHeight += 10;
     }
 
 }
