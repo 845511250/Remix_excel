@@ -173,36 +173,36 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     }
 
     void drawTextRR(Canvas canvasRR) {
-        canvasRR.drawRect(1020, 520, 1450, 570, rectPaint);
-        canvasRR.drawText(orderItems.get(currentID).newCode + " 右外", 1020, 565, paintRed);
-        canvasRR.drawText(orderItems.get(currentID).size + orderItems.get(currentID).color + (orderItems.get(currentID).sku.equals("FX") ? "(新)" : ""), 1360, 565, paint);
-        canvasRR.drawText(orderItems.get(currentID).order_number, 1160, 590, paint);
-        canvasRR.drawRect(100, 520, 300, 570, rectPaint);
-        canvasRR.drawText(time, 100, 565, paint);
+        canvasRR.drawRect(100, 530, 100 + 400, 570, rectPaint);
+        canvasRR.drawText(time + "  " + orderItems.get(currentID).order_number, 100, 565, paint);
+        canvasRR.drawRect(700, 530, 700 + 300, 570, rectPaint);
+        canvasRR.drawText(orderItems.get(currentID).newCodeStr, 700, 565, paint);
+        canvasRR.drawRect(1150, 530, 1150 + 300, 570, rectPaint);
+        canvasRR.drawText("生产尺寸:" + (orderItems.get(currentID).size - 1) + "码" + orderItems.get(currentID).color + " 右外", 1150, 565, paintRed);
     }
     void drawTextRL(Canvas canvasRL) {
-        canvasRL.drawRect(70,520,450,570,rectPaint);
-        canvasRL.drawText(orderItems.get(currentID).size+orderItems.get(currentID).color + (orderItems.get(currentID).sku.equals("FX") ? "(新)" : ""),70,565,paint);
-        canvasRL.drawText("右内 " + orderItems.get(currentID).newCode, 230, 565, paintRed);
-        canvasRL.drawText(orderItems.get(currentID).order_number,100,595,paint);
-        canvasRL.drawRect(1100, 520, 1300, 570, rectPaint);
-        canvasRL.drawText(time, 1100, 565, paint);
+        canvasRL.drawRect(70, 530, 70 + 300, 570, rectPaint);
+        canvasRL.drawText("生产尺寸:" + (orderItems.get(currentID).size - 1) + "码" + orderItems.get(currentID).color + " 右内", 70, 565, paintRed);
+        canvasRL.drawRect(600, 530, 600 + 300, 570, rectPaint);
+        canvasRL.drawText( orderItems.get(currentID).newCodeStr, 600, 565, paint);
+        canvasRL.drawRect(1000, 530, 1000 + 400, 570, rectPaint);
+        canvasRL.drawText(time+ "  " + orderItems.get(currentID).order_number, 1000, 565, paint);
     }
     void drawTextLR(Canvas canvasLR) {
-        canvasLR.drawRect(1020, 520, 1450, 570, rectPaint);
-        canvasLR.drawText(orderItems.get(currentID).newCode + " 左内", 1020, 565, paintRed);
-        canvasLR.drawText(orderItems.get(currentID).size + orderItems.get(currentID).color + (orderItems.get(currentID).sku.equals("FX") ? "(新)" : ""), 1360, 565, paint);
-        canvasLR.drawText(orderItems.get(currentID).order_number, 1160, 590, paint);
-        canvasLR.drawRect(100, 520, 300, 570, rectPaint);
-        canvasLR.drawText(time, 100, 565, paint);
+        canvasLR.drawRect(100, 530, 100 + 400, 570, rectPaint);
+        canvasLR.drawText(time + "  " + orderItems.get(currentID).order_number, 100, 565, paint);
+        canvasLR.drawRect(700, 530, 700 + 300, 570, rectPaint);
+        canvasLR.drawText(orderItems.get(currentID).newCodeStr, 700, 565, paint);
+        canvasLR.drawRect(1150, 530, 1150 + 300, 570, rectPaint);
+        canvasLR.drawText("生产尺寸:" + (orderItems.get(currentID).size - 1) + "码" + orderItems.get(currentID).color + " 左内", 1150, 565, paintRed);
     }
     void drawTextLL(Canvas canvasLL) {
-        canvasLL.drawRect(70, 520, 450, 570, rectPaint);
-        canvasLL.drawText(orderItems.get(currentID).size + orderItems.get(currentID).color + (orderItems.get(currentID).sku.equals("FX") ? "(新)" : ""), 70, 565, paint);
-        canvasLL.drawText("左外 " + orderItems.get(currentID).newCode, 230, 565, paintRed);
-        canvasLL.drawText(orderItems.get(currentID).order_number, 100, 595, paint);
-        canvasLL.drawRect(1100, 520, 1300, 570, rectPaint);
-        canvasLL.drawText(time, 1100, 565, paint);
+        canvasLL.drawRect(70, 530, 70 + 300, 570, rectPaint);
+        canvasLL.drawText("生产尺寸:" + (orderItems.get(currentID).size - 1) + "码" + orderItems.get(currentID).color + " 左外", 70, 565, paintRed);
+        canvasLL.drawRect(600, 530, 600 + 300, 570, rectPaint);
+        canvasLL.drawText( orderItems.get(currentID).newCodeStr, 600, 565, paint);
+        canvasLL.drawRect(1000, 530, 1000 + 400, 570, rectPaint);
+        canvasLL.drawText(time+ "  " + orderItems.get(currentID).order_number, 1000, 565, paint);
     }
 
     public void remixx(){
@@ -277,7 +277,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         try {
             String printColor = orderItems.get(currentID).color.equals("黑") ? "B" : "W";
             String noNewCode = orderItems.get(currentID).newCode.equals("") ? orderItems.get(currentID).sku + orderItems.get(currentID).size : "";
-            String nameCombine = noNewCode + orderItems.get(currentID).sku + orderItems.get(currentID).newCode + orderItems.get(currentID).color + (orderItems.get(currentID).sku.equals("FX") ? "(新)" : "") + orderItems.get(currentID).order_number + strPlus + ".jpg";
+            String nameCombine = noNewCode + orderItems.get(currentID).sku + orderItems.get(currentID).newCode + orderItems.get(currentID).color + orderItems.get(currentID).order_number + strPlus + ".jpg";
 
             String pathSave;
             if(MainActivity.instance.cb_classify.isChecked()){
@@ -356,7 +356,11 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         }
     }
     void setSize(int size){
-        switch (size) {
+        switch (size - 1) {
+            case 34:
+                width = 1310;
+                height = 600;
+                break;
             case 35:
                 width = 1341;
                 height = 609;

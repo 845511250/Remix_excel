@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PaintFlagsDrawFilter;
 import android.graphics.Typeface;
@@ -180,109 +181,283 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     void drawText(Canvas canvas) {
         canvas.save();
         canvas.rotate(90, 10, height_main - 1100);
-        canvas.drawRect(10, height_main - 1100 - 25, 10 + 700, height_main - 1100, rectPaint);
-        canvas.drawText("沙发垫 尺码" + orderItems.get(currentID).sizeStr + "  " + time + "  " + orderItems.get(currentID).order_number + "   " + orderItems.get(currentID).newCodeStr, 10, height_main - 1100 - 2, paint);
+        canvas.drawRect(10 - 200, height_main - 1100 - 25, 10 + 700, height_main - 1100, rectPaint);
+        canvas.drawText("下边  沙发垫 尺码" + orderItems.get(currentID).sizeStr + "  " + time + "  " + orderItems.get(currentID).order_number + "   " + orderItems.get(currentID).newCodeStr, 10 - 200, height_main - 1100 - 2, paint);
         canvas.restore();
 
         canvas.save();
         canvas.rotate(-90, width_main - 10, 1100);
-        canvas.drawRect(width_main - 10, 1100 - 25, width_main - 10 + 700, 1100, rectPaint);
-        canvas.drawText("沙发垫 尺码" + orderItems.get(currentID).sizeStr + "  " + time + "  " + orderItems.get(currentID).order_number + "   " + orderItems.get(currentID).newCodeStr, width_main - 10, 1100 - 2, paint);
+        canvas.drawRect(width_main - 10 - 200, 1100 - 25, width_main - 10 + 700, 1100, rectPaint);
+        canvas.drawText("上边  沙发垫 尺码" + orderItems.get(currentID).sizeStr + "  " + time + "  " + orderItems.get(currentID).order_number + "   " + orderItems.get(currentID).newCodeStr, width_main - 10 - 200, 1100 - 2, paint);
         canvas.restore();
 
     }
 
+    void drawTextSide(Canvas canvas) {
+        canvas.drawRect(800, 10, 800 + 900, 10 + 25, rectPaint);
+        canvas.drawText("沙发垫侧边 尺码" + orderItems.get(currentID).sizeStr + "  " + time + "  " + orderItems.get(currentID).order_number + "   " + orderItems.get(currentID).newCodeStr, 800, 10 + 23, paint);
+    }
+
     public void remixx(){
-        boolean is70_2 = orderItems.get(currentID).sizeStr.equals("70_2");
+        Bitmap bitmapCombine = null;
 
-        Bitmap bitmapCombine = Bitmap.createBitmap(width_combine, height_combine, Bitmap.Config.ARGB_8888);
-        Canvas canvasCombine= new Canvas(bitmapCombine);
-        canvasCombine.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
-        canvasCombine.drawColor(0xffffffff);
+        if (orderItems.get(currentID).sku.equals("HO1") || orderItems.get(currentID).sku.equals("HO2")) {
+            bitmapCombine = Bitmap.createBitmap(width_combine, height_combine, Bitmap.Config.ARGB_8888);
+            Canvas canvasCombine= new Canvas(bitmapCombine);
+            canvasCombine.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
+            canvasCombine.drawColor(0xffffffff);
 
 
-        Bitmap bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, x_cut_main, y_cut_main, width_main, height_main);
-        Canvas canvasTemp= new Canvas(bitmapTemp);
-        canvasTemp.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
-        drawText(canvasTemp);
-        canvasCombine.drawBitmap(bitmapTemp, 0, 0, null);
+            Bitmap bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, x_cut_main, y_cut_main, width_main, height_main);
+            Canvas canvasTemp= new Canvas(bitmapTemp);
+            canvasTemp.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
+            drawText(canvasTemp);
+            canvasCombine.drawBitmap(bitmapTemp, 0, 0, null);
 
-        if (!is70_2) {
             bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, x_cut_l, y_cut_l, width_side, height_side);
+            canvasTemp= new Canvas(bitmapTemp);
+            canvasTemp.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
+            drawTextSide(canvasTemp);
             canvasCombine.drawBitmap(bitmapTemp, x_print_l, y_print_l, null);
+
             bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, x_cut_r, y_cut_r, width_side, height_side);
+            canvasTemp= new Canvas(bitmapTemp);
+            canvasTemp.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
+            drawTextSide(canvasTemp);
             canvasCombine.drawBitmap(bitmapTemp, x_print_r, y_print_r, null);
-        }
-        bitmapTemp.recycle();
 
-        if (num == 1) {
-            if (MainActivity.instance.bitmapPillow != null) {
-                MainActivity.instance.bitmapPillow.recycle();
+            bitmapTemp.recycle();
+
+            if (num == 1) {
+                if (MainActivity.instance.bitmapPillow != null) {
+                    MainActivity.instance.bitmapPillow.recycle();
+                }
             }
-        }
 
-        //标记缝接点
-        canvasCombine.drawRect(0, y_cut_l - y_cut_main, 20, y_cut_l - y_cut_main + height_side, rectBorderPaintRed);
-        canvasCombine.drawRect(width_main - 20, y_cut_l - y_cut_main, width_main, y_cut_l - y_cut_main + height_side, rectBorderPaintGreen);
-        if (!is70_2) {
+            //标记缝接点
+            canvasCombine.drawRect(0, y_cut_l - y_cut_main, 20, y_cut_l - y_cut_main + height_side, rectBorderPaintRed);
+            canvasCombine.drawRect(width_main - 20, y_cut_l - y_cut_main, width_main, y_cut_l - y_cut_main + height_side, rectBorderPaintGreen);
             canvasCombine.drawRect(x_print_l + width_side - 20, y_print_l + 1, x_print_l + width_side, y_print_l + 1 + height_side, rectBorderPaintRed);
             canvasCombine.drawRect(x_print_r, y_print_r, x_print_r + 20, y_print_r + height_side, rectBorderPaintGreen);
-        }
 
-        //标记三角点
-        Bitmap bitmapMark = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_triangle_left);
-        bitmapMark = Bitmap.createScaledBitmap(bitmapMark, 30, 30, true);
-        canvasCombine.drawBitmap(bitmapMark, 0, y_mark - 15, null);
-        bitmapMark = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_triangle_right);
-        bitmapMark = Bitmap.createScaledBitmap(bitmapMark, 30, 30, true);
-        canvasCombine.drawBitmap(bitmapMark, width_main - 30, y_mark - 15, null);
+            //标记三角点
+            Bitmap bitmapMark = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_triangle_left);
+            bitmapMark = Bitmap.createScaledBitmap(bitmapMark, 30, 30, true);
+            canvasCombine.drawBitmap(bitmapMark, 0, y_mark - 15, null);
+            bitmapMark = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_triangle_right);
+            bitmapMark = Bitmap.createScaledBitmap(bitmapMark, 30, 30, true);
+            canvasCombine.drawBitmap(bitmapMark, width_main - 30, y_mark - 15, null);
 
-        //画黑线框
-        canvasCombine.drawRect(0, 0, width_main - 5, height_main - 5, rectBorderPaint);
-        canvasCombine.drawRect(5, 5, width_main - 5, height_main - 5, rectBorderPaint);
-        if (!is70_2) {
+            //画黑线框
+            canvasCombine.drawRect(0, 0, width_main - 5, height_main - 5, rectBorderPaint);
+            canvasCombine.drawRect(5, 5, width_main - 5, height_main - 5, rectBorderPaint);
+
             canvasCombine.drawRect(x_print_l, y_print_l + 1, x_print_l + width_side - 5, y_print_l + height_side - 5, rectBorderPaint);
             canvasCombine.drawRect(x_print_l + 5, y_print_l + 6, x_print_l + width_side - 5, y_print_l + height_side - 5, rectBorderPaint);
 
             canvasCombine.drawRect(x_print_r, y_print_r + 1, x_print_r + width_side - 5, y_print_r + height_side - 5, rectBorderPaint);
             canvasCombine.drawRect(x_print_r + 5, y_print_r + 6, x_print_r + width_side - 5, y_print_r + height_side - 5, rectBorderPaint);
-        }
 
-        //画圆角
-        Bitmap bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.ho1);
-        canvasCombine.drawBitmap(bitmapDB, 0, 0, null);
-        if (!is70_2) {
+            //画圆角
+            Bitmap bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.ho1);
+            canvasCombine.drawBitmap(bitmapDB, 0, 0, null);
             canvasCombine.drawBitmap(bitmapDB, x_print_l, y_print_l, null);
-        }
-        bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.ho2);
-        canvasCombine.drawBitmap(bitmapDB, width_main - 500, 0, null);
-        if (!is70_2) {
+
+            bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.ho2);
+            canvasCombine.drawBitmap(bitmapDB, width_main - 500, 0, null);
             canvasCombine.drawBitmap(bitmapDB, x_print_r + width_side - 500, y_print_r, null);
-        }
-        bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.ho3);
-        canvasCombine.drawBitmap(bitmapDB, 0, height_main - 500, null);
-        if (!is70_2) {
+
+            bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.ho3);
+            canvasCombine.drawBitmap(bitmapDB, 0, height_main - 500, null);
             canvasCombine.drawBitmap(bitmapDB, x_print_l, y_print_l + height_side - 500, null);
-        }
-        bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.ho4);
-        canvasCombine.drawBitmap(bitmapDB, width_main - 500, height_main - 500, null);
-        if (!is70_2) {
+
+            bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.ho4);
+            canvasCombine.drawBitmap(bitmapDB, width_main - 500, height_main - 500, null);
             canvasCombine.drawBitmap(bitmapDB, x_print_r + width_side - 500, y_print_r + height_side - 500, null);
+
+            //save
+            String nameCombine = "HO沙发垫_" + orderItems.get(currentID).order_number + strPlus + ".jpg";
+            String pathSave;
+            if(MainActivity.instance.cb_classify.isChecked()){
+                pathSave = sdCardPath + "/生产图/" + childPath + "/" + orderItems.get(currentID).sku + "/";
+            } else
+                pathSave = sdCardPath + "/生产图/" + childPath + "/";
+            if(!new File(pathSave).exists())
+                new File(pathSave).mkdirs();
+            File fileSave = new File(pathSave + nameCombine);
+            BitmapToJpg.save(bitmapCombine, fileSave, 100);
+            bitmapCombine.recycle();
+
+        } else if (orderItems.get(currentID).sku.equals("HO5")) {
+            bitmapCombine = Bitmap.createBitmap(width_combine, height_combine, Bitmap.Config.ARGB_8888);
+            Canvas canvasCombine= new Canvas(bitmapCombine);
+            canvasCombine.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
+            canvasCombine.drawColor(0xffffffff);
+
+            Bitmap bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, x_cut_main, y_cut_main, width_main, height_main);
+            Canvas canvasTemp= new Canvas(bitmapTemp);
+            canvasTemp.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
+            drawText(canvasTemp);
+            canvasCombine.drawBitmap(bitmapTemp, 0, 0, null);
+
+            bitmapTemp.recycle();
+
+            if (num == 1) {
+                if (MainActivity.instance.bitmapPillow != null) {
+                    MainActivity.instance.bitmapPillow.recycle();
+                }
+            }
+
+            //标记三角点
+            Bitmap bitmapMark = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_triangle_left);
+            bitmapMark = Bitmap.createScaledBitmap(bitmapMark, 30, 30, true);
+            canvasCombine.drawBitmap(bitmapMark, 0, y_mark - 15, null);
+            canvasCombine.drawBitmap(bitmapMark, 0, y_mark * 2 - 15, null);
+            bitmapMark = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_triangle_right);
+            bitmapMark = Bitmap.createScaledBitmap(bitmapMark, 30, 30, true);
+            canvasCombine.drawBitmap(bitmapMark, width_main - 30, y_mark - 15, null);
+            canvasCombine.drawBitmap(bitmapMark, width_main - 30, y_mark * 2 - 15, null);
+
+            //画黑线框
+            canvasCombine.drawRect(0, 0, width_main - 5, height_main - 5, rectBorderPaint);
+            canvasCombine.drawRect(5, 5, width_main - 5, height_main - 5, rectBorderPaint);
+
+            //画圆角
+            Bitmap bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.ho1);
+            canvasCombine.drawBitmap(bitmapDB, 0, 0, null);
+
+            bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.ho2);
+            canvasCombine.drawBitmap(bitmapDB, width_main - 500, 0, null);
+
+            bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.ho3);
+            canvasCombine.drawBitmap(bitmapDB, 0, height_main - 500, null);
+
+            bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.ho4);
+            canvasCombine.drawBitmap(bitmapDB, width_main - 500, height_main - 500, null);
+
+            //save
+            String nameCombine = "HO沙发垫_" + orderItems.get(currentID).order_number + strPlus + ".jpg";
+            String pathSave;
+            if(MainActivity.instance.cb_classify.isChecked()){
+                pathSave = sdCardPath + "/生产图/" + childPath + "/" + orderItems.get(currentID).sku + "/";
+            } else
+                pathSave = sdCardPath + "/生产图/" + childPath + "/";
+            if(!new File(pathSave).exists())
+                new File(pathSave).mkdirs();
+            File fileSave = new File(pathSave + nameCombine);
+            BitmapToJpg.save(bitmapCombine, fileSave, 100);
+            bitmapCombine.recycle();
+
+        }else{
+            //side
+            bitmapCombine = Bitmap.createBitmap(height_side * 2 + 120, width_side, Bitmap.Config.ARGB_8888);
+            Canvas canvasCombine= new Canvas(bitmapCombine);
+            canvasCombine.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
+            canvasCombine.drawColor(0xffffffff);
+
+            Bitmap bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, x_cut_l, y_cut_l, width_side, height_side);
+            Canvas canvasTemp= new Canvas(bitmapTemp);
+            canvasTemp.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
+            drawTextSide(canvasTemp);
+            //标记缝接点
+            canvasTemp.drawRect(width_side - 20, 1, width_side, 1 + height_side, rectBorderPaintRed);
+            //画黑线框
+            canvasTemp.drawRect(0, 0, width_side - 5, height_side - 5, rectBorderPaint);
+            canvasTemp.drawRect(5, 5, width_side - 5, height_side - 5, rectBorderPaint);
+            //画圆角
+            Bitmap bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.ho1);
+            canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
+            bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.ho3);
+            canvasTemp.drawBitmap(bitmapDB, 0, height_side - 500, null);
+
+            Matrix matrix = new Matrix();
+            matrix.postRotate(-90);
+            matrix.postTranslate(0, width_side);
+            canvasCombine.drawBitmap(bitmapTemp, matrix, null);
+
+            bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, x_cut_r, y_cut_r, width_side, height_side);
+            canvasTemp= new Canvas(bitmapTemp);
+            canvasTemp.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
+            drawTextSide(canvasTemp);
+            //标记缝接点
+            canvasTemp.drawRect(0, 0, 20, height_side, rectBorderPaintGreen);
+            //画黑线框
+            canvasTemp.drawRect(0, 0, width_side - 5, height_side - 5, rectBorderPaint);
+            canvasTemp.drawRect(5, 5, width_side - 5, height_side - 5, rectBorderPaint);
+            //画圆角
+            bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.ho2);
+            canvasTemp.drawBitmap(bitmapDB, width_side - 500, 0, null);
+            bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.ho4);
+            canvasTemp.drawBitmap(bitmapDB, width_side - 500, height_side - 500, null);
+
+            matrix.reset();
+            matrix.postRotate(90);
+            matrix.postTranslate(height_side * 2 + 120, 0);
+            canvasCombine.drawBitmap(bitmapTemp, matrix, null);
+            bitmapTemp.recycle();
+
+            //save Side
+            String nameCombine = "HO沙发垫侧边_" + orderItems.get(currentID).order_number + strPlus + ".jpg";
+            String pathSave;
+            if(MainActivity.instance.cb_classify.isChecked()){
+                pathSave = sdCardPath + "/生产图/" + childPath + "/" + orderItems.get(currentID).sku + "/";
+            } else
+                pathSave = sdCardPath + "/生产图/" + childPath + "/";
+            if(!new File(pathSave).exists())
+                new File(pathSave).mkdirs();
+            File fileSave = new File(pathSave + nameCombine);
+            BitmapToJpg.save(bitmapCombine, fileSave, 100);
+            bitmapCombine.recycle();
+
+            //main
+            bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, x_cut_main, y_cut_main, width_main, height_main);
+            canvasTemp= new Canvas(bitmapTemp);
+            canvasTemp.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
+            drawText(canvasTemp);
+
+            if (num == 1) {
+                if (MainActivity.instance.bitmapPillow != null) {
+                    MainActivity.instance.bitmapPillow.recycle();
+                }
+            }
+
+            //标记缝接点
+            canvasTemp.drawRect(0, y_cut_l - y_cut_main, 20, y_cut_l - y_cut_main + height_side, rectBorderPaintRed);
+            canvasTemp.drawRect(width_main - 20, y_cut_l - y_cut_main, width_main, y_cut_l - y_cut_main + height_side, rectBorderPaintGreen);
+            //标记三角点
+            Bitmap bitmapMark = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_triangle_left);
+            bitmapMark = Bitmap.createScaledBitmap(bitmapMark, 30, 30, true);
+            canvasTemp.drawBitmap(bitmapMark, 0, y_mark - 15, null);
+            bitmapMark = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_triangle_right);
+            bitmapMark = Bitmap.createScaledBitmap(bitmapMark, 30, 30, true);
+            canvasTemp.drawBitmap(bitmapMark, width_main - 30, y_mark - 15, null);
+            //画黑线框
+            canvasTemp.drawRect(0, 0, width_main - 5, height_main - 5, rectBorderPaint);
+            canvasTemp.drawRect(5, 5, width_main - 5, height_main - 5, rectBorderPaint);
+            //画圆角
+            bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.ho1);
+            canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
+            bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.ho2);
+            canvasTemp.drawBitmap(bitmapDB, width_main - 500, 0, null);
+            bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.ho3);
+            canvasTemp.drawBitmap(bitmapDB, 0, height_main - 500, null);
+            bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.ho4);
+            canvasTemp.drawBitmap(bitmapDB, width_main - 500, height_main - 500, null);
+
+
+            //save Main
+            nameCombine = "HO沙发垫_" + orderItems.get(currentID).order_number + strPlus + ".jpg";
+            if(MainActivity.instance.cb_classify.isChecked()){
+                pathSave = sdCardPath + "/生产图/" + childPath + "/" + orderItems.get(currentID).sku + "/";
+            } else
+                pathSave = sdCardPath + "/生产图/" + childPath + "/";
+            if(!new File(pathSave).exists())
+                new File(pathSave).mkdirs();
+            fileSave = new File(pathSave + nameCombine);
+            BitmapToJpg.save(bitmapTemp, fileSave, 100);
+            bitmapTemp.recycle();
+
         }
-
-
-        String nameCombine = orderItems.get(currentID).sku + "_" + orderItems.get(currentID).order_number + strPlus + ".jpg";
-        String pathSave;
-        if(MainActivity.instance.cb_classify.isChecked()){
-            pathSave = sdCardPath + "/生产图/" + childPath + "/" + orderItems.get(currentID).sku + "/";
-        } else
-            pathSave = sdCardPath + "/生产图/" + childPath + "/";
-        if(!new File(pathSave).exists())
-            new File(pathSave).mkdirs();
-        File fileSave = new File(pathSave + nameCombine);
-        BitmapToJpg.save(bitmapCombine, fileSave, 100);
-        bitmapCombine.recycle();
-
 
         try {
 //            matrix.reset();
@@ -371,8 +546,8 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     }
 
     void setSize() {
-        switch (orderItems.get(currentID).sizeStr) {
-            case "23":
+        switch (orderItems.get(currentID).sku) {
+            case "HO1":
                 width_main = 2380;
                 height_main = 8075;
                 width_side = 2420 + 60;
@@ -391,7 +566,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
                 y_print_r = height_main + height_side + 240;
                 y_mark = 2817;
                 break;
-            case "28":
+            case "HO2":
                 width_main = 2891;
                 height_main = 9764;
                 width_side = 2851 + 60;
@@ -410,7 +585,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
                 y_print_r = height_main + height_side + 240;
                 y_mark = 3760;
                 break;
-            case "48":
+            case "HO3":
                 width_main = 4956;
                 height_main = 8031;
                 width_side = 2420 + 60;
@@ -429,7 +604,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
                 y_print_r = height_main + 120;
                 y_mark = 2995;
                 break;
-            case "54":
+            case "HO4":
                 width_main = 5592;
                 height_main = 8111;
                 width_side = 2420 + 60;
@@ -448,7 +623,16 @@ String sdCardPath = "/storage/emulated/0/Pictures";
                 y_print_r = height_main + 120;
                 y_mark = 2972;
                 break;
-            case "70_1":
+            case "HO5":
+                width_main = 7246;
+                height_main = 8032;
+                x_cut_main = 3277;
+                y_cut_main = 1199;
+                width_combine = width_main;
+                height_combine = height_main;
+                y_mark = 2678;
+                break;
+            case "HO6":
                 width_main = 7250;
                 height_main = 8032;
                 width_side = 2420 + 60;
@@ -467,15 +651,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
                 y_print_r = height_main + 120;
                 y_mark = 2790;
                 break;
-            case "70_2":
-                width_main = 7246;
-                height_main = 8032;
-                x_cut_main = 3277;
-                y_cut_main = 1199;
-                width_combine = width_main;
-                height_combine = height_main;
-                break;
-            case "78":
+            case "HO7":
                 width_main = 8062;
                 height_main = 9134;
                 width_side = 2850 + 60;

@@ -268,6 +268,7 @@ public class LocalOrderActivity extends AppCompatActivity {
 
                     String sizestr = getContent(row, 8);
                     orderItem.sizeStr = sizestr;
+                    orderItem.sizeOriginal = getContent(row, 10);
                     if (!sizestr.equals("")) {
                         if (sizestr.equalsIgnoreCase("S/M")) {
                             orderItem.size = 0;

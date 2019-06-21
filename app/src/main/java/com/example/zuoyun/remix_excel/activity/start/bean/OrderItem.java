@@ -10,7 +10,7 @@ public class OrderItem {
     public String order_number,color,sku,img_left,img_right,img_design_left,img_design_right, img_pillow;
     public int num, size;
     public String colorStr;
-    public String sizeStr, skuStr;
+    public String sizeStr, skuStr,sizeOriginal;
     public String printCode;
     public String newCode, newCodeStr;
     public String codeE;

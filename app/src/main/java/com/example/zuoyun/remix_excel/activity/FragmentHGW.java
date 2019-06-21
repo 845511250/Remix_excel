@@ -250,7 +250,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     public void remixx(){
         int margin = 120;
         Matrix matrix = new Matrix();
-        int combineWidth = width_front + width_back + height_borderTop + margin;
+        int combineWidth = width_front + width_back + height_borderTop + margin * 2;
         int combineHeight = Math.max(width_borderTop, height_front + height_pocket + height_back + margin * 2);
         if (orderItems.get(currentID).sizeStr.equals("4XL")) {
             combineWidth = width_front + width_back + height_borderTop + margin * 2 - 350;
@@ -345,16 +345,19 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_pocket, height_pocket, true);
         canvasCombine.drawBitmap(bitmapTemp, width_pocket + margin, height_front + margin, null);
 
-        //borderPocketL
+        //borderPocketR
         bitmapTemp = Bitmap.createBitmap(bitmapF, 552, 746, 936, 736);
         canvasTemp = new Canvas(bitmapTemp);
         bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.hgw_border_pocket_l);
         canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
-        drawTextborderPocketL(canvasTemp);
+        matrix.reset();
+        matrix.postScale(-1, 1);
+        bitmapTemp = Bitmap.createBitmap(bitmapTemp, 0, 0, 936, 736, matrix, true);
+        drawTextborderPocketR(canvasTemp);
         bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_borderPocket, height_borderPocket, true);
         canvasCombine.drawBitmap(bitmapTemp, combineWidth - width_borderPocket - height_borderTop - margin, combineHeight - height_borderPocket, null);
 
-        //borderPocketR
+        //borderPocketL
         bitmapTemp = Bitmap.createBitmap(bitmapF, 3411, 746, 937, 736);
         canvasTemp = new Canvas(bitmapTemp);
         matrix.reset();
@@ -362,7 +365,10 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         bitmapDB = Bitmap.createBitmap(bitmapDB, 0, 0, bitmapDB.getWidth(), bitmapDB.getHeight(), matrix, true);
         canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
         bitmapDB.recycle();
-        drawTextborderPocketR(canvasTemp);
+        matrix.reset();
+        matrix.postScale(-1, 1);
+        bitmapTemp = Bitmap.createBitmap(bitmapTemp, 0, 0, 936, 736, matrix, true);
+        drawTextborderPocketL(canvasTemp);
         bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width_borderPocket, height_borderPocket, true);
         canvasCombine.drawBitmap(bitmapTemp, width_back + margin, height_front + height_back + margin * 2, null);
 

@@ -533,17 +533,77 @@ public class MainActivity extends FragmentActivity {
                 tv_title.setText("新款 " + orderItems.get(currentID).order_number);
                 transaction.replace(R.id.frame_main, new FragmentHK());
                 break;
-            case "HL":
+            case "HL1":
                 tv_title.setText("空调毯 " + orderItems.get(currentID).order_number);
                 transaction.replace(R.id.frame_main, new FragmentHL());
+                break;
+            case "HL2":
+                tv_title.setText("空调毯 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentHL());
+                break;
+            case "HL3":
+                tv_title.setText("空调毯 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentHL());
+                break;
+            case "HL4":
+                tv_title.setText("空调毯 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentHL());
+                break;
+            case "HL5":
+                tv_title.setText("空调毯 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentHL());
+                break;
+            case "HLL3":
+                tv_title.setText("空调毯带枕套 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentHLL());
+                break;
+            case "HLL4":
+                tv_title.setText("空调毯带枕套 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentHLL());
+                break;
+            case "HLL5":
+                tv_title.setText("空调毯带枕套 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentHLL());
                 break;
             case "HM":
                 tv_title.setText("围裙 " + orderItems.get(currentID).order_number);
                 transaction.replace(R.id.frame_main, new FragmentR());
                 break;
-            case "HO":
+            case "HO1":
                 tv_title.setText("沙发垫 " + orderItems.get(currentID).order_number);
                 transaction.replace(R.id.frame_main, new FragmentHO());
+                break;
+            case "HO2":
+                tv_title.setText("沙发垫 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentHO());
+                break;
+            case "HO3":
+                tv_title.setText("沙发垫 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentHO());
+                break;
+            case "HO4":
+                tv_title.setText("沙发垫 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentHO());
+                break;
+            case "HO5":
+                tv_title.setText("沙发垫 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentHO());
+                break;
+            case "HO6":
+                tv_title.setText("沙发垫 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentHO());
+                break;
+            case "HO7":
+                tv_title.setText("沙发垫 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentHO());
+                break;
+            case "HV":
+                tv_title.setText("拖鞋 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentHV());
+                break;
+            case "HW":
+                tv_title.setText("狗狗坐垫 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentHW());
                 break;
             case "R":
                 tv_title.setText("围裙 " + orderItems.get(currentID).order_number);
@@ -569,7 +629,7 @@ public class MainActivity extends FragmentActivity {
         tv_finishRemixx.setText("加载中...");
         Log.e("aaa", "开始 "+orderItems.get(currentID).order_number);
 
-        if(orderItems.get(currentID).img_left!=null){
+        if (orderItems.get(currentID).img_left != null) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -583,23 +643,23 @@ public class MainActivity extends FragmentActivity {
                         public void run() {
                             if (bitmapLeft == null || bitmapRight == null) {
                                 showDialogNoImage();
-                            }else{
+                            } else {
                                 tv_finishRemixx.setText("加载完成");
 
                                 leftsucceed = true;
-                                messageListener.listen(1,orderItems.get(currentID).img_design_left);
+                                messageListener.listen(1, orderItems.get(currentID).img_design_left);
                                 rightsucceed = true;
-                                messageListener.listen(2,orderItems.get(currentID).img_design_right);
+                                messageListener.listen(2, orderItems.get(currentID).img_design_right);
                             }
                         }
                     });
                 }
             }).start();
-        } else if (orderItems.get(currentID).img_pillow!=null) {
+        } else if (orderItems.get(currentID).img_pillow != null) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    if(bitmapPillow!=null){
+                    if (bitmapPillow != null) {
                         bitmapPillow.recycle();
                     }
                     String img_pillow = orderItems.get(currentID).img_pillow;
@@ -612,7 +672,7 @@ public class MainActivity extends FragmentActivity {
                                 showDialogNoImage();
                             } else {
                                 tv_finishRemixx.setText("加载完成");
-                                messageListener.listen(4,orderItems.get(currentID).img_pillow);
+                                messageListener.listen(4, orderItems.get(currentID).img_pillow);
                             }
                         }
                     });
@@ -621,6 +681,7 @@ public class MainActivity extends FragmentActivity {
         } else {
             tv_tip.setText("当前图片不存在 请操作下一个");
             messageListener.listen(3, "");
+            writeWrong();
         }
     }
 
@@ -644,18 +705,6 @@ public class MainActivity extends FragmentActivity {
         dialog.hide();
     }
 
-    String[] gqList = new String[]{"1539795", "1596072", "1602647", "1597401", "1526215", "154352", "1596173",
-            "1605154", "1573050", "1609073", "1551699", "1490506", "1609073", "1600986", "1585723", "1553543",
-            "1577504"
-    };
-    boolean findWrongGQ(){
-        for (String str : gqList) {
-            if (orderItems.get(currentID).img_right.contains(str)) {
-                return true;
-            }
-        }
-        return false;
-    }
     public void writeWrong(){
         //写入excel
         try{
@@ -663,7 +712,7 @@ public class MainActivity extends FragmentActivity {
             if(!file.exists())
                 file.mkdirs();
             totalWrong++;
-            String writePath = "/storage/emulated/0/Pictures/生产图/" + childPath + "/问题卫衣过滤列表.xls";
+            String writePath = "/storage/emulated/0/Pictures/生产图/" + childPath + "/问题订单列表.xls";
             File fileWrite = new File(writePath);
             if(!fileWrite.exists()){
                 WritableWorkbook book = Workbook.createWorkbook(fileWrite);

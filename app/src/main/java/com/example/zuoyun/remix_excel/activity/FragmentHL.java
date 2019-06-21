@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PaintFlagsDrawFilter;
 import android.graphics.Typeface;
@@ -54,7 +55,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     Paint rectPaint, paint, paintRed, paintBlue, rectBorderPaint, paintSmall;
     String time;
 
-    int cutX,cutY,width, height;
+    int dpi,width,height;
 
     @Override
     public int getLayout() {
@@ -157,39 +158,94 @@ String sdCardPath = "/storage/emulated/0/Pictures";
 
     }
 
-    void drawText(Canvas canvas) {
-        canvas.drawRect(1000, 4, 1000 + 1000, 4 + 25, rectPaint);
-        canvas.drawText("空调毯-" + orderItems.get(currentID).sizeStr + "   " + time + "   " + orderItems.get(currentID).order_number + "    " + orderItems.get(currentID).newCode, 1000, 4 + 23, paint);
+    void drawText345(Canvas canvas) {
+        canvas.save();
+        canvas.rotate(-90, width, 1200 + 1000);
+        canvas.drawRect(width, 1200 + 1000 - 30, width + 1000, 1200 + 1000 - 5, rectPaint);
+        canvas.drawText("上边      空调毯-" + orderItems.get(currentID).color + orderItems.get(currentID).sizeStr + "   " + time + "   " + orderItems.get(currentID).order_number + "    " + orderItems.get(currentID).newCodeStr, width, 1200 + 1000 - 8, paint);
+        canvas.restore();
+        canvas.save();
+        canvas.rotate(90, 0, height - 1200 - 1000);
+        canvas.drawRect(0, height - 1200 - 1000 - 30, 1000, height - 1200 - 1000 - 5, rectPaint);
+        canvas.drawText("下边      空调毯-" + orderItems.get(currentID).color + orderItems.get(currentID).sizeStr + "   " + time + "   " + orderItems.get(currentID).order_number + "    " + orderItems.get(currentID).newCodeStr, 0, height - 1200 - 1000 - 8, paint);
+        canvas.restore();
+    }
+    void drawText2(Canvas canvas) {
+        paint.setTextSize(40);
+        canvas.save();
+        canvas.rotate(-90, width, 1900 + 2000);
+        canvas.drawRect(width, 1900 + 2000 - 45, width + 2000, 1900 + 2000 - 5, rectPaint);
+        canvas.drawText("上边      空调毯-" + orderItems.get(currentID).color + orderItems.get(currentID).sizeStr + "   " + time + "   " + orderItems.get(currentID).order_number + "    " + orderItems.get(currentID).newCodeStr, width, 1900 + 2000 - 9, paint);
+        canvas.restore();
+        canvas.save();
+        canvas.rotate(90, 0, height - 1900 - 2000);
+        canvas.drawRect(0, height - 1900 - 2000 - 45, 2000, height - 1900 - 2000 - 5, rectPaint);
+        canvas.drawText("下边      空调毯-" + orderItems.get(currentID).color + orderItems.get(currentID).sizeStr + "   " + time + "   " + orderItems.get(currentID).order_number + "    " + orderItems.get(currentID).newCodeStr, 0, height - 1900 - 2000 - 9, paint);
+        canvas.restore();
+    }
+    void drawText1(Canvas canvas) {
+        paint.setTextSize(50);
+        canvas.save();
+        canvas.rotate(-90, width, 2400 + 2000);
+        canvas.drawRect(width, 2400 + 2000 - 55, width + 2000, 2400 + 2000 - 5, rectPaint);
+        canvas.drawText("上边      空调毯-" + orderItems.get(currentID).color + orderItems.get(currentID).sizeStr + "   " + time + "   " + orderItems.get(currentID).order_number + "    " + orderItems.get(currentID).newCodeStr, width, 2400 + 2000 - 9, paint);
+        canvas.restore();
+        canvas.save();
+        canvas.rotate(90, 0, height - 2400 - 2000);
+        canvas.drawRect(0, height - 2400 - 2000 - 55, 2000, height - 2400 - 2000 - 5, rectPaint);
+        canvas.drawText("下边      空调毯-" + orderItems.get(currentID).color + orderItems.get(currentID).sizeStr + "   " + time + "   " + orderItems.get(currentID).order_number + "    " + orderItems.get(currentID).newCodeStr, 0, height - 2400 - 2000 - 9, paint);
+        canvas.restore();
     }
 
     public void remixx(){
-        Bitmap bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, cutX, cutY, width, height);
+        Matrix matrix = new Matrix();
+        matrix.postScale(width / 13800f, height / 15300f);
+        if (orderItems.get(currentID).sku.equals("HL2") || orderItems.get(currentID).sku.equals("HL3") || orderItems.get(currentID).sku.equals("HL4")) {
+            matrix.postRotate(-90);
+            matrix.postTranslate(0, width);
+        }
+        Bitmap bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, 0, 0, 13800, 15300, matrix, true);
         MainActivity.instance.bitmapPillow.recycle();
         Canvas canvasTemp= new Canvas(bitmapTemp);
         canvasTemp.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
 
+
+        if (orderItems.get(currentID).sku.equals("HL2") || orderItems.get(currentID).sku.equals("HL3") || orderItems.get(currentID).sku.equals("HL4")) {
+            canvasTemp.rotate(-90);
+            canvasTemp.translate(-width, 0);
+        }
+
         canvasTemp.drawRect(0, 0, width - 4, height - 4, rectBorderPaint);
         canvasTemp.drawRect(4, 4, width - 4, height - 4, rectBorderPaint);
-        drawText(canvasTemp);
+
+        if (orderItems.get(currentID).sku.equals("HL1")) {
+            drawText1(canvasTemp);
+        } else if (orderItems.get(currentID).sku.equals("HL2")) {
+            drawText2(canvasTemp);
+        } else {
+            drawText345(canvasTemp);
+        }
+
 
         try {
-//            Matrix matrix = new Matrix();
-//            matrix.postRotate(-90, bitmapCombine.getWidth() / 2, bitmapCombine.getHeight() / 2);
-//            bitmapCombine = Bitmap.createBitmap(bitmapCombine, 0, 0, bitmapCombine.getWidth(), bitmapCombine.getHeight(), matrix, true);
-
-            String nameCombine = orderItems.get(currentID).sku + "_" + orderItems.get(currentID).sizeStr + "_" + orderItems.get(currentID).order_number + strPlus + ".jpg";
+            String sizeStr = orderItems.get(currentID).sizeStr;
+            if (sizeStr.equals("Crib/Lap Blanket")) {
+                sizeStr = "LapBlanket";
+            }
+            String nameCombine = orderItems.get(currentID).sku + "_" + orderItems.get(currentID).color + "_" + sizeStr + "_" + orderItems.get(currentID).order_number + strPlus + ".jpg";
 
             String pathSave;
             if(MainActivity.instance.cb_classify.isChecked()){
                 pathSave = sdCardPath + "/生产图/" + childPath + "/" + orderItems.get(currentID).sku + "/";
             } else
                 pathSave = sdCardPath + "/生产图/" + childPath + "/";
-            if(!new File(pathSave).exists())
+            if(!new File(pathSave).exists()) {
                 new File(pathSave).mkdirs();
+            }
             File fileSave = new File(pathSave + nameCombine);
-            BitmapToJpg.save(bitmapTemp, fileSave, 145);
-
+            BitmapToJpg.save(bitmapTemp, fileSave, dpi);
             bitmapTemp.recycle();
+
 
             //写入excel
             String writePath = sdCardPath + "/生产图/" + childPath + "/生产单.xls";
@@ -289,36 +345,31 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     }
 
     void setSize(){
-        switch (orderItems.get(currentID).sizeStr) {
-            case "Crib":
-                cutX = 3534;
-                cutY = 3900;
-                width = 6731;
-                height = 7500;
+        switch (orderItems.get(currentID).skuStr) {
+            case "HL1":
+                dpi = 297;
+                width = 13800;
+                height = 15000;
                 break;
-            case "Throw Blanket":
-                cutX = 2775;
-                cutY = 3054;
-                width = 8250;
-                height = 9192;
+            case "HL2":
+                dpi = 242;
+                width = 13800;
+                height = 15000;
                 break;
-            case "Twin Full":
-                cutX = 1178;
-                cutY = 1275;
-                width = 11443;
-                height = 12750;
+            case "HL3":
+                dpi = 175;
+                width = 13414;
+                height = 15268;
                 break;
-            case "Queen":
-                cutX = 841;
-                cutY = 900;
-                width = 12117;
-                height = 13500;
+            case "HL4":
+                dpi = 166;
+                width = 13600;
+                height = 15300;
                 break;
-            case "King":
-                cutX = 71;
-                cutY = 42;
-                width = 13657;
-                height = 15215;
+            case "HL5":
+                dpi = 146;
+                width = 13629;
+                height = 15300;
                 break;
             default:
                 sizeOK = false;

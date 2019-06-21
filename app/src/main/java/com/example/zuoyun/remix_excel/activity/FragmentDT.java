@@ -198,8 +198,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvasLeftSide.drawRect(370, 48, 512, 48 + 23, rectPaint);
         canvasLeftSide.drawText(orderItems.get(currentID).order_number, 370, 48 + 21, paint);
         canvasLeftMain.drawRect(615, 1160, 1011, 1212, rectPaint);
-        canvasLeftMain.drawText("    左", 612, 1206, paintRed);
-        canvasLeftMain.drawText(orderItems.get(currentID).size + "码" + orderItems.get(currentID).color, 860, 1206, paint);
+        canvasLeftMain.drawText((orderItems.get(currentID).size) + "码" + orderItems.get(currentID).color + "  左", 612, 1206, paintRed);
         canvasLeftMain.save();
         canvasLeftMain.rotate(-68.5f, 1296, 882);
         canvasLeftMain.drawRect(1298, 832, 1800, 882, rectPaint);
@@ -210,16 +209,15 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvasLeftMain.rotate(-111.5f, 373, 862);
         canvasLeftMain.drawRect(373, 800, 873, 850, rectPaint);
         //canvasLeftMain.drawBitmap(bitmapBarCode, 373, 800, null);
-        canvasLeftMain.drawText(orderItems.get(currentID).newCode, 373, 846, paintRed);
+        canvasLeftMain.drawText(orderItems.get(currentID).newCodeStr, 373, 846, paint);
         canvasLeftMain.restore();
 
         canvasRightSide.drawRect(1655, 48, 1805, 48 + 23, rectPaint);
-        canvasRightSide.drawText(orderItems.get(currentID).size + "码 右", 1656, 48 + 21, paintRed);
+        canvasRightSide.drawText((orderItems.get(currentID).size + "码 右"), 1656, 48 + 21, paintRed);
         canvasRightSide.drawRect(370, 48, 512, 48 + 23, rectPaint);
         canvasRightSide.drawText(orderItems.get(currentID).order_number, 370, 48 + 21, paint);
         canvasRightMain.drawRect(615, 1160, 1011, 1212, rectPaint);
-        canvasRightMain.drawText(orderItems.get(currentID).size + "码" + orderItems.get(currentID).color, 612, 1206, paint);
-        canvasRightMain.drawText(" 右", 860, 1206, paintRed);
+        canvasRightMain.drawText((orderItems.get(currentID).size) + "码" + orderItems.get(currentID).color + "  右", 612, 1206, paintRed);
         canvasRightMain.save();
         canvasRightMain.rotate(-111.5f, 373, 862);
         canvasRightMain.drawRect(373, 800, 873, 850, rectPaint);
@@ -230,7 +228,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvasRightMain.rotate(-68.5f, 1296, 882);
         canvasRightMain.drawRect(1298, 832, 1800, 882, rectPaint);
         //canvasRightMain.drawBitmap(bitmapBarCode, 1298, 832, null);
-        canvasRightMain.drawText(orderItems.get(currentID).newCode, 1298, 878, paintRed);
+        canvasRightMain.drawText(orderItems.get(currentID).newCodeStr, 1298, 878, paint);
         canvasRightMain.restore();
 
         try {
@@ -353,6 +351,11 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     }
     void setScale(int size){
         switch (size) {
+
+            case 35:
+                scaleX = 0.857f;
+                scaleY = 0.872f;
+                break;
             case 36:
                 scaleX = 0.923f;
                 scaleY = 0.888f;
