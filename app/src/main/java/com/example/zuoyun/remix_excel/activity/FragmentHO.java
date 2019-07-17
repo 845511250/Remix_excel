@@ -200,6 +200,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
 
     public void remixx(){
         Bitmap bitmapCombine = null;
+        orderItems.get(currentID).newCodeStr = orderItems.get(currentID).newCodeStr.replace("\" ", "-");
 
         if (orderItems.get(currentID).sku.equals("HO1") || orderItems.get(currentID).sku.equals("HO2")) {
             bitmapCombine = Bitmap.createBitmap(width_combine, height_combine, Bitmap.Config.ARGB_8888);
@@ -276,7 +277,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
             canvasCombine.drawBitmap(bitmapDB, x_print_r + width_side - 500, y_print_r + height_side - 500, null);
 
             //save
-            String nameCombine = "HO沙发垫_" + orderItems.get(currentID).order_number + strPlus + ".jpg";
+            String nameCombine = orderItems.get(currentID).newCodeStr + "-沙发垫-" + orderItems.get(currentID).order_number + strPlus + ".jpg";
             String pathSave;
             if(MainActivity.instance.cb_classify.isChecked()){
                 pathSave = sdCardPath + "/生产图/" + childPath + "/" + orderItems.get(currentID).sku + "/";
@@ -289,18 +290,16 @@ String sdCardPath = "/storage/emulated/0/Pictures";
             bitmapCombine.recycle();
 
         } else if (orderItems.get(currentID).sku.equals("HO5")) {
-            bitmapCombine = Bitmap.createBitmap(width_combine, height_combine, Bitmap.Config.ARGB_8888);
+            Matrix matrix = new Matrix();
+            matrix.postRotate(-90);
+            matrix.postTranslate(0, width_main);
+
+            bitmapCombine = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, x_cut_main, y_cut_main, width_main, height_main,matrix,true);
             Canvas canvasCombine= new Canvas(bitmapCombine);
             canvasCombine.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
-            canvasCombine.drawColor(0xffffffff);
-
-            Bitmap bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, x_cut_main, y_cut_main, width_main, height_main);
-            Canvas canvasTemp= new Canvas(bitmapTemp);
-            canvasTemp.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
-            drawText(canvasTemp);
-            canvasCombine.drawBitmap(bitmapTemp, 0, 0, null);
-
-            bitmapTemp.recycle();
+            canvasCombine.rotate(-90);
+            canvasCombine.translate(-width_main, 0);
+            drawText(canvasCombine);
 
             if (num == 1) {
                 if (MainActivity.instance.bitmapPillow != null) {
@@ -336,7 +335,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
             canvasCombine.drawBitmap(bitmapDB, width_main - 500, height_main - 500, null);
 
             //save
-            String nameCombine = "HO沙发垫_" + orderItems.get(currentID).order_number + strPlus + ".jpg";
+            String nameCombine = orderItems.get(currentID).newCodeStr + "-沙发垫-" + orderItems.get(currentID).order_number + strPlus + ".jpg";
             String pathSave;
             if(MainActivity.instance.cb_classify.isChecked()){
                 pathSave = sdCardPath + "/生产图/" + childPath + "/" + orderItems.get(currentID).sku + "/";
@@ -350,7 +349,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
 
         }else{
             //side
-            bitmapCombine = Bitmap.createBitmap(height_side * 2 + 120, width_side, Bitmap.Config.ARGB_8888);
+            bitmapCombine = Bitmap.createBitmap(height_side * 2 + 20, width_side, Bitmap.Config.ARGB_8888);
             Canvas canvasCombine= new Canvas(bitmapCombine);
             canvasCombine.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
             canvasCombine.drawColor(0xffffffff);
@@ -392,12 +391,12 @@ String sdCardPath = "/storage/emulated/0/Pictures";
 
             matrix.reset();
             matrix.postRotate(90);
-            matrix.postTranslate(height_side * 2 + 120, 0);
+            matrix.postTranslate(height_side * 2 + 20, 0);
             canvasCombine.drawBitmap(bitmapTemp, matrix, null);
             bitmapTemp.recycle();
 
             //save Side
-            String nameCombine = "HO沙发垫侧边_" + orderItems.get(currentID).order_number + strPlus + ".jpg";
+            String nameCombine = orderItems.get(currentID).newCodeStr + "-沙发垫侧边-" + orderItems.get(currentID).order_number + strPlus + ".jpg";
             String pathSave;
             if(MainActivity.instance.cb_classify.isChecked()){
                 pathSave = sdCardPath + "/生产图/" + childPath + "/" + orderItems.get(currentID).sku + "/";
@@ -410,9 +409,14 @@ String sdCardPath = "/storage/emulated/0/Pictures";
             bitmapCombine.recycle();
 
             //main
-            bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, x_cut_main, y_cut_main, width_main, height_main);
+            matrix.reset();
+            matrix.postRotate(-90);
+            matrix.postTranslate(0, width_main);
+            bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, x_cut_main, y_cut_main, width_main, height_main, matrix, true);
             canvasTemp= new Canvas(bitmapTemp);
             canvasTemp.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
+            canvasTemp.rotate(-90);
+            canvasTemp.translate(-width_main, 0);
             drawText(canvasTemp);
 
             if (num == 1) {
@@ -446,7 +450,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
 
 
             //save Main
-            nameCombine = "HO沙发垫_" + orderItems.get(currentID).order_number + strPlus + ".jpg";
+            nameCombine = orderItems.get(currentID).newCodeStr + "-沙发垫-" + orderItems.get(currentID).order_number + strPlus + ".jpg";
             if(MainActivity.instance.cb_classify.isChecked()){
                 pathSave = sdCardPath + "/生产图/" + childPath + "/" + orderItems.get(currentID).sku + "/";
             } else
@@ -559,11 +563,11 @@ String sdCardPath = "/storage/emulated/0/Pictures";
                 x_cut_r = 8090 - 60;
                 y_cut_r = 5590;
                 width_combine = width_side;
-                height_combine = height_main + height_side * 2 + 240;
+                height_combine = height_main + height_side * 2 + 40;
                 x_print_l = 0;
-                y_print_l = height_main + 120;
+                y_print_l = height_main + 20;
                 x_print_r = 0;
-                y_print_r = height_main + height_side + 240;
+                y_print_r = height_main + height_side + 40;
                 y_mark = 2817;
                 break;
             case "HO2":
@@ -578,11 +582,11 @@ String sdCardPath = "/storage/emulated/0/Pictures";
                 x_cut_r = 8346 - 60;
                 y_cut_r = 5590;
                 width_combine = width_side;
-                height_combine = height_main + height_side * 2 + 240;
+                height_combine = height_main + height_side * 2 + 40;
                 x_print_l = 0;
-                y_print_l = height_main + 120;
+                y_print_l = height_main + 20;
                 x_print_r = 0;
-                y_print_r = height_main + height_side + 240;
+                y_print_r = height_main + height_side + 40;
                 y_mark = 3760;
                 break;
             case "HO3":
@@ -596,12 +600,12 @@ String sdCardPath = "/storage/emulated/0/Pictures";
                 y_cut_l = 5590;
                 x_cut_r = 9380 - 60;
                 y_cut_r = 5590;
-                width_combine = width_side * 2 + 120;
-                height_combine = height_main + height_side + 120;
+                width_combine = width_side * 2 + 20;
+                height_combine = height_main + height_side + 20;
                 x_print_l = 0;
-                y_print_l = height_main + 120;
-                x_print_r = width_side + 120;
-                y_print_r = height_main + 120;
+                y_print_l = height_main + 20;
+                x_print_r = width_side + 20;
+                y_print_r = height_main + 20;
                 y_mark = 2995;
                 break;
             case "HO4":
@@ -616,11 +620,11 @@ String sdCardPath = "/storage/emulated/0/Pictures";
                 x_cut_r = 9701 - 60;
                 y_cut_r = 5590;
                 width_combine = width_main;
-                height_combine = height_main + height_side + 120;
+                height_combine = height_main + height_side + 20;
                 x_print_l = 0;
-                y_print_l = height_main + 120;
-                x_print_r = width_side + 150;
-                y_print_r = height_main + 120;
+                y_print_l = height_main + 20;
+                x_print_r = width_side + 50;
+                y_print_r = height_main + 20;
                 y_mark = 2972;
                 break;
             case "HO5":
@@ -644,11 +648,11 @@ String sdCardPath = "/storage/emulated/0/Pictures";
                 x_cut_r = 10524 - 60;
                 y_cut_r = 5590;
                 width_combine = width_main;
-                height_combine = height_main + height_side + 120;
+                height_combine = height_main + height_side + 20;
                 x_print_l = 0;
-                y_print_l = height_main + 120;
-                x_print_r = width_side + 150;
-                y_print_r = height_main + 120;
+                y_print_l = height_main + 20;
+                x_print_r = width_side + 50;
+                y_print_r = height_main + 20;
                 y_mark = 2790;
                 break;
             case "HO7":
@@ -663,11 +667,11 @@ String sdCardPath = "/storage/emulated/0/Pictures";
                 x_cut_r = 10936 - 60;
                 y_cut_r = 5590;
                 width_combine = width_main;
-                height_combine = height_main + height_side + 120;
+                height_combine = height_main + height_side + 20;
                 x_print_l = 0;
-                y_print_l = height_main + 120;
-                x_print_r = width_side + 200;
-                y_print_r = height_main + 120;
+                y_print_l = height_main + 20;
+                x_print_r = width_side + 400;
+                y_print_r = height_main + 20;
                 y_mark = 3740;
                 break;
             default:

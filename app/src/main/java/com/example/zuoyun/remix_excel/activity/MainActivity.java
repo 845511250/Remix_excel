@@ -597,6 +597,26 @@ public class MainActivity extends FragmentActivity {
                 tv_title.setText("沙发垫 " + orderItems.get(currentID).order_number);
                 transaction.replace(R.id.frame_main, new FragmentHO());
                 break;
+            case "HU1":
+                tv_title.setText("沙发套 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentHU());
+                break;
+            case "HU2":
+                tv_title.setText("沙发套 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentHU());
+                break;
+            case "HU3":
+                tv_title.setText("沙发套 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentHU());
+                break;
+            case "HU4":
+                tv_title.setText("沙发套 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentHU());
+                break;
+            case "HU5":
+                tv_title.setText("沙发套 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentHU());
+                break;
             case "HV":
                 tv_title.setText("拖鞋 " + orderItems.get(currentID).order_number);
                 transaction.replace(R.id.frame_main, new FragmentHV());

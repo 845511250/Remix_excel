@@ -59,7 +59,7 @@ public class FragmentHV extends BaseFragment {
     int num;
     String strPlus = "";
     int intPlus = 1;
-    Paint paint,paintRed,paintBlue, rectPaint;
+    Paint paint,paintRed,paintBlue, rectPaint, rectPaintRed;
     String time = MainActivity.instance.orderDate_Print;
 
 
@@ -78,8 +78,8 @@ public class FragmentHV extends BaseFragment {
 
         paint = new Paint();
         paint.setColor(0xff000000);
-        paint.setTextSize(20);
-        paint.setTypeface(Typeface.DEFAULT_BOLD);
+        paint.setTextSize(22);
+        paint.setTypeface(Typeface.DEFAULT);
         paint.setAntiAlias(true);
 
         paintRed = new Paint();
@@ -97,6 +97,10 @@ public class FragmentHV extends BaseFragment {
         rectPaint = new Paint();
         rectPaint.setColor(0xffffffff);
         rectPaint.setStyle(Paint.Style.FILL);
+
+        rectPaintRed = new Paint();
+        rectPaintRed.setColor(0xffff0000);
+        rectPaintRed.setStyle(Paint.Style.FILL);
 
         MainActivity.instance.setMessageListener(new MainActivity.MessageListener() {
             @Override
@@ -161,27 +165,30 @@ public class FragmentHV extends BaseFragment {
 
     }
 
-    void drawText(Canvas canvas, String LR) {
-        canvas.save();
-        canvas.rotate(71.6f, 3, 59);
-        canvas.drawRect(3, 59 - 22, 3 + 240, 59, rectPaint);
-        canvas.drawText("HV" + orderItems.get(currentID).size + "码" + LR + " " + orderItems.get(currentID).order_number, 3, 59 - 2, paint);
-        canvas.restore();
-
-        canvas.save();
-        canvas.rotate(-70.7f, 1064, 230);
-        canvas.drawRect(1064, 230 - 22, 1064 + 160, 230, rectPaint);
-        canvas.drawText(orderItems.get(currentID).newCodeStr, 1064, 230 - 2, paint);
-        canvas.restore();
+    void drawTextL(Canvas canvas) {
+        if (orderItems.get(currentID).colorStr.equalsIgnoreCase("white")) {
+            paint.setColor(0xffffffff);
+            canvas.drawText("M", 13, 77, paint);
+            paint.setColor(0xff000000);
+            canvas.drawText("M", 13 + 3, 77 - 3, paint);
+        }
+    }
+    void drawTextR(Canvas canvas) {
+        if (orderItems.get(currentID).colorStr.equalsIgnoreCase("white")) {
+            paint.setColor(0xffffffff);
+            canvas.drawText("M", 1090, 77, paint);
+            paint.setColor(0xff000000);
+            canvas.drawText("M", 1090 + 3, 77 - 3, paint);
+        }
     }
 
     public void remixx(){
-        setSize(orderItems.get(currentID).size);
+        setSize(orderItems.get(currentID).sizeStr);
         Bitmap bitmapDBRight = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.hv_r);
         Bitmap bitmapDBLeft = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.hv_l);
 
         //bitmapCombine
-        Bitmap bitmapCombine = Bitmap.createBitmap(width * 2 + 120, height + 60, Bitmap.Config.ARGB_8888);
+        Bitmap bitmapCombine = Bitmap.createBitmap(2760, 585, Bitmap.Config.ARGB_8888);
         Canvas canvasCombine = new Canvas(bitmapCombine);
         canvasCombine.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
         canvasCombine.drawColor(0xffffffff);
@@ -191,6 +198,7 @@ public class FragmentHV extends BaseFragment {
         canvasTemp.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
         canvasTemp.drawBitmap(bitmapDBLeft, 0, 0, null);
         bitmapDBLeft.recycle();
+        drawTextL(canvasTemp);
         bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width, height, true);
         Matrix matrix = new Matrix();
         matrix.postRotate(180);
@@ -202,15 +210,19 @@ public class FragmentHV extends BaseFragment {
         canvasTemp.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
         canvasTemp.drawBitmap(bitmapDBRight, 0, 0, null);
         bitmapDBRight.recycle();
+        drawTextR(canvasTemp);
         bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width, height, true);
-        matrix.postTranslate(width + 60, 0);
+        matrix.postTranslate(1380, 0);
         canvasCombine.drawBitmap(bitmapTemp, matrix, null);
         bitmapTemp.recycle();
+
+//        canvasCombine.drawRect(0, 0, 2, 565, rectPaintRed);
+//        canvasCombine.drawRect(1379, 0, 1381, 565, rectPaintRed);
 
 
         try {
             String printColor = orderItems.get(currentID).color.equals("黑") ? "B" : "W";
-            String nameCombine = orderItems.get(currentID).sku + orderItems.get(currentID).size + orderItems.get(currentID).color + "_" + orderItems.get(currentID).order_number + strPlus + ".jpg";
+            String nameCombine = orderItems.get(currentID).sku + orderItems.get(currentID).sizeStr + orderItems.get(currentID).color + "_" + orderItems.get(currentID).order_number + strPlus + ".jpg";
 
             String pathSave;
             if(MainActivity.instance.cb_classify.isChecked()){
@@ -297,109 +309,137 @@ public class FragmentHV extends BaseFragment {
         }
     }
 
-    void setSize(int size){
+    void setSize(String size){
         switch (size) {
-            case 20:
+            case "20":
                 width = 733;
                 height = 335;
                 break;
-            case 21:
+            case "21":
                 width = 733;
                 height = 335;
                 break;
-            case 22:
+            case "20-21":
+                width = 733;
+                height = 335;
+                break;
+            case "22":
                 width = 790;
                 height = 352;
                 break;
-            case 23:
+            case "23":
                 width = 790;
                 height = 352;
                 break;
-            case 24:
+            case "22-23":
+                width = 790;
+                height = 352;
+                break;
+            case "24":
                 width = 832;
                 height = 364;
                 break;
-            case 25:
+            case "25":
                 width = 832;
                 height = 364;
                 break;
-            case 26:
+            case "24-25":
+                width = 832;
+                height = 364;
+                break;
+            case "26":
                 width = 875;
                 height = 388;
                 break;
-            case 27:
+            case "27":
                 width = 875;
                 height = 388;
                 break;
-            case 28:
+            case "26-27":
+                width = 875;
+                height = 388;
+                break;
+            case "28":
                 width = 911;
                 height = 408;
                 break;
-            case 29:
+            case "29":
                 width = 911;
                 height = 408;
                 break;
-            case 30:
+            case "30":
                 width = 911;
                 height = 408;
                 break;
-            case 31:
+            case "29-30":
+                width = 911;
+                height = 408;
+                break;
+            case "31":
                 width = 967;
                 height = 424;
                 break;
-            case 32:
+            case "32":
                 width = 967;
                 height = 424;
                 break;
-            case 33:
+            case "31-32":
+                width = 967;
+                height = 424;
+                break;
+            case "33":
                 width = 999;
                 height = 443;
                 break;
-            case 34:
+            case "34":
                 width = 999;
                 height = 443;
                 break;
-            case 35:
+            case "33-34":
+                width = 999;
+                height = 443;
+                break;
+            case "35":
                 width = 1034;
                 height = 460;
                 break;
-            case 36:
+            case "36":
                 width = 1034;
                 height = 460;
                 break;
-            case 37:
+            case "37":
                 width = 1067;
                 height = 476;
                 break;
-            case 38:
+            case "38":
                 width = 1094;
                 height = 479;
                 break;
-            case 39:
+            case "39":
                 width = 1123;
                 height = 499;
                 break;
-            case 40:
+            case "40":
                 width = 1160;
                 height = 529;
                 break;
-            case 41:
+            case "41":
                 width = 1188;
                 height = 532;
                 break;
-            case 42:
+            case "42":
                 width = 1225;
                 height = 551;
                 break;
-            case 43:
+            case "43":
                 width = 1254;
                 height = 549;
                 break;
-            case 44:
+            case "44":
                 width = 1283;
                 height = 566;
                 break;
-            case 45:
+            case "45":
                 width = 1320;
                 height = 566;
                 break;
