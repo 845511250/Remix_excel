@@ -17,5 +17,6 @@ public class OrderItem {
 
     public String order_id;
     public ArrayList<String> print_url;
+    public String customer;
 
 }

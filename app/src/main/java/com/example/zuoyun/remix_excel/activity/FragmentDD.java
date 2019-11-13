@@ -77,21 +77,15 @@ public class FragmentDD extends BaseFragment {
 
         paint = new Paint();
         paint.setColor(0xff000000);
-        paint.setTextSize(34);
+        paint.setTextSize(38);
         paint.setTypeface(Typeface.DEFAULT_BOLD);
         paint.setAntiAlias(true);
 
         paintRed = new Paint();
         paintRed.setColor(0xffff0000);
-        paintRed.setTextSize(34);
+        paintRed.setTextSize(38);
         paintRed.setTypeface(Typeface.DEFAULT_BOLD);
         paintRed.setAntiAlias(true);
-
-        paintBlue = new Paint();
-        paintBlue.setColor(0xff0000ff);
-        paintBlue.setTextSize(40);
-        paintBlue.setTypeface(Typeface.DEFAULT_BOLD);
-        paintBlue.setAntiAlias(true);
 
         rectPaint = new Paint();
         rectPaint.setColor(0xffffffff);
@@ -160,22 +154,22 @@ public class FragmentDD extends BaseFragment {
     }
 
     void drawTextRight(Canvas canvas, String LR) {
-        canvas.drawRect(120, 695, 540, 731, rectPaint);
-        canvas.drawText(time, 120, 730, paint);
-        canvas.drawText(orderItems.get(currentID).order_number, 320, 730, paint);
-        canvas.drawRect(800, 695, 800 + 200, 731, rectPaint);
-        canvas.drawText(orderItems.get(currentID).newCodeStr, 800, 730, paint);
-        canvas.drawRect(1200, 695, 1200 + 300, 731, rectPaint);
-        canvas.drawText("生产尺寸:" + (orderItems.get(currentID).size - 1) + "码" + orderItems.get(currentID).color + " " + LR, 1200, 730, paintRed);
+        String isKK = orderItems.get(currentID).sku.equals("KK") ? "KK(MD鞋底) " : "";
+
+        canvas.drawRect(120, 720 - 40, 1520, 720, rectPaint);
+        canvas.drawText(time, 120, 716, paint);
+        canvas.drawText(isKK + orderItems.get(currentID).order_number, 320, 716, paint);
+        canvas.drawText(orderItems.get(currentID).newCodeStr, 700, 716, paint);
+        canvas.drawText("生产尺寸:" + (orderItems.get(currentID).size - 1) + "码" + orderItems.get(currentID).color + " " + LR, 1120, 716, paintRed);
     }
     void drawTextLeft(Canvas canvas, String LR) {
-        canvas.drawRect(70, 695, 70 + 300, 731, rectPaint);
-        canvas.drawText("生产尺寸:" + (orderItems.get(currentID).size - 1) + "码" + orderItems.get(currentID).color + " " + LR, 70, 730, paintRed);
-        canvas.drawRect(500, 695, 500 + 200, 731, rectPaint);
-        canvas.drawText(orderItems.get(currentID).newCodeStr, 500, 730, paint);
-        canvas.drawRect(1000, 695, 1400, 731, rectPaint);
-        canvas.drawText(time, 1000, 730, paint);
-        canvas.drawText(orderItems.get(currentID).order_number, 1200, 730, paint);
+        String isKK = orderItems.get(currentID).sku.equals("KK") ? "KK(MD鞋底) " : "";
+
+        canvas.drawRect(70, 720 - 40, 1500, 720, rectPaint);
+        canvas.drawText("生产尺寸:" + (orderItems.get(currentID).size - 1) + "码" + orderItems.get(currentID).color + " " + LR, 70, 716, paintRed);
+        canvas.drawText(orderItems.get(currentID).newCodeStr, 500, 716, paint);
+        canvas.drawText(time, 900, 716, paint);
+        canvas.drawText(isKK + orderItems.get(currentID).order_number, 1100, 716, paint);
     }
 
     public void remixx(){
@@ -302,11 +296,11 @@ public class FragmentDD extends BaseFragment {
             sheet.addCell(label1);
             Number number2 = new Number(2, currentID+1, orderItems.get(currentID).num);
             sheet.addCell(number2);
-            Label label3 = new Label(3, currentID+1, "小左");
+            Label label3 = new Label(3, currentID+1, orderItems.get(currentID).customer);
             sheet.addCell(label3);
             Label label4 = new Label(4, currentID + 1, MainActivity.instance.orderDate_Excel);
             sheet.addCell(label4);
-            Label label6 = new Label(6, currentID+1, "平台大货");
+            Label label6 = new Label(6, currentID + 1, "平台大货");
             sheet.addCell(label6);
 
             workbook.write();
@@ -344,7 +338,7 @@ public class FragmentDD extends BaseFragment {
     }
 
     void setScale(int size){
-        switch (size) {
+        switch (size + 1 - 1) {
             case 36:
                 width = 1376;
                 height = 763;
@@ -393,7 +387,6 @@ public class FragmentDD extends BaseFragment {
                 width = 1788;
                 height = 886;
                 break;
-
             case 48:
                 width = 1828;
                 height = 912;

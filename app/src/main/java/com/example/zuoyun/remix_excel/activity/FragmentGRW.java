@@ -283,7 +283,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvasCombine.drawColor(0xffffffff);
 
         //front
-        Bitmap bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 1458 + 30, 2257, 2072, 4193);
+        Bitmap bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 1428 + 30, 2257, 2072, 4193);
         Canvas canvasTemp = new Canvas(bitmapTemp);
         Bitmap bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.gr_front_r);
         canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
@@ -293,7 +293,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvasCombine.drawBitmap(bitmapTemp, 0, 0, null);
         bitmapTemp.recycle();
 
-        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 3530 - 30, 2257, 2072, 4193);
+        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 3500 - 30, 2257, 2072, 4193);
         canvasTemp = new Canvas(bitmapTemp);
         bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.gr_front_l);
         canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
@@ -601,11 +601,11 @@ String sdCardPath = "/storage/emulated/0/Pictures";
             int num=orderItems.get(currentID).num;
             Number number2 = new Number(2, currentID+1, num);
             sheet.addCell(number2);
-            Label label3 = new Label(3, currentID+1, "小左");
+            Label label3 = new Label(3, currentID+1, orderItems.get(currentID).customer);
             sheet.addCell(label3);
             Label label4 = new Label(4, currentID + 1, MainActivity.instance.orderDate_Excel);
             sheet.addCell(label4);
-            Label label6 = new Label(6, currentID+1, "平台大货");
+            Label label6 = new Label(6, currentID + 1, "平台大货");
             sheet.addCell(label6);
 
             workbook.write();

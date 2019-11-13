@@ -162,12 +162,20 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     }
 
     public void remixx(){
-        Bitmap bitmapCombine = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, 0, 68, 7500, 6376);
-        Canvas canvasCombine= new Canvas(bitmapCombine);
-        canvasCombine.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
-
-        canvasCombine.drawRect(0, 0, 7500, 6376, rectBorderPaint);
-        drawText(canvasCombine);
+        Bitmap bitmapCombine = null;
+        if (MainActivity.instance.bitmapPillow.getWidth() == 6500) {
+            bitmapCombine = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, 68, 0, 6376, 7500);
+            Canvas canvasCombine= new Canvas(bitmapCombine);
+            canvasCombine.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
+            canvasCombine.drawRect(0, 0, 6376, 7500, rectBorderPaint);
+            drawText(canvasCombine);
+        } else {
+            bitmapCombine = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, 0, 68, 7500, 6376);
+            Canvas canvasCombine= new Canvas(bitmapCombine);
+            canvasCombine.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
+            canvasCombine.drawRect(0, 0, 7500, 6376, rectBorderPaint);
+            drawText(canvasCombine);
+        }
 
         try {
             String nameCombine = orderItems.get(currentID).sku + "_" + orderItems.get(currentID).sizeStr + "_" + orderItems.get(currentID).order_number + strPlus + ".jpg";
@@ -232,11 +240,11 @@ String sdCardPath = "/storage/emulated/0/Pictures";
             int num=orderItems.get(currentID).num;
             Number number2 = new Number(2, currentID+1, num);
             sheet.addCell(number2);
-            Label label3 = new Label(3, currentID+1, "小左");
+            Label label3 = new Label(3, currentID+1, orderItems.get(currentID).customer);
             sheet.addCell(label3);
             Label label4 = new Label(4, currentID + 1, MainActivity.instance.orderDate_Excel);
             sheet.addCell(label4);
-            Label label6 = new Label(6, currentID+1, "平台大货");
+            Label label6 = new Label(6, currentID + 1, "平台大货");
             sheet.addCell(label6);
 
             workbook.write();

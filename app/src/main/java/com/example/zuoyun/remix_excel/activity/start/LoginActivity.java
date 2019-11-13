@@ -60,6 +60,7 @@ public class LoginActivity extends AppCompatActivity {
     String orderDate_Print, orderDate_Excel, orderDate_Request;
 
     final int Request_Login = 0;
+    final int Request_LoginInFactory = 2;
     final int Request_Update = 1;
     final int Request_DownLoad = 2;
 
@@ -73,7 +74,8 @@ public class LoginActivity extends AppCompatActivity {
         initView();
         initListener();
 
-        requestQueue.add(Request_Update, NoHttp.createStringRequest(Config.checkUpdate), responseListener);
+        RequestQueue requestQueueUpdate = NoHttp.newRequestQueue();
+        requestQueueUpdate.add(Request_Update, NoHttp.createStringRequest(Config.checkUpdate), responseListener);
     }
 
     void initView(){
@@ -150,8 +152,11 @@ public class LoginActivity extends AppCompatActivity {
                     dialog_pwd.dismiss();
                 } else {
                     Request<String> request = NoHttp.createStringRequest(Config.ToCheck, RequestMethod.GET);
+                    Request<String> requestInFactory = NoHttp.createStringRequest(Config.ToCheckInFactory, RequestMethod.GET);
                     String base64 = Base64.encodeToString((str1 + ":" + str2).getBytes(), Base64.DEFAULT);
                     request.addHeader("Authorization", "Basic " + base64);
+                    requestInFactory.addHeader("Authorization", "Basic " + base64);
+                    requestQueue.add(Request_LoginInFactory, requestInFactory, responseListener);
                     requestQueue.add(Request_Login, request, responseListener);
                 }
             }
@@ -166,11 +171,12 @@ public class LoginActivity extends AppCompatActivity {
 
         @Override
         public void onSucceed(int what, Response<String> response) {
-            if (what == Request_Login) {
+            if (what == Request_Login || what == Request_LoginInFactory) {
                 if (response.responseCode() == 200) {
                     Toast.makeText(context, "验证通过", Toast.LENGTH_SHORT).show();
+                    requestQueue.cancelAll();
                     dialog_pwd.dismiss();
-                } else if(response.responseCode() == 401){
+                } else if (response.responseCode() == 401) {
                     Toast.makeText(context, "验证失败！", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(context, "服务器返回码：" + response.responseCode(), Toast.LENGTH_SHORT).show();

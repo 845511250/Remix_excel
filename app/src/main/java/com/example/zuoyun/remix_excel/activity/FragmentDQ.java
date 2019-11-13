@@ -98,14 +98,6 @@ public class FragmentDQ extends BaseFragment {
                     iv_rightup.setImageDrawable(null);
                     Log.e("fragment_dq", "message0");
                 }
-                else if (message == 1) {
-                    Log.e("fragment_dq", "message1");
-                    bt_remix.setClickable(true);
-                    if(!MainActivity.instance.cb_fastmode.isChecked())
-                        iv_leftup.setImageBitmap(MainActivity.instance.bitmapLeft);
-//                    Glide.with(context).load(sampleurl).into(iv_sample1);
-                    checkremix();
-                }
                 else if(message==2){
                     Log.e("fragment_dq", "message2");
                     bt_remix.setClickable(true);
@@ -113,11 +105,15 @@ public class FragmentDQ extends BaseFragment {
                         iv_rightup.setImageBitmap(MainActivity.instance.bitmapRight);
 //                    Glide.with(context).load(sampleurl).into(iv_sample2);
                     checkremix();
-                }
-                else if (message==3){
+                } else if (message == 4) {
+                    Log.e("fragment_dq", "message4");
+                    if(!MainActivity.instance.cb_fastmode.isChecked())
+                        iv_rightup.setImageBitmap(MainActivity.instance.bitmapPillow);
+                    bt_remix.setClickable(true);
+                    checkremix();
+                } else if (message==3){
                     bt_remix.setClickable(false);
-                }
-                else if (message == 10) {
+                } else if (message == 10) {
                     remix();
                 }
             }
@@ -181,14 +177,17 @@ public class FragmentDQ extends BaseFragment {
         Bitmap bitmapDB_main = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.dq_adam);
         Bitmap bitmapDB_tongue = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.dq40_tongue);
 
+        Bitmap bitmapLeft = orderItems.get(currentID).img_pillow == null ? MainActivity.instance.bitmapLeft : MainActivity.instance.bitmapPillow;
+        Bitmap bitmapRight = orderItems.get(currentID).img_pillow == null ? MainActivity.instance.bitmapRight : MainActivity.instance.bitmapPillow;
+
         //left
         //Bitmap bitmapLeft_main = Bitmap.createBitmap(MainActivity.instance.bitmapLeft, 18, 35, 916, 1127);
-        Bitmap bitmapLeft_tongue = Bitmap.createBitmap(MainActivity.instance.bitmapLeft, 288, 336, 382, 467);
+        Bitmap bitmapLeft_tongue = Bitmap.createBitmap(bitmapLeft, 288, 336, 382, 467);
 
         Bitmap bitmapLeft_main = Bitmap.createBitmap(990, 1128, Bitmap.Config.ARGB_8888);
         Canvas canvasLeft_main = new Canvas(bitmapLeft_main);
         canvasLeft_main.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
-        canvasLeft_main.drawBitmap(MainActivity.instance.bitmapLeft, 20, -35, null);
+        canvasLeft_main.drawBitmap(bitmapLeft, 20, -35, null);
         canvasLeft_main.drawBitmap(bitmapDB_main, 0, 0, null);
 
         Canvas canvasLeft_tongue = new Canvas(bitmapLeft_tongue);
@@ -197,12 +196,12 @@ public class FragmentDQ extends BaseFragment {
 
         //right
 //        Bitmap bitmapRight_main = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 18, 35, 916, 1127);
-        Bitmap bitmapRight_tongue = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 288, 336, 382, 467);
+        Bitmap bitmapRight_tongue = Bitmap.createBitmap(bitmapRight, 288, 336, 382, 467);
 
         Bitmap bitmapRight_main = Bitmap.createBitmap(990, 1128, Bitmap.Config.ARGB_8888);
         Canvas canvasRight_main = new Canvas(bitmapRight_main);
         canvasRight_main.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
-        canvasRight_main.drawBitmap(MainActivity.instance.bitmapRight, 20, -35, null);
+        canvasRight_main.drawBitmap(bitmapRight, 20, -35, null);
         canvasRight_main.drawBitmap(bitmapDB_main, 0, 0, null);
 
         Canvas canvasRight_tongue = new Canvas(bitmapRight_tongue);
@@ -293,11 +292,11 @@ public class FragmentDQ extends BaseFragment {
             sheet.addCell(label1);
             Number number2 = new Number(2, currentID+1, orderItems.get(currentID).num);
             sheet.addCell(number2);
-            Label label3 = new Label(3, currentID+1, "小左");
+            Label label3 = new Label(3, currentID+1, orderItems.get(currentID).customer);
             sheet.addCell(label3);
             Label label4 = new Label(4, currentID + 1, MainActivity.instance.orderDate_Excel);
             sheet.addCell(label4);
-            Label label6 = new Label(6, currentID+1, "平台大货");
+            Label label6 = new Label(6, currentID + 1, "平台大货");
             sheet.addCell(label6);
 
             workbook.write();
@@ -307,8 +306,13 @@ public class FragmentDQ extends BaseFragment {
             Log.e("aaa", e.toString());
         }
         if (num == 1) {
-            MainActivity.instance.bitmapLeft.recycle();
-            MainActivity.instance.bitmapRight.recycle();
+            if (MainActivity.instance.bitmapPillow != null) {
+                MainActivity.instance.bitmapPillow.recycle();
+            }
+            if (MainActivity.instance.bitmapLeft != null) {
+                MainActivity.instance.bitmapLeft.recycle();
+                MainActivity.instance.bitmapRight.recycle();
+            }
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -323,8 +327,7 @@ public class FragmentDQ extends BaseFragment {
 
     public void checkremix(){
         if (MainActivity.instance.tb_auto.isChecked()){
-            if(MainActivity.instance.leftsucceed&&MainActivity.instance.rightsucceed)
-                remix();
+            remix();
         }
     }
 

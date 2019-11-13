@@ -251,6 +251,16 @@ public class LocalOrderActivity extends AppCompatActivity {
                     orderItem.num = Integer.parseInt(getContent(row, 2));
                     orderItem.codeE = getContent(row, 4);
 
+                    orderItem.customer = "";
+                    if(path.contains("pillowprofits"))
+                        orderItem.customer = "adam";
+                    else if(path.contains("4u2-正丁"))
+                        orderItem.customer = "u2-正丁";
+                    else if(path.contains("4u2-正域"))
+                        orderItem.customer = "4u2-正域";
+                    else if(path.contains("zhengding-vietnam"))
+                        orderItem.customer = "zhengding-vietnam";
+
                     orderItem.colorStr = getContent(row, 7);
                     orderItem.color = orderItem.colorStr;
                     if (orderItem.color.equalsIgnoreCase("Black"))

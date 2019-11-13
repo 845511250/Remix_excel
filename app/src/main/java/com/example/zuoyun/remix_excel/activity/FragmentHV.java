@@ -166,20 +166,26 @@ public class FragmentHV extends BaseFragment {
     }
 
     void drawTextL(Canvas canvas) {
-        if (orderItems.get(currentID).colorStr.equalsIgnoreCase("white")) {
-            paint.setColor(0xffffffff);
-            canvas.drawText("M", 13, 77, paint);
-            paint.setColor(0xff000000);
-            canvas.drawText("M", 13 + 3, 77 - 3, paint);
-        }
+        String isWhite = orderItems.get(currentID).colorStr.equalsIgnoreCase("white") ? " W" : "";
+
+        canvas.save();
+        canvas.rotate(74.1f, 2, 48);
+        paint.setColor(0xffffffff);
+        canvas.drawText(orderItems.get(currentID).sizeStr + isWhite, 2, 48 - 2, paint);
+        paint.setColor(0xff000000);
+        canvas.drawText(orderItems.get(currentID).sizeStr + isWhite, 2 + 3, 48 - 2 - 3, paint);
+        canvas.restore();
     }
     void drawTextR(Canvas canvas) {
-        if (orderItems.get(currentID).colorStr.equalsIgnoreCase("white")) {
-            paint.setColor(0xffffffff);
-            canvas.drawText("M", 1090, 77, paint);
-            paint.setColor(0xff000000);
-            canvas.drawText("M", 1090 + 3, 77 - 3, paint);
-        }
+        String isWhite = orderItems.get(currentID).colorStr.equalsIgnoreCase("white") ? " W" : "";
+
+        canvas.save();
+        canvas.rotate(-75f, 1101, 119);
+        paint.setColor(0xffffffff);
+        canvas.drawText(orderItems.get(currentID).sizeStr + isWhite, 1101, 119 - 2, paint);
+        paint.setColor(0xff000000);
+        canvas.drawText(orderItems.get(currentID).sizeStr + isWhite, 1101 + 3, 119 - 2 - 3, paint);
+        canvas.restore();
     }
 
     public void remixx(){
@@ -268,11 +274,11 @@ public class FragmentHV extends BaseFragment {
             sheet.addCell(label1);
             Number number2 = new Number(2, currentID+1, orderItems.get(currentID).num);
             sheet.addCell(number2);
-            Label label3 = new Label(3, currentID+1, "小左");
+            Label label3 = new Label(3, currentID+1, orderItems.get(currentID).customer);
             sheet.addCell(label3);
             Label label4 = new Label(4, currentID + 1, MainActivity.instance.orderDate_Excel);
             sheet.addCell(label4);
-            Label label6 = new Label(6, currentID+1, "平台大货");
+            Label label6 = new Label(6, currentID + 1, "平台大货");
             sheet.addCell(label6);
 
             workbook.write();

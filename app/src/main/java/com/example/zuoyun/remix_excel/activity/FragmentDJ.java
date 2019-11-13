@@ -125,9 +125,9 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvasLeftMain.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
         canvasLeftMain.drawBitmap(bitmapDB_main, 0, 0, null);
         //left_side
-        Bitmap bitmapLeftSide1 = Bitmap.createBitmap(MainActivity.instance.bitmapLeft, 264, 124, 698, 890);
+        Bitmap bitmapLeftSide1 = Bitmap.createBitmap(MainActivity.instance.bitmapLeft, 297, 124, 698, 890);
         bitmapLeftSide1 = Bitmap.createScaledBitmap(bitmapLeftSide1, 631, 841, true);
-        Bitmap bitmapLeftSide2 = Bitmap.createBitmap(MainActivity.instance.bitmapLeft, 1048, 124, 698, 890);
+        Bitmap bitmapLeftSide2 = Bitmap.createBitmap(MainActivity.instance.bitmapLeft, 1062, 124, 698, 890);
         bitmapLeftSide2 = Bitmap.createScaledBitmap(bitmapLeftSide2, 631, 841, true);
 
 //        Bitmap bitmapLeftSide1 = Bitmap.createBitmap(MainActivity.instance.bitmapLeft, 295, 124, 698, 890);
@@ -154,9 +154,9 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvasRightMain.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
         canvasRightMain.drawBitmap(bitmapDB_main, 0, 0, null);
         //right_side
-        Bitmap bitmapRightSide1 = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 264, 124, 698, 890);
+        Bitmap bitmapRightSide1 = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 297, 124, 698, 890);
         bitmapRightSide1 = Bitmap.createScaledBitmap(bitmapRightSide1, 631, 841, true);
-        Bitmap bitmapRightSide2 = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 1048, 124, 698, 890);
+        Bitmap bitmapRightSide2 = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 1062, 124, 698, 890);
         bitmapRightSide2 = Bitmap.createScaledBitmap(bitmapRightSide2, 631, 841, true);
 
 //        Bitmap bitmapRightSide1 = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 295, 124, 698, 890);
@@ -180,19 +180,19 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         //paint
         Paint paint = new Paint();
         paint.setColor(0xff000000);
-        paint.setTextSize(36);
+        paint.setTextSize(35);
         paint.setTypeface(Typeface.DEFAULT_BOLD);
         paint.setAntiAlias(true);
 
         Paint paintRed = new Paint();
         paintRed.setColor(0xffff0000);
-        paintRed.setTextSize(36);
+        paintRed.setTextSize(35);
         paintRed.setTypeface(Typeface.DEFAULT_BOLD);
         paintRed.setAntiAlias(true);
 
         Paint paintBlue = new Paint();
         paintBlue.setColor(0xff0000ff);
-        paintBlue.setTextSize(36);
+        paintBlue.setTextSize(35);
         paintBlue.setTypeface(Typeface.DEFAULT_BOLD);
         paintBlue.setAntiAlias(true);
 
@@ -211,7 +211,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvasLeftMain.rotate(6.8f, 92, 44);
         canvasLeftMain.drawRect(42, 8, 500, 44, rectPaint);
         //canvasLeftMain.drawBitmap(bitmapBarCode, 46, 8, null);
-        canvasLeftMain.drawText(orderItems.get(currentID).newCode + " 左" + orderItems.get(currentID).size + "码", 62, 41, paintRed);
+        canvasLeftMain.drawText(" 左" + orderItems.get(currentID).size + "码", 62, 41, paintRed);
         canvasLeftMain.restore();
 
         canvasRightMain.save();
@@ -223,7 +223,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvasRightMain.rotate(6.8f, 92, 44);
         canvasRightMain.drawRect(42, 8, 500, 44, rectPaint);
 //        canvasRightMain.drawBitmap(bitmapBarCode, 46, 8, null);
-        canvasRightMain.drawText(orderItems.get(currentID).newCode + " 右" + orderItems.get(currentID).size + "码", 62, 41, paintRed);
+        canvasRightMain.drawText(" 右" + orderItems.get(currentID).size + "码", 62, 41, paintRed);
         canvasRightMain.restore();
 
 //        paintRed.setTextSize(45);
@@ -232,8 +232,8 @@ String sdCardPath = "/storage/emulated/0/Pictures";
 //        canvasRightMain.drawRect(540, 1018, 780, 1060, rectPaint);
 //        canvasRightMain.drawText(" 右 " + orderItems.get(currentID).size + "码", 540, 1057, paintRed);
 
-        paintRed.setTextSize(56);
-        paint.setTextSize(56);
+        paintRed.setTextSize(50);
+        paint.setTextSize(50);
 
         canvasLeftSide.save();
         canvasLeftSide.rotate(-165.9f, 1238, 81);
@@ -344,7 +344,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
             sheet.addCell(label1);
             Number number2 = new Number(2, currentID + 1, orderItems.get(currentID).num);
             sheet.addCell(number2);
-            Label label3 = new Label(3, currentID + 1, "小左");
+            Label label3 = new Label(3, currentID + 1, orderItems.get(currentID).customer);
             sheet.addCell(label3);
             Label label4 = new Label(4, currentID + 1, MainActivity.instance.orderDate_Excel);
             sheet.addCell(label4);

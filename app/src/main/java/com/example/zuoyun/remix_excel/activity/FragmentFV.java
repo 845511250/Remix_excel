@@ -222,11 +222,11 @@ public class FragmentFV extends BaseFragment {
         drawText(canvasCombine);
 
         try {
-            bitmapCombine = Bitmap.createScaledBitmap(bitmapCombine, 3720, 4955, true);
+            bitmapCombine = Bitmap.createScaledBitmap(bitmapCombine, 3720, 4850, true);
 //            bitmapCombine = Bitmap.createScaledBitmap(bitmapCombine, 3621, 4922, true);
             String printColor = orderItems.get(currentID).color.equals("黑") ? "B" : "W";
             String noNewCode = orderItems.get(currentID).newCode.equals("") ? orderItems.get(currentID).sku + "_" : "";
-            String nameCombine = noNewCode + orderItems.get(currentID).sku + "_" + orderItems.get(currentID).newCode + orderItems.get(currentID).color + orderItems.get(currentID).order_number + strPlus + ".jpg";
+            String nameCombine = noNewCode + "_" + orderItems.get(currentID).newCode + "_" + orderItems.get(currentID).color + "_" + orderItems.get(currentID).order_number + strPlus + ".jpg";
 
             String pathSave;
             if(MainActivity.instance.cb_classify.isChecked()){
@@ -274,11 +274,11 @@ public class FragmentFV extends BaseFragment {
             sheet.addCell(label1);
             Number number2 = new Number(2, currentID+1, orderItems.get(currentID).num);
             sheet.addCell(number2);
-            Label label3 = new Label(3, currentID+1, "小左");
+            Label label3 = new Label(3, currentID+1, orderItems.get(currentID).customer);
             sheet.addCell(label3);
             Label label4 = new Label(4, currentID + 1, MainActivity.instance.orderDate_Excel);
             sheet.addCell(label4);
-            Label label6 = new Label(6, currentID+1, "平台大货");
+            Label label6 = new Label(6, currentID + 1, "平台大货");
             sheet.addCell(label6);
 
             workbook.write();

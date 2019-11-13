@@ -198,11 +198,17 @@ public class MainActivity extends FragmentActivity {
                 break;
             case "DD":
                 tv_title.setText("高帮鞋 " + orderItems.get(currentID).order_number);
-                transaction.replace(R.id.frame_main, new FragmentDD());
+                if(orderItems.get(currentID).size>34)
+                    transaction.replace(R.id.frame_main, new FragmentDD());
+                else
+                    transaction.replace(R.id.frame_main, new FragmentDD_Child());
                 break;
             case "DE":
                 tv_title.setText("低帮鞋 " + orderItems.get(currentID).order_number);
-                transaction.replace(R.id.frame_main, new FragmentDE());
+                if(orderItems.get(currentID).size>34)
+                    transaction.replace(R.id.frame_main, new FragmentDE());
+                else
+                    transaction.replace(R.id.frame_main, new FragmentDE_Child());
                 break;
             case "DF":
                 tv_title.setText("旧一脚蹬 " + orderItems.get(currentID).order_number);
@@ -358,11 +364,17 @@ public class MainActivity extends FragmentActivity {
                 break;
             case "FW":
                 tv_title.setText("换鞋垫高帮 " + orderItems.get(currentID).order_number);
-                transaction.replace(R.id.frame_main, new FragmentDD());
+                if(orderItems.get(currentID).size>34)
+                    transaction.replace(R.id.frame_main, new FragmentDD());
+                else
+                    transaction.replace(R.id.frame_main, new FragmentDD_Child());
                 break;
             case "FX":
                 tv_title.setText("换鞋垫低帮 " + orderItems.get(currentID).order_number);
-                transaction.replace(R.id.frame_main, new FragmentDE());
+                if(orderItems.get(currentID).size>34)
+                    transaction.replace(R.id.frame_main, new FragmentDE());
+                else
+                    transaction.replace(R.id.frame_main, new FragmentDE_Child());
                 break;
             case "DZ":
                 tv_title.setText("行李套 " + orderItems.get(currentID).order_number);
@@ -597,6 +609,14 @@ public class MainActivity extends FragmentActivity {
                 tv_title.setText("沙发垫 " + orderItems.get(currentID).order_number);
                 transaction.replace(R.id.frame_main, new FragmentHO());
                 break;
+            case "HSL":
+                tv_title.setText("大灯罩HSL " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentHS());
+                break;
+            case "HSS":
+                tv_title.setText("小灯罩HSS " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentHS());
+                break;
             case "HU1":
                 tv_title.setText("沙发套 " + orderItems.get(currentID).order_number);
                 transaction.replace(R.id.frame_main, new FragmentHU());
@@ -621,9 +641,39 @@ public class MainActivity extends FragmentActivity {
                 tv_title.setText("拖鞋 " + orderItems.get(currentID).order_number);
                 transaction.replace(R.id.frame_main, new FragmentHV());
                 break;
-            case "HW":
+            case "HW1":
                 tv_title.setText("狗狗坐垫 " + orderItems.get(currentID).order_number);
                 transaction.replace(R.id.frame_main, new FragmentHW());
+                break;
+            case "HW2":
+                tv_title.setText("狗狗坐垫 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentHW());
+                break;
+            case "HZ":
+                tv_title.setText("HZ椰子鞋 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentHZ());
+                break;
+            case "KK":
+                tv_title.setText("KK(MD鞋底高帮) " + orderItems.get(currentID).order_number);
+                if(orderItems.get(currentID).size>34)
+                    transaction.replace(R.id.frame_main, new FragmentDD());
+                else
+                    transaction.replace(R.id.frame_main, new FragmentDD_Child());
+                break;
+            case "KKY":
+                tv_title.setText("KK童鞋(MD鞋底高帮) " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentDD_Child());
+                break;
+            case "KL":
+                tv_title.setText("KL(MD鞋底低帮) " + orderItems.get(currentID).order_number);
+                if(orderItems.get(currentID).size>34)
+                    transaction.replace(R.id.frame_main, new FragmentDE());
+                else
+                    transaction.replace(R.id.frame_main, new FragmentDE_Child());
+                break;
+            case "KLY":
+                tv_title.setText("KL童鞋(MD鞋底低帮) " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentDE_Child());
                 break;
             case "R":
                 tv_title.setText("围裙 " + orderItems.get(currentID).order_number);
@@ -683,6 +733,7 @@ public class MainActivity extends FragmentActivity {
                         bitmapPillow.recycle();
                     }
                     String img_pillow = orderItems.get(currentID).img_pillow;
+                    Log.e("img_pillow:", img_pillow);
                     bitmapPillow = BitmapFactory.decodeFile(picturesPath + "/" + img_pillow);
 
                     runOnUiThread(new Runnable() {

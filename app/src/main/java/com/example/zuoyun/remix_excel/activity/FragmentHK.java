@@ -168,7 +168,8 @@ String sdCardPath = "/storage/emulated/0/Pictures";
 
         //main
         Bitmap bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.hk_main);
-        Bitmap bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapLeft, 38, 0, 1223, 1398);
+        Bitmap bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapLeft, 8, 0, 1280, 1397);
+        bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, 1223, 1398, true);
         Canvas canvasTemp = new Canvas(bitmapTemp);
         canvasTemp.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
         canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
@@ -176,7 +177,8 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, mainWidth, mainHeight, true);
         canvasCombine.drawBitmap(bitmapTemp, 0, 0, null);
 
-        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 38, 0, 1223, 1398);
+        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 8, 0, 1280, 1397);
+        bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, 1223, 1398, true);
         canvasTemp = new Canvas(bitmapTemp);
         canvasTemp.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
         canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
@@ -257,11 +259,11 @@ String sdCardPath = "/storage/emulated/0/Pictures";
             int num=orderItems.get(currentID).num;
             Number number2 = new Number(2, currentID+1, num);
             sheet.addCell(number2);
-            Label label3 = new Label(3, currentID+1, "小左");
+            Label label3 = new Label(3, currentID+1, orderItems.get(currentID).customer);
             sheet.addCell(label3);
             Label label4 = new Label(4, currentID + 1, MainActivity.instance.orderDate_Excel);
             sheet.addCell(label4);
-            Label label6 = new Label(6, currentID+1, "平台大货");
+            Label label6 = new Label(6, currentID + 1, "平台大货");
             sheet.addCell(label6);
 
             workbook.write();

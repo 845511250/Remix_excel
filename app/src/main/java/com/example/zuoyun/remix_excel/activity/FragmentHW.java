@@ -47,7 +47,6 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     int num;
     String strPlus = "";
     int intPlus = 1;
-    boolean sizeOK = true;
 
     Paint rectPaint, paint, paintRed, paintBlue, rectBorderPaint, paintSmall, rectBorderPaintRed,rectBorderPaintGreen;
     String time;
@@ -147,24 +146,20 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     }
 
     public void remix(){
-        setSize();
-
         new Thread(){
             @Override
             public void run() {
                 super.run();
 
-                if (sizeOK) {
-                    for(num=orderItems.get(currentID).num;num>=1;num--) {
-                        for(int i=0;i<currentID;i++) {
-                            if (orderItems.get(currentID).order_number.equals(orderItems.get(i).order_number)) {
-                                intPlus += 1;
-                            }
+                for(num=orderItems.get(currentID).num;num>=1;num--) {
+                    for(int i=0;i<currentID;i++) {
+                        if (orderItems.get(currentID).order_number.equals(orderItems.get(i).order_number)) {
+                            intPlus += 1;
                         }
-                        strPlus = intPlus == 1 ? "" : "(" + intPlus + ")";
-                        remixx();
-                        intPlus += 1;
                     }
+                    strPlus = intPlus == 1 ? "" : "(" + intPlus + ")";
+                    remixx();
+                    intPlus += 1;
                 }
 
             }
@@ -181,14 +176,17 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     }
     void drawText4(Canvas canvas) {
         canvas.drawRect(500, 5, 500 + 500, 5 + 25, rectPaint);
-        canvas.drawText("狗狗坐垫 第4片 " + orderItems.get(currentID).sizeStr + "  " + time + "  " + orderItems.get(currentID).order_number, 500, 5 + 23, paint);
+        canvas.drawText("狗狗坐垫 第4片 " + orderItems.get(currentID).sizeStr + "码  " + time + "  " + orderItems.get(currentID).order_number, 500, 5 + 23, paint);
     }
     void drawText5(Canvas canvas) {
         canvas.drawRect(50, 5, 50 + 500, 5 + 25, rectPaint);
-        canvas.drawText("狗狗坐垫 第5片 " + orderItems.get(currentID).sizeStr + "  " + time + "  " + orderItems.get(currentID).order_number, 50, 5 + 23, paint);
+        canvas.drawText("狗狗坐垫 第5片 " + orderItems.get(currentID).sizeStr + "码  " + time + "  " + orderItems.get(currentID).order_number, 50, 5 + 23, paint);
     }
 
     public void remixx(){
+        orderItems.get(currentID).sizeStr = orderItems.get(currentID).sizeStr.startsWith("R") ? "L" : "XL";
+        setSize();
+
         int margin = 100;
         Bitmap bitmapCombine = Bitmap.createBitmap(width1, height1 + height2 + margin, Bitmap.Config.ARGB_8888);
         Canvas canvasCombine= new Canvas(bitmapCombine);
@@ -328,11 +326,11 @@ String sdCardPath = "/storage/emulated/0/Pictures";
             int num=orderItems.get(currentID).num;
             Number number2 = new Number(2, currentID+1, num);
             sheet.addCell(number2);
-            Label label3 = new Label(3, currentID+1, "小左");
+            Label label3 = new Label(3, currentID+1, orderItems.get(currentID).customer);
             sheet.addCell(label3);
             Label label4 = new Label(4, currentID + 1, MainActivity.instance.orderDate_Excel);
             sheet.addCell(label4);
-            Label label6 = new Label(6, currentID+1, "平台大货");
+            Label label6 = new Label(6, currentID + 1, "平台大货");
             sheet.addCell(label6);
 
             workbook.write();
@@ -375,6 +373,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     }
 
     void setSize() {
+        Log.e("aaa", orderItems.get(currentID).sizeStr);
         switch (orderItems.get(currentID).sizeStr) {
             case "L":
                 width1 = 6668;
@@ -395,9 +394,6 @@ String sdCardPath = "/storage/emulated/0/Pictures";
                 height3 = 2922;
                 width4 = 1061;
                 height4 = 2320;
-                break;
-            default:
-                sizeOK = false;
                 break;
         }
     }
