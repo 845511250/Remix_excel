@@ -222,7 +222,7 @@ public class FragmentFV extends BaseFragment {
         drawText(canvasCombine);
 
         try {
-            bitmapCombine = Bitmap.createScaledBitmap(bitmapCombine, 3720, 4850, true);
+            bitmapCombine = Bitmap.createScaledBitmap(bitmapCombine, 3720, 4940, true);
 //            bitmapCombine = Bitmap.createScaledBitmap(bitmapCombine, 3621, 4922, true);
             String printColor = orderItems.get(currentID).color.equals("黑") ? "B" : "W";
             String noNewCode = orderItems.get(currentID).newCode.equals("") ? orderItems.get(currentID).sku + "_" : "";
