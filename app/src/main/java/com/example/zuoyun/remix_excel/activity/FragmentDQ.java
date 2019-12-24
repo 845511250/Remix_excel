@@ -151,13 +151,13 @@ public class FragmentDQ extends BaseFragment {
         canvas.save();
         canvas.rotate(77.4f, 69, 323);
         canvas.drawRect(69, 323 - 25, 420, 323, rectPaint);
-        canvas.drawText(time + "     " + orderItems.get(currentID).newCode, 69, 323 - 2, paintRed);
+        canvas.drawText(time + "     " + orderItems.get(currentID).newCode, 69, 323 - 3, paintRed);
         canvas.restore();
 
         canvas.save();
         canvas.rotate(-76.8f, 846, 641);
         canvas.drawRect(846, 641 - 25, 846 + 500, 641, rectPaint);
-        canvas.drawText(orderItems.get(currentID).size + "码" + orderItems.get(currentID).color + LR + "   " + orderItems.get(currentID).order_number, 846, 641 - 2, paint);
+        canvas.drawText(orderItems.get(currentID).size + "码" + orderItems.get(currentID).color + LR + "   " + orderItems.get(currentID).order_number, 846, 641 - 3, paint);
         canvas.restore();
     }
 
