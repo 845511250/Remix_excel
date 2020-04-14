@@ -228,14 +228,14 @@ String sdCardPath = "/storage/emulated/0/Pictures";
             bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, 10522, 2670, 1366, 2554);
             canvasTemp= new Canvas(bitmapTemp);
             canvasTemp.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
-            bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.hu2_smallside);
+            bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.hu2_smallside_l);
             canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
             canvasCombine.drawBitmap(bitmapTemp, 6105, 9830, null);
             //smallSideR
             bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, 8750, 2670, 1366, 2554);
             canvasTemp= new Canvas(bitmapTemp);
             canvasTemp.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
-            bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.hu2_smallside);
+            bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.hu2_smallside_r);
             canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
             canvasCombine.drawBitmap(bitmapTemp, 4677, 9830, null);
             //pocket
@@ -255,7 +255,6 @@ String sdCardPath = "/storage/emulated/0/Pictures";
             matrix.postRotate(90);
             matrix.postTranslate(3956 + 76, 0);
             canvasCombine.drawBitmap(bitmapTemp, matrix, null);
-
             //sideR
             bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, 18, 5631, 4793, 3956);
             canvasTemp= new Canvas(bitmapTemp);

@@ -664,6 +664,10 @@ public class MainActivity extends FragmentActivity {
                 tv_title.setText("KK童鞋(MD鞋底高帮) " + orderItems.get(currentID).order_number);
                 transaction.replace(R.id.frame_main, new FragmentDD_Child());
                 break;
+            case "KKY2":
+                tv_title.setText("KK童鞋(MD鞋底高帮-无鞋盒) " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentDD_Child());
+                break;
             case "KL":
                 tv_title.setText("KL(MD鞋底低帮) " + orderItems.get(currentID).order_number);
                 if(orderItems.get(currentID).size>34)
@@ -674,6 +678,26 @@ public class MainActivity extends FragmentActivity {
             case "KLY":
                 tv_title.setText("KL童鞋(MD鞋底低帮) " + orderItems.get(currentID).order_number);
                 transaction.replace(R.id.frame_main, new FragmentDE_Child());
+                break;
+            case "KLY2":
+                tv_title.setText("KL童鞋(MD鞋底低帮-无鞋盒) " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentDE_Child());
+                break;
+            case "KM":
+                tv_title.setText("KM新底皮靴 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentKM());
+                break;
+            case "KPL":
+                tv_title.setText("KPL大袖毯 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentKPL());
+                break;
+            case "KPS":
+                tv_title.setText("KPL小袖毯 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentKPS());
+                break;
+            case "KT":
+                tv_title.setText("KT旗子 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentKT());
                 break;
             case "R":
                 tv_title.setText("围裙 " + orderItems.get(currentID).order_number);

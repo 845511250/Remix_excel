@@ -528,7 +528,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         }
     }
 
-//    void setScale(String size) {
+//    void setSize(String size) {
 //        switch (size) {
 //            case "29.5":
 //                width_1 = 1034;

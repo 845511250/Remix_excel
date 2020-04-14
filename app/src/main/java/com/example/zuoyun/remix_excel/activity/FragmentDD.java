@@ -98,27 +98,23 @@ public class FragmentDD extends BaseFragment {
                     iv_leftup.setImageDrawable(null);
                     iv_rightup.setImageDrawable(null);
                     Log.e("fragment_dd_old", "message0");
-                }
-                else if (message == 1) {
+                } else if (message == 1) {
                     Log.e("fragment_dd_old", "message1");
                     bt_remix.setClickable(true);
                     if(!MainActivity.instance.cb_fastmode.isChecked())
                         iv_leftup.setImageBitmap(MainActivity.instance.bitmapLeft);
 //                    Glide.with(context).load(sampleurl).into(iv_sample1);
                     checkremix();
-                }
-                else if(message==2){
+                } else if(message==2){
                     Log.e("fragment_dd_old", "message2");
                     bt_remix.setClickable(true);
                     if(!MainActivity.instance.cb_fastmode.isChecked())
                         iv_rightup.setImageBitmap(MainActivity.instance.bitmapRight);
 //                    Glide.with(context).load(sampleurl).into(iv_sample2);
                     checkremix();
-                }
-                else if (message==3){
+                } else if (message==3){
                     bt_remix.setClickable(false);
-                }
-                else if (message == 10) {
+                } else if (message == 10) {
                     remix();
                 }
             }

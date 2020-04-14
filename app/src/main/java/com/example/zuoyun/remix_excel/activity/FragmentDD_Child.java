@@ -154,14 +154,14 @@ public class FragmentDD_Child extends BaseFragment {
     }
 
     void drawTextRight(Canvas canvas, String LR) {
-        String isKK = orderItems.get(currentID).sku.equals("KKY") ? "KKY(MD鞋底) " : "";
+        String isKK = orderItems.get(currentID).sku.equals("KKY") ? "KKY(MD鞋底) " : orderItems.get(currentID).sku.equals("KKY2") ? "KKY2(MD鞋底-无鞋盒) " : "";
 
         canvas.drawRect(120, 720 - 40, 1520, 720, rectPaint);
         canvas.drawText(isKK + time + "  " + orderItems.get(currentID).order_number + "  " + orderItems.get(currentID).newCodeStr, 120, 716, paint);
         canvas.drawText("童鞋" + orderItems.get(currentID).size + "码" + orderItems.get(currentID).color + " " + LR, 1190, 716, paintRed);
     }
     void drawTextLeft(Canvas canvas, String LR) {
-        String isKK = orderItems.get(currentID).sku.equals("KKY") ? "KKY(MD鞋底) " : "";
+        String isKK = orderItems.get(currentID).sku.equals("KKY") ? "KKY(MD鞋底) " : orderItems.get(currentID).sku.equals("KKY2") ? "KKY2(MD鞋底-无鞋盒) " : "";
 
         canvas.drawRect(70, 720 - 40, 1500, 720, rectPaint);
         canvas.drawText("童鞋" + orderItems.get(currentID).size + "码" + orderItems.get(currentID).color + " " + LR, 70, 716, paintRed);
@@ -243,8 +243,7 @@ public class FragmentDD_Child extends BaseFragment {
 
         try {
             String printColor = orderItems.get(currentID).color.equals("黑") ? "B" : "W";
-            String noNewCode = orderItems.get(currentID).newCode.equals("") ? orderItems.get(currentID).sku + orderItems.get(currentID).size : "";
-            String nameCombine = noNewCode + orderItems.get(currentID).sku + orderItems.get(currentID).newCode + orderItems.get(currentID).color + orderItems.get(currentID).order_number + strPlus + ".jpg";
+            String nameCombine = orderItems.get(currentID).sku + "-" + orderItems.get(currentID).size + "-" + orderItems.get(currentID).color + "-" + orderItems.get(currentID).order_number + strPlus + ".jpg";
 
             String pathSave;
             if(MainActivity.instance.cb_classify.isChecked()){

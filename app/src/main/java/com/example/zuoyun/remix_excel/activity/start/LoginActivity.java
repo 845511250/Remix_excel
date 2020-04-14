@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Base64;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -60,7 +59,6 @@ public class LoginActivity extends AppCompatActivity {
     String orderDate_Print, orderDate_Excel, orderDate_Request;
 
     final int Request_Login = 0;
-    final int Request_LoginInFactory = 2;
     final int Request_Update = 1;
     final int Request_DownLoad = 2;
 
@@ -152,11 +150,8 @@ public class LoginActivity extends AppCompatActivity {
                     dialog_pwd.dismiss();
                 } else {
                     Request<String> request = NoHttp.createStringRequest(Config.ToCheck, RequestMethod.GET);
-                    Request<String> requestInFactory = NoHttp.createStringRequest(Config.ToCheckInFactory, RequestMethod.GET);
-                    String base64 = Base64.encodeToString((str1 + ":" + str2).getBytes(), Base64.DEFAULT);
-                    request.addHeader("Authorization", "Basic " + base64);
-                    requestInFactory.addHeader("Authorization", "Basic " + base64);
-                    requestQueue.add(Request_LoginInFactory, requestInFactory, responseListener);
+                    request.add("username", str1);
+                    request.add("password", str2);
                     requestQueue.add(Request_Login, request, responseListener);
                 }
             }
@@ -171,15 +166,13 @@ public class LoginActivity extends AppCompatActivity {
 
         @Override
         public void onSucceed(int what, Response<String> response) {
-            if (what == Request_Login || what == Request_LoginInFactory) {
-                if (response.responseCode() == 200) {
+            if (what == Request_Login) {
+                if (response.responseCode() == 200 && response.get().equals("succeed")) {
                     Toast.makeText(context, "验证通过", Toast.LENGTH_SHORT).show();
                     requestQueue.cancelAll();
                     dialog_pwd.dismiss();
-                } else if (response.responseCode() == 401) {
-                    Toast.makeText(context, "验证失败！", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(context, "服务器返回码：" + response.responseCode(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "服务器返回码：" + response.responseCode() + " " + response.get(), Toast.LENGTH_SHORT).show();
                 }
             } else if (what == Request_Update) {
                 if (response.responseCode() == 200) {
@@ -199,7 +192,7 @@ public class LoginActivity extends AppCompatActivity {
 
         @Override
         public void onFailed(int what, Response<String> response) {
-
+            Toast.makeText(context, "服务器返回码：" + response.responseCode() + " " + response.get(), Toast.LENGTH_SHORT).show();
         }
 
         @Override

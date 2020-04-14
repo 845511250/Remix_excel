@@ -6,10 +6,10 @@ package com.example.zuoyun.remix_excel.bean;
 
 public class Config {
 //    public final static String BaseUrl = "http://192.168.10.191";
-    public final static String BaseUrl = "http://factory.forudesigns.cn:8080";
+    public final static String BaseUrl = "https://factory.forudesigns.cn:8090";
 //    public final static String BaseUrl = "http://192.168.10.242";
 
-    public final static String ToCheck = "http://factory.forudesigns.cn:8080";
+    public final static String ToCheck = "http://845511250.top/zhengyuapi/Login/login.php";
     public final static String ToCheckInFactory = "http://192.168.10.242";
 
     public final static String checkUpdate = "http://845511250.top/zhengyuapi/checkupdate.php";

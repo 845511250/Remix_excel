@@ -1,20 +1,16 @@
 package com.example.zuoyun.remix_excel.activity;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PaintFlagsDrawFilter;
 import android.graphics.Typeface;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.zuoyun.remix_excel.R;
 import com.example.zuoyun.remix_excel.activity.start.bean.OrderItem;
@@ -35,7 +31,7 @@ import jxl.write.WritableWorkbook;
  * Created by zuoyun on 2016/11/4.
  */
 
-public class FragmentFY extends BaseFragment {
+public class FragmentKPS extends BaseFragment {
     Context context;
 //    String sdCardPath = "/mnt/asec/share";
 String sdCardPath = "/storage/emulated/0/Pictures";
@@ -77,7 +73,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         rectBorderPaint = new Paint();
         rectBorderPaint.setColor(0xff000000);
         rectBorderPaint.setStyle(Paint.Style.STROKE);
-        rectBorderPaint.setStrokeWidth(2);
+        rectBorderPaint.setStrokeWidth(12);
 
         paint = new Paint();
         paint.setColor(0xff000000);
@@ -99,7 +95,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
 
         paintSmall = new Paint();
         paintSmall.setColor(0xff000000);
-        paintSmall.setTextSize(20);
+        paintSmall.setTextSize(23);
         paintSmall.setTypeface(Typeface.DEFAULT_BOLD);
         paintSmall.setAntiAlias(true);
 
@@ -158,60 +154,57 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     }
 
     void drawText(Canvas canvas) {
-        canvas.drawRect(2700, 5, 2700 + 350, 24, rectPaint);
-        canvas.drawText(orderItems.get(currentID).sizeStr + "  " + time + "   " + orderItems.get(currentID).order_number + "    " + orderItems.get(currentID).newCode, 2700, 20, paintSmall);
+        canvas.drawRect(2500, 10, 3000, 10 + 22, rectPaint);
+        canvas.drawText(time + "   " + orderItems.get(currentID).order_number + "    " + orderItems.get(currentID).newCode, 2520, 10 + 20, paintSmall);
     }
 
     public void remixx(){
-        Bitmap bitmapCombine = null;
-        if (orderItems.get(currentID).sizeStr.equals("S")) {
-            bitmapCombine = Bitmap.createBitmap(7235, 5436+60, Bitmap.Config.ARGB_8888);
-            Canvas canvasCombine= new Canvas(bitmapCombine);
-            canvasCombine.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
-            canvasCombine.drawColor(0xffffffff);
+        Bitmap bitmapCombine = Bitmap.createBitmap(5614, 7899, Bitmap.Config.ARGB_8888);
+        Canvas canvasCombine= new Canvas(bitmapCombine);
+        canvasCombine.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
+        canvasCombine.drawColor(0xffffffff);
 
-            Bitmap bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.fy_s);
+        //Main
+        Bitmap bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, 1944, 8, 5614, 5482);
+        Canvas canvasTemp= new Canvas(bitmapTemp);
+        canvasTemp.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
+        canvasTemp.drawRect(0, 0, 5614 - 6, 5482 - 6, rectBorderPaint);
+        canvasTemp.drawRect(6, 6, 5614 - 6, 5482 - 6, rectBorderPaint);
 
-            Bitmap bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, 86, 54, 7126, 5492);
-            Canvas canvasTemp = new Canvas(bitmapTemp);
-            canvasTemp.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
-            canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
-            drawText(canvasTemp);
-            bitmapDB.recycle();
-            bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, 7235, 5436, true);
+        Bitmap bitmapDB = BitmapFactory.decodeResource(getResources(), R.drawable.kps_hole_r);
+        canvasTemp.drawBitmap(bitmapDB, 1586, 965, null);
+        bitmapDB = BitmapFactory.decodeResource(getResources(), R.drawable.kps_hole_l);
+        canvasTemp.drawBitmap(bitmapDB, 3406, 965, null);
+        canvasCombine.drawBitmap(bitmapTemp, 0, 0, null);
 
-            canvasCombine.drawBitmap(bitmapTemp, 0, 0, null);
-            bitmapTemp.recycle();
+        //right sleeve
+        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, 16, 821, 1863, 2374);
+        canvasTemp= new Canvas(bitmapTemp);
+        canvasTemp.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
+        bitmapDB = BitmapFactory.decodeResource(getResources(), R.drawable.kps_sleeve_r);
+        canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
+        canvasCombine.drawBitmap(bitmapTemp, 0, 5525, null);
 
-            Matrix matrix=new Matrix();
-            matrix.postRotate(180, bitmapCombine.getWidth() / 2, bitmapCombine.getHeight() / 2);
-            bitmapCombine = Bitmap.createBitmap(bitmapCombine, 0, 0, bitmapCombine.getWidth(), bitmapCombine.getHeight(), matrix, true);
-        } else if (orderItems.get(currentID).sizeStr.equals("L")) {
-            bitmapCombine = Bitmap.createBitmap(7191, 5492 + 60, Bitmap.Config.ARGB_8888);
-            Canvas canvasCombine= new Canvas(bitmapCombine);
-            canvasCombine.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
-            canvasCombine.drawColor(0xffffffff);
+        //left sleeve
+        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, 7622, 820, 1863, 2374);
+        canvasTemp= new Canvas(bitmapTemp);
+        canvasTemp.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
+        bitmapDB = BitmapFactory.decodeResource(getResources(), R.drawable.kps_sleeve_l);
+        canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
+        canvasCombine.drawBitmap(bitmapTemp, 1907, 5525, null);
 
-            Bitmap bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.fy_l);
-
-            Bitmap bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, 54, 54, 7191, 5492);
-            Canvas canvasTemp = new Canvas(bitmapTemp);
-            canvasTemp.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
-            canvasTemp.drawBitmap(bitmapDB, 0, 0, null);
-            drawText(canvasTemp);
-            bitmapDB.recycle();
-
-            canvasCombine.drawBitmap(bitmapTemp, 0, 0, null);
-            bitmapTemp.recycle();
-
-            Matrix matrix=new Matrix();
-            matrix.postRotate(90, bitmapCombine.getWidth() / 2, bitmapCombine.getHeight() / 2);
-            bitmapCombine = Bitmap.createBitmap(bitmapCombine, 0, 0, bitmapCombine.getWidth(), bitmapCombine.getHeight(), matrix, true);
+        bitmapTemp.recycle();
+        bitmapDB.recycle();
+        if (num == 1) {
+            MainActivity.instance.bitmapPillow.recycle();
         }
 
+//        matrix.reset();
+//        matrix.postRotate(-90, bitmapCombine.getWidth() / 2, bitmapCombine.getHeight() / 2);
+//        bitmapCombine = Bitmap.createBitmap(bitmapCombine, 0, 0, bitmapCombine.getWidth(), bitmapCombine.getHeight(), matrix, true);
 
         try {
-            String nameCombine = orderItems.get(currentID).sku + "_" + orderItems.get(currentID).sizeStr + "_" + orderItems.get(currentID).order_number + strPlus + ".jpg";
+            String nameCombine = orderItems.get(currentID).sku + "_" + orderItems.get(currentID).order_number + strPlus + ".jpg";
 
             String pathSave;
             if(MainActivity.instance.cb_classify.isChecked()){
@@ -221,13 +214,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
             if(!new File(pathSave).exists())
                 new File(pathSave).mkdirs();
             File fileSave = new File(pathSave + nameCombine);
-
-            if (orderItems.get(currentID).sizeStr.equals("S")) {
-                BitmapToJpg.save(bitmapCombine, fileSave, 120);
-            }else if (orderItems.get(currentID).sizeStr.equals("L")) {
-                BitmapToJpg.save(bitmapCombine, fileSave, 90);
-            }
-
+            BitmapToJpg.save(bitmapCombine, fileSave, 110);
 
             bitmapCombine.recycle();
 
@@ -278,7 +265,9 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         }catch (Exception e){
         }
         if (num == 1) {
-            MainActivity.instance.bitmapPillow.recycle();
+            if (MainActivity.instance.bitmapPillow != null) {
+                MainActivity.instance.bitmapPillow.recycle();
+            }
 
             getActivity().runOnUiThread(new Runnable() {
                 @Override
@@ -298,32 +287,5 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     }
 
 
-    public void showDialogSizeWrong(final String order_number){
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                final AlertDialog dialog_finish;
-                AlertDialog.Builder builder = new AlertDialog.Builder(context,R.style.DialogTransBackGround);
-                dialog_finish = builder.create();
-                dialog_finish.setCancelable(false);
-                dialog_finish.show();
-                View view_dialog = LayoutInflater.from(context).inflate(R.layout.item_dialog_finish, null);
-                dialog_finish.setContentView(view_dialog);
-                TextView tv_title = (TextView) view_dialog.findViewById(R.id.tv_dialog_title);
-                TextView tv_content = (TextView) view_dialog.findViewById(R.id.tv_dialog_content);
-                Button bt_yes = (Button) view_dialog.findViewById(R.id.bt_dialog_yes);
-
-                tv_title.setText("错误！");
-                tv_content.setText("单号："+order_number+"读取尺码失败");
-                bt_yes.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog_finish.dismiss();
-                        getActivity().finish();
-                    }
-                });
-            }
-        });
-    }
 
 }
