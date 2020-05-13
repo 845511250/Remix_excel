@@ -110,7 +110,7 @@ public class LocalOrderActivity extends AppCompatActivity {
                     OrderItem orderItem = new OrderItem();
                     orderItem.order_number = getContent(row, 0);
                     orderItem.num = Integer.parseInt(getContent(row, 2));
-                    orderItem.codeE = getContent(row, 4);
+                    orderItem.platform = getContent(row, 4);
 
                     orderItem.colorStr = getContent(row, 15);
                     orderItem.color = orderItem.colorStr;
@@ -249,7 +249,7 @@ public class LocalOrderActivity extends AppCompatActivity {
                 if (row != null && getContent(row, 0) != "" && getContent(row, 5).contains(".")) {
                     orderItem.order_number = getContent(row, 0);
                     orderItem.num = Integer.parseInt(getContent(row, 2));
-                    orderItem.codeE = getContent(row, 4);
+                    orderItem.platform = getContent(row, 4);
 
                     orderItem.customer = "";
                     if(path.contains("pillowprofits"))
@@ -313,6 +313,11 @@ public class LocalOrderActivity extends AppCompatActivity {
                         orderItem.newCode = size + "-" + print_index;
                     }
 
+                    if (orderItem.platform.equals("zy")) {
+                        orderItem.newCode = orderItem.num + "";
+                        orderItem.num = 1;
+                    }
+
                     String SKU = getContent(row, 1);
                     orderItem.skuStr = SKU;
                     orderItem.sku = SKU;
@@ -325,6 +330,10 @@ public class LocalOrderActivity extends AppCompatActivity {
                         orderItem.img_left = getImageName(images[1]);
                     } else if (images.length == 1) {
                         orderItem.img_pillow = getImageName(images[0]);
+                    } else if (images.length == 3) {
+                        orderItem.img_right = getImageName(images[0]);
+                        orderItem.img_left = getImageName(images[1]);
+                        orderItem.img_3 = getImageName(images[2]);
                     }
                     orderItems.add(orderItem);
                 }
@@ -342,12 +351,12 @@ public class LocalOrderActivity extends AppCompatActivity {
     }
 
     String getImageName(String str){
-        return str.substring(str.lastIndexOf("/")+1, str.length());
+        return str.substring(str.lastIndexOf("/")+1);
     }
 
     private static String getNewCode(String str){
         String str1 = str.substring(0, str.lastIndexOf("-"));
-        return str.substring(str1.lastIndexOf("-") + 1, str.length());
+        return str.substring(str1.lastIndexOf("-") + 1);
     }
 
     public void showDialogDatePicker(){

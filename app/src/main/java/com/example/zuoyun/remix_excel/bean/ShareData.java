@@ -28,7 +28,7 @@ public class ShareData {
             orderItem.order_id = ro.order_id;
             orderItem.order_number = ro.order_number;
             orderItem.num = ro.quantity;
-            orderItem.codeE = ro.platform;
+            orderItem.platform = ro.platform;
             String size = ro.size.equals("S/M") ? "中码" : ro.size.equals("L/XL") ? "大码" : ro.size;
             if (ro.print_index.startsWith("A")) {
                 orderItem.newCode = size + "-A-" + getNewCode(ro.print_index);

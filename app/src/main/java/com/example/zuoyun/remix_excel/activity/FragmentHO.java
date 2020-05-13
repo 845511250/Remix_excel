@@ -516,12 +516,10 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         }catch (Exception e){
         }
         if (num == 1) {
-            if (MainActivity.instance.bitmapPillow != null) {
-                MainActivity.instance.bitmapPillow.recycle();
-            }
-            if (MainActivity.instance.bitmapLeft != null) {
+            if (MainActivity.instance.bitmap3 != null) {
                 MainActivity.instance.bitmapLeft.recycle();
                 MainActivity.instance.bitmapRight.recycle();
+                MainActivity.instance.bitmap3.recycle();
             }
 
             getActivity().runOnUiThread(new Runnable() {

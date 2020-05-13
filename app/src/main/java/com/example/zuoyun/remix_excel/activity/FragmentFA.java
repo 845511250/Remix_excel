@@ -164,7 +164,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvas.drawRect(left, bottom - 20, left + 900, bottom, rectPaint);
         canvas.drawText(time + "  FA枕套  " + orderItems.get(currentID).sizeStr + orderItems.get(currentID).color + "   " + orderItems.get(currentID).order_number, left, bottom - 2, paintSmall);
         canvas.drawText(getRedNewCode(orderItems.get(currentID).newCode), left + 500, bottom - 2, paintRedSmall);
-//        canvas.drawText("验片码" + orderItems.get(currentID).codeE, left + 600, bottom - 2, paintRedSmall);
+//        canvas.drawText("验片码" + orderItems.get(currentID).platform, left + 600, bottom - 2, paintRedSmall);
     }
 
     void drawTextRotateQuilt(Canvas canvas, int degree, int left, int bottom) {
@@ -173,7 +173,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvas.drawRect(left, bottom - 20, left + 1000, bottom, rectPaint);
         canvas.drawText(time + "  FA被套  " + orderItems.get(currentID).sizeStr + orderItems.get(currentID).color + "   " + orderItems.get(currentID).order_number, left, bottom - 2, paintSmall);
         canvas.drawText(getRedNewCode(orderItems.get(currentID).newCode), left + 500, bottom - 2, paintRedSmall);
-//        canvas.drawText("验片码" + orderItems.get(currentID).codeE, left + 600, bottom - 2, paintRedSmall);
+//        canvas.drawText("验片码" + orderItems.get(currentID).platform, left + 600, bottom - 2, paintRedSmall);
         canvas.restore();
     }
 

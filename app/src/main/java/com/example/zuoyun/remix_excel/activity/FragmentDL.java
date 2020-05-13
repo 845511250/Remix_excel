@@ -153,7 +153,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
             canvasremix.drawText(orderItems.get(currentID).newCode, 501, 1385, paintRed);
             //-------
             canvasremix.drawRect(1000, 1358, 1200, 1388, rectPaint);
-            canvasremix.drawText("验片码" + orderItems.get(currentID).codeE, 1000, 1385, paintRed);
+            canvasremix.drawText("验片码" + orderItems.get(currentID).platform, 1000, 1385, paintRed);
 
             canvasremix.drawRect(1500, 1358+1388, 1565, 1388+1388, rectPaint);
             canvasremix.drawText("DL", 1500, 1385+1388, paint);
@@ -164,7 +164,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
             canvasremix.drawText(orderItems.get(currentID).newCode, 501, 1385 + 1388, paintRed);
             //-------
             canvasremix.drawRect(1000, 1358+1388, 1200, 1388+1388, rectPaint);
-            canvasremix.drawText("验片码" + orderItems.get(currentID).codeE, 1000, 1385+1388, paintRed);
+            canvasremix.drawText("验片码" + orderItems.get(currentID).platform, 1000, 1385+1388, paintRed);
 
             String noNewCode = orderItems.get(currentID).newCode.equals("") ? orderItems.get(currentID).sku : "";
             String nameCombine = noNewCode + orderItems.get(currentID).sku + orderItems.get(currentID).newCode + orderItems.get(currentID).order_number + strPlus + ".jpg";

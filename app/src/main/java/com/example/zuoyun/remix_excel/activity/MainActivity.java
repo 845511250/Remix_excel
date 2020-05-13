@@ -81,7 +81,7 @@ public class MainActivity extends FragmentActivity {
 //    String picturesPath = "/storage/emulated/0/Download";
     ArrayList<OrderItem> orderItems = new ArrayList<>();
     ArrayList<RemakeItem> remakeItems=new ArrayList<>();
-    public Bitmap bitmapLeft, bitmapRight, bitmapPillow;
+    public Bitmap bitmapLeft, bitmapRight, bitmapPillow, bitmap3;
 
     FragmentManager fragmentManager;
     MessageListener messageListener;
@@ -687,6 +687,10 @@ public class MainActivity extends FragmentActivity {
                 tv_title.setText("KM新底皮靴 " + orderItems.get(currentID).order_number);
                 transaction.replace(R.id.frame_main, new FragmentKM());
                 break;
+            case "KO":
+                tv_title.setText("KO " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentKO());
+                break;
             case "KPL":
                 tv_title.setText("KPL大袖毯 " + orderItems.get(currentID).order_number);
                 transaction.replace(R.id.frame_main, new FragmentKPL());
@@ -698,6 +702,22 @@ public class MainActivity extends FragmentActivity {
             case "KT":
                 tv_title.setText("KT旗子 " + orderItems.get(currentID).order_number);
                 transaction.replace(R.id.frame_main, new FragmentKT());
+                break;
+            case "KYS":
+                tv_title.setText("KYS " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentKY());
+                break;
+            case "KYL":
+                tv_title.setText("KYL " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentKY());
+                break;
+            case "KYPM":
+                firstOK = false;
+                setnext();
+                break;
+            case "LK":
+                tv_title.setText("LK " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentLK());
                 break;
             case "R":
                 tv_title.setText("围裙 " + orderItems.get(currentID).order_number);
@@ -723,7 +743,29 @@ public class MainActivity extends FragmentActivity {
         tv_finishRemixx.setText("加载中...");
         Log.e("aaa", "开始 "+orderItems.get(currentID).order_number);
 
-        if (orderItems.get(currentID).img_left != null) {
+        if (orderItems.get(currentID).img_3 != null) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    bitmapRight = BitmapFactory.decodeFile(picturesPath + "/" + orderItems.get(currentID).img_right);
+                    bitmapLeft = BitmapFactory.decodeFile(picturesPath + "/" + orderItems.get(currentID).img_left);
+                    bitmap3 = BitmapFactory.decodeFile(picturesPath + "/" + orderItems.get(currentID).img_3);
+
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (bitmapLeft == null || bitmapRight == null || bitmap3 == null) {
+                                showDialogNoImage();
+                            } else {
+                                tv_finishRemixx.setText("加载完成");
+                                messageListener.listen(1, null);
+                            }
+                        }
+                    });
+                }
+            }).start();
+        } else if (orderItems.get(currentID).img_left != null) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -888,7 +930,7 @@ public class MainActivity extends FragmentActivity {
     }
 
     public void showDialogNoImage(){
-        doRequestDownloadImg();
+        //doRequestDownloadImg();
 
         final AlertDialog dialog_noimage;
         AlertDialog.Builder builder = new AlertDialog.Builder(context,R.style.DialogTransBackGround);
@@ -969,6 +1011,23 @@ public class MainActivity extends FragmentActivity {
             return uri.getPath();
         }
 
+    }
+
+    public static void recycleExcelImages(){
+        if (MainActivity.instance.bitmapPillow != null) {
+            MainActivity.instance.bitmapPillow.recycle();
+            MainActivity.instance.bitmapPillow = null;
+        }
+        if (MainActivity.instance.bitmapLeft != null) {
+            MainActivity.instance.bitmapLeft.recycle();
+            MainActivity.instance.bitmapLeft = null;
+            MainActivity.instance.bitmapRight.recycle();
+            MainActivity.instance.bitmapRight = null;
+        }
+        if (MainActivity.instance.bitmap3 != null) {
+            MainActivity.instance.bitmap3.recycle();
+            MainActivity.instance.bitmap3 = null;
+        }
     }
 
     public static void doRecycle(Bitmap bitmap){

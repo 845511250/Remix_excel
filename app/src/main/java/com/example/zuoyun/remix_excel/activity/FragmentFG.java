@@ -163,7 +163,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     void drawText(Canvas canvas, int left, int bottom, String str) {
         canvas.drawRect(left, bottom - 30, left + 1200, bottom, rectPaint);
         canvas.drawText("画框" + orderItems.get(currentID).sizeStr + "件套  " + time + "  " + orderItems.get(currentID).order_number, left, bottom - 3, paint);
-        canvas.drawText(orderItems.get(currentID).newCode + "   验片码" + orderItems.get(currentID).codeE, left + 600, bottom - 3, paintRed);
+        canvas.drawText(orderItems.get(currentID).newCode + "   验片码" + orderItems.get(currentID).platform, left + 600, bottom - 3, paintRed);
         canvas.drawText(str, left + 1000, bottom - 3, paintRed);
     }
 

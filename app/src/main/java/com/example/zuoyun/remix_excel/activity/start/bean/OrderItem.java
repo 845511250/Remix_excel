@@ -7,13 +7,13 @@ import java.util.ArrayList;
  */
 
 public class OrderItem {
-    public String order_number,color,sku,img_left,img_right,img_design_left,img_design_right, img_pillow;
+    public String order_number,color,sku,img_left,img_right,img_design_left,img_design_right, img_pillow, img_3;
     public int num, size;
     public String colorStr;
     public String sizeStr, skuStr,sizeOriginal;
     public String printCode;
     public String newCode, newCodeStr;
-    public String codeE;
+    public String platform;
 
     public String order_id;
     public ArrayList<String> print_url;

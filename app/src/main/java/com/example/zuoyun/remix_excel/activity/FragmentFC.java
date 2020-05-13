@@ -160,7 +160,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvas.drawRect(left + 280, bottom + 1, left + 560, bottom + 33, rectPaint);
         canvas.drawText(orderItems.get(currentID).order_number, left + 290, bottom + 31, paintBlue);
         //-------
-        canvas.drawText("验片码" + orderItems.get(currentID).codeE, left + 460, bottom + 31, paintRed);
+        canvas.drawText("验片码" + orderItems.get(currentID).platform, left + 460, bottom + 31, paintRed);
 
         canvas.restore();
     }
@@ -174,7 +174,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvas.drawRect(left, bottom + 1, left + 270, bottom + 33, rectPaint);
         canvas.drawText(orderItems.get(currentID).order_number, left + 20, bottom + 31, paintBlue);
         //-------
-        canvas.drawText("验片码" + orderItems.get(currentID).codeE, left + 200, bottom + 31, paintRed);
+        canvas.drawText("验片码" + orderItems.get(currentID).platform, left + 200, bottom + 31, paintRed);
 
         canvas.restore();
     }
@@ -228,7 +228,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvasPart2L.rotate(74.8f, 15, 73);
         canvasPart2L.drawRect(15, 33, 515, 73, rectPaint);
         //canvasPart2L.drawBitmap(bitmapBarCode, 15, 33, null);
-        canvasPart2L.drawText("      流：" + orderItems.get(currentID).newCode + "      验片码" + orderItems.get(currentID).codeE, 20, 70, paintRed);
+        canvasPart2L.drawText("      流：" + orderItems.get(currentID).newCode + "      验片码" + orderItems.get(currentID).platform, 20, 70, paintRed);
         canvasPart2L.restore();
         canvasPart2L.save();
         canvasPart2L.rotate(-75.2f, 1331, 631);
@@ -251,7 +251,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvasPart2R.rotate(74.8f, 15, 73);
         canvasPart2R.drawRect(15, 33, 515, 73, rectPaint);
         //canvasPart2R.drawBitmap(bitmapBarCode, 15, 33, null);
-        canvasPart2R.drawText("      流："+orderItems.get(currentID).newCode + "      验片码" + orderItems.get(currentID).codeE, 20, 70, paintRed);
+        canvasPart2R.drawText("      流："+orderItems.get(currentID).newCode + "      验片码" + orderItems.get(currentID).platform, 20, 70, paintRed);
         canvasPart2R.restore();
         canvasPart2R.save();
         canvasPart2R.rotate(-75.2f, 1331, 631);

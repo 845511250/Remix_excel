@@ -157,7 +157,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
                 canvasremix.drawText(orderItems.get(currentID).newCode, 801, 2949 + 59, paintRed);
                 //-------
                 canvasremix.drawRect(1200, 2929+59, 1400, 2953+59, rectPaint);
-                canvasremix.drawText("验片码" + orderItems.get(currentID).codeE, 1200, 2949 + 59, paintRed);
+                canvasremix.drawText("验片码" + orderItems.get(currentID).platform, 1200, 2949 + 59, paintRed);
 
                 canvasremix.drawRect(1623 + 1683, 2929+59, 1683 + 1683, 2953+59, rectPaint);
                 canvasremix.drawText("DN", 1624 + 1683, 2949+59, paint);
@@ -168,7 +168,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
                 canvasremix.drawText(orderItems.get(currentID).newCode, 801 + 1683, 2949 + 59, paintRed);
                 //-------
                 canvasremix.drawRect(1200 + 1683, 2929+59, 1400 + 1683, 2953+59, rectPaint);
-                canvasremix.drawText("验片码" + orderItems.get(currentID).codeE, 1200 + 1683, 2949 + 59, paintRed);
+                canvasremix.drawText("验片码" + orderItems.get(currentID).platform, 1200 + 1683, 2949 + 59, paintRed);
 
             } else{
                 bitmapPillow = Bitmap.createScaledBitmap(MainActivity.instance.bitmapPillow, 2598, 1594, true);
@@ -193,7 +193,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
                 canvasremix.drawText(orderItems.get(currentID).newCode, 801, 1590, paintRed);
                 //-------
                 canvasremix.drawRect(1100, 1570, 1300, 1594, rectPaint);
-                canvasremix.drawText("验片码" + orderItems.get(currentID).codeE, 1100, 1590, paintRed);
+                canvasremix.drawText("验片码" + orderItems.get(currentID).platform, 1100, 1590, paintRed);
 
                 canvasremix.drawRect(2538, 1570+1594, 2598, 1594+1594, rectPaint);
                 canvasremix.drawText("DP", 2539, 1590+1594, paint);
@@ -204,7 +204,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
                 canvasremix.drawText(orderItems.get(currentID).newCode, 801, 1590 + 1594, paintRed);
                 //-------
                 canvasremix.drawRect(1100, 1570+1594, 1300, 1594+1594, rectPaint);
-                canvasremix.drawText("验片码" + orderItems.get(currentID).codeE, 1100, 1590+1594, paintRed);
+                canvasremix.drawText("验片码" + orderItems.get(currentID).platform, 1100, 1590+1594, paintRed);
 
             }
 
