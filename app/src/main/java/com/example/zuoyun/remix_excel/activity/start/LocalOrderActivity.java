@@ -325,6 +325,9 @@ public class LocalOrderActivity extends AppCompatActivity {
                         orderItem.sku = "AB";//拖鞋
 
                     String[] images = getContent(row, 5).trim().split(" ");
+                    for (String str_img : images) {
+                        orderItem.imgs.add(getImageName(str_img));
+                    }
                     if (images.length == 2) {
                         orderItem.img_right = getImageName(images[0]);
                         orderItem.img_left = getImageName(images[1]);

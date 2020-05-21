@@ -114,7 +114,11 @@ String sdCardPath = "/storage/emulated/0/Pictures";
                     iv_pillow.setImageDrawable(null);
                     bt_remix.setClickable(false);
                 } else if (message == 1) {
-                    Log.e("fragment_dd_old", "message1");
+                    Log.e("fragment", "message1");
+                    bt_remix.setClickable(true);
+                    checkremix();
+                } else if (message == 4) {
+                    Log.e("fragment", "message4");
                     bt_remix.setClickable(true);
                     checkremix();
                 } else if (message == 3) {
@@ -181,7 +185,13 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvasCombine.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
         canvasCombine.drawColor(0xffffffff);
 
-        Bitmap bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 14, 17, 3071, 4264);
+        Bitmap bitmapTemp = null;
+        if(orderItems.get(currentID).imgs.size()==3){
+            bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 14, 17, 3071, 4264);
+        }
+        else {
+            bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, 14, 17, 3071, 4264);
+        }
         canvasCombine.drawBitmap(bitmapTemp, 0, 0, null);
         Bitmap bitmapDB = BitmapFactory.decodeResource(getResources(), R.drawable.ko_main);
         canvasCombine.drawBitmap(bitmapDB, 0, 0, null);
@@ -192,12 +202,22 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvasCombine.drawBitmap(bitmapTemp, matrix, null);
         canvasCombine.drawBitmap(bitmapDB, matrix, null);
 
-        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 1133, 177, 832, 776);
+        if(orderItems.get(currentID).imgs.size()==3) {
+            bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 1133, 177, 832, 776);
+        }
+        else {
+            bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, 1133, 177, 832, 776);
+        }
         canvasCombine.drawBitmap(bitmapTemp, 1133, 300, null);
         bitmapDB = BitmapFactory.decodeResource(getResources(), R.drawable.ko_pocket2);
         canvasCombine.drawBitmap(bitmapDB, 1133, 300, null);
 
-        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 1133, 18, 832, 935);
+        if(orderItems.get(currentID).imgs.size()==3) {
+            bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 1133, 18, 832, 935);
+        }
+        else {
+            bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, 1133, 18, 832, 935);
+        }
         canvasCombine.drawBitmap(bitmapTemp, 1133, 7250, null);
         bitmapDB = BitmapFactory.decodeResource(getResources(), R.drawable.ko_pocket1);
         canvasCombine.drawBitmap(bitmapDB, 1133, 7250, null);
@@ -225,7 +245,12 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvasCombine.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
         canvasCombine.drawColor(0xffffffff);
 
-        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapLeft, 14, 17, 3071, 4264);
+        if(orderItems.get(currentID).imgs.size()==3) {
+            bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapLeft, 14, 17, 3071, 4264);
+        }
+        else {
+            bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, 14 + 3100, 17, 3071, 4264);
+        }
         canvasCombine.drawBitmap(bitmapTemp, 0, 0, null);
         bitmapDB = BitmapFactory.decodeResource(getResources(), R.drawable.ko_main);
         canvasCombine.drawBitmap(bitmapDB, 0, 0, null);
@@ -236,12 +261,22 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvasCombine.drawBitmap(bitmapTemp, matrix, null);
         canvasCombine.drawBitmap(bitmapDB, matrix, null);
 
-        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapLeft, 1133, 177, 832, 776);
+        if(orderItems.get(currentID).imgs.size()==3) {
+            bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapLeft, 1133, 177, 832, 776);
+        }
+        else {
+            bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, 1133 + 3100, 177, 832, 776);
+        }
         canvasCombine.drawBitmap(bitmapTemp, 1133, 300, null);
         bitmapDB = BitmapFactory.decodeResource(getResources(), R.drawable.ko_pocket2);
         canvasCombine.drawBitmap(bitmapDB, 1133, 300, null);
 
-        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapLeft, 1133, 18, 832, 935);
+        if(orderItems.get(currentID).imgs.size()==3) {
+            bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapLeft, 1133, 18, 832, 935);
+        }
+        else {
+            bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, 1133 + 3100, 18, 832, 935);
+        }
         canvasCombine.drawBitmap(bitmapTemp, 1133, 7250, null);
         bitmapDB = BitmapFactory.decodeResource(getResources(), R.drawable.ko_pocket1);
         canvasCombine.drawBitmap(bitmapDB, 1133, 7250, null);
@@ -261,7 +296,12 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvasCombine.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
         canvasCombine.drawColor(0xffffffff);
 
-        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmap3, 14, 17, 3071, 4264);
+        if(orderItems.get(currentID).imgs.size()==3) {
+            bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmap3, 14, 17, 3071, 4264);
+        }
+        else {
+            bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, 14 + 3100 * 2, 17, 3071, 4264);
+        }
         canvasCombine.drawBitmap(bitmapTemp, 0, 0, null);
         bitmapDB = BitmapFactory.decodeResource(getResources(), R.drawable.ko_main);
         canvasCombine.drawBitmap(bitmapDB, 0, 0, null);
@@ -272,12 +312,22 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvasCombine.drawBitmap(bitmapTemp, matrix, null);
         canvasCombine.drawBitmap(bitmapDB, matrix, null);
 
-        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmap3, 1133, 177, 832, 776);
+        if(orderItems.get(currentID).imgs.size()==3) {
+            bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmap3, 1133, 177, 832, 776);
+        }
+        else {
+            bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, 1133 + 3100 * 2, 177, 832, 776);
+        }
         canvasCombine.drawBitmap(bitmapTemp, 1133, 300, null);
         bitmapDB = BitmapFactory.decodeResource(getResources(), R.drawable.ko_pocket2);
         canvasCombine.drawBitmap(bitmapDB, 1133, 300, null);
 
-        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmap3, 1133, 18, 832, 935);
+        if(orderItems.get(currentID).imgs.size()==3) {
+            bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmap3, 1133, 18, 832, 935);
+        }
+        else {
+            bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, 1133 + 3100 * 2, 18, 832, 935);
+        }
         canvasCombine.drawBitmap(bitmapTemp, 1133, 7250, null);
         bitmapDB = BitmapFactory.decodeResource(getResources(), R.drawable.ko_pocket1);
         canvasCombine.drawBitmap(bitmapDB, 1133, 7250, null);
@@ -343,18 +393,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         }catch (Exception e){
         }
         if (num == 1) {
-            if (MainActivity.instance.bitmapPillow != null) {
-                MainActivity.instance.bitmapPillow.recycle();
-            }
-            if (MainActivity.instance.bitmapRight != null) {
-                MainActivity.instance.bitmapRight.recycle();
-            }
-            if (MainActivity.instance.bitmapLeft != null) {
-                MainActivity.instance.bitmapLeft.recycle();
-            }
-            if (MainActivity.instance.bitmap3 != null) {
-                MainActivity.instance.bitmap3.recycle();
-            }
+            MainActivity.recycleExcelImages();
 
             getActivity().runOnUiThread(new Runnable() {
                 @Override

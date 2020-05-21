@@ -743,7 +743,7 @@ public class MainActivity extends FragmentActivity {
         tv_finishRemixx.setText("加载中...");
         Log.e("aaa", "开始 "+orderItems.get(currentID).order_number);
 
-        if (orderItems.get(currentID).img_3 != null) {
+        if (orderItems.get(currentID).imgs.size() == 3) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -765,7 +765,7 @@ public class MainActivity extends FragmentActivity {
                     });
                 }
             }).start();
-        } else if (orderItems.get(currentID).img_left != null) {
+        } else if (orderItems.get(currentID).imgs.size() == 2) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -791,7 +791,7 @@ public class MainActivity extends FragmentActivity {
                     });
                 }
             }).start();
-        } else if (orderItems.get(currentID).img_pillow != null) {
+        } else if (orderItems.get(currentID).imgs.size() == 1) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
