@@ -175,7 +175,7 @@ public class FragmentDQ extends BaseFragment {
         setScale(orderItems.get(currentID).size);
 
         Bitmap bitmapDB_main = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.dq_adam);
-        Bitmap bitmapDB_tongue = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.dq40_tongue);
+        Bitmap bitmapDB_tongue = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.dq_tongue_adam);
 
         Bitmap bitmapLeft = orderItems.get(currentID).img_pillow == null ? MainActivity.instance.bitmapLeft : MainActivity.instance.bitmapPillow;
         Bitmap bitmapRight = orderItems.get(currentID).img_pillow == null ? MainActivity.instance.bitmapRight : MainActivity.instance.bitmapPillow;

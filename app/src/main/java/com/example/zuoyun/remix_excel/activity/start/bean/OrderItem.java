@@ -12,7 +12,7 @@ public class OrderItem {
     public String colorStr;
     public String sizeStr, skuStr,sizeOriginal;
     public String printCode;
-    public String newCode, newCodeStr;
+    public String newCode, newCodeStr, newCode_short;
     public String platform;
 
     public String order_id;

@@ -303,6 +303,9 @@ public class LocalOrderActivity extends AppCompatActivity {
                     String print_index = getContent(row, 3);
                     orderItem.newCode = print_index;
                     orderItem.newCodeStr = print_index;
+                    if (print_index.length() > 10 && print_index.contains("-")) {
+                        orderItem.newCode_short = print_index.substring(0, 1) + "-" + print_index.substring(print_index.lastIndexOf("-") - 1);
+                    }
                     String size = orderItem.sizeStr.equals("S/M") ? "中码" : orderItem.sizeStr.equals("L/XL") ? "大码" : orderItem.sizeStr;
                     if (print_index.startsWith("A")) {
                         orderItem.newCode = size + "-A-" + getNewCode(print_index);

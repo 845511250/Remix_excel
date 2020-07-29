@@ -181,14 +181,6 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvas.drawRect(1000, 10, 1000 + 700, 10 + 23, rectPaint);
         canvas.drawText("HU沙发套-" + orderItems.get(currentID).sizeStr + " - " + time + "  " + orderItems.get(currentID).order_number + "   " + orderItems.get(currentID).newCodeStr, 1000, 10 + 23 - 2, paint);
     }
-    void drawText2(Canvas canvas) {
-        canvas.drawRect(500, 5, 500 + 500, 5 + 25, rectPaint);
-        canvas.drawText("狗狗坐垫 第4片 " + orderItems.get(currentID).sizeStr + "  " + time + "  " + orderItems.get(currentID).order_number, 500, 5 + 23, paint);
-    }
-    void drawText345(Canvas canvas) {
-        canvas.drawRect(50, 5, 50 + 500, 5 + 25, rectPaint);
-        canvas.drawText("狗狗坐垫 第5片 " + orderItems.get(currentID).sizeStr + "  " + time + "  " + orderItems.get(currentID).order_number, 50, 5 + 23, paint);
-    }
 
     public void remixx(){
         orderItems.get(currentID).newCodeStr = orderItems.get(currentID).newCodeStr.replace("\" ", "-");

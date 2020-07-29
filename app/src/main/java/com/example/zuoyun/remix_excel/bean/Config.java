@@ -21,4 +21,5 @@ public class Config {
 
     public static int chooseGA;//100,165
     public static int chooseGB;//100,165
+    public static int  FV_type;//滚筒1,激光2
 }

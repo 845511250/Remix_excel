@@ -703,6 +703,14 @@ public class MainActivity extends FragmentActivity {
                 tv_title.setText("KT旗子 " + orderItems.get(currentID).order_number);
                 transaction.replace(R.id.frame_main, new FragmentKT());
                 break;
+            case "KTS":
+                tv_title.setText("KT小旗子 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentKT());
+                break;
+            case "KTL":
+                tv_title.setText("KT大旗子 " + orderItems.get(currentID).order_number);
+                transaction.replace(R.id.frame_main, new FragmentKT());
+                break;
             case "KYS":
                 tv_title.setText("KYS " + orderItems.get(currentID).order_number);
                 transaction.replace(R.id.frame_main, new FragmentKY());

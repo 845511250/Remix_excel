@@ -88,7 +88,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
 
         paintRed = new Paint();
         paintRed.setColor(0xffff0000);
-        paintRed.setTextSize(30);
+        paintRed.setTextSize(28);
         paintRed.setTypeface(Typeface.DEFAULT_BOLD);
         paintRed.setAntiAlias(true);
 
@@ -138,8 +138,6 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     }
 
     public void remix(){
-        setSize();
-
         new Thread(){
             @Override
             public void run() {
@@ -163,34 +161,65 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     }
 
     void drawText(Canvas canvas) {
-        canvas.drawRect(200, 10, 200 + 600, 10 + 27, rectPaint);
-        canvas.drawText((orderItems.get(currentID).sizeStr.equals("12") ? "KT小旗子  " : "KT大旗子  ") + time + "  " + orderItems.get(currentID).order_number, 200, 10 + 25, paint);
+        canvas.drawRect(200, 10, 200 + 650, 10 + 27, rectPaint);
+        canvas.drawText((orderItems.get(currentID).sizeStr.equals("S") ? "KT小旗子  " : "KT大旗子  ") + time + "  " + orderItems.get(currentID).order_number, 200, 10 + 25, paint);
+        canvas.drawText(orderItems.get(currentID).newCode_short, 720, 10 + 25, paintRed);
     }
 
     public void remixx(){
-        Bitmap bitmapCombine = Bitmap.createBitmap(width, height * 2, Bitmap.Config.ARGB_8888);
-        Canvas canvasCombine= new Canvas(bitmapCombine);
-        canvasCombine.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
-        canvasCombine.drawColor(0xffffffff);
+        if(orderItems.get(currentID).sizeStr.equals("12"))
+            orderItems.get(currentID).sizeStr = "S";
+        if(orderItems.get(currentID).sizeStr.equals("40"))
+            orderItems.get(currentID).sizeStr = "L";
+        setSize();
 
-        Bitmap bitmapTemp = Bitmap.createScaledBitmap(MainActivity.instance.bitmapRight, width, height, true);
-        canvasCombine.drawBitmap(bitmapTemp, 0, height, null);
+        Bitmap bitmapCombine = null;
+        if(orderItems.get(currentID).sizeStr.equals("S")){
+            bitmapCombine = Bitmap.createBitmap(width + 150, height * 2 + 100, Bitmap.Config.ARGB_8888);
+            Canvas canvasCombine= new Canvas(bitmapCombine);
+            canvasCombine.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
+            canvasCombine.drawColor(0xffffffff);
 
-        bitmapTemp = Bitmap.createScaledBitmap(MainActivity.instance.bitmapLeft, width, height, true);
-        Matrix matrix = new Matrix();
-        matrix.postRotate(180);
-        matrix.postTranslate(width, height);
-        canvasCombine.drawBitmap(bitmapTemp, matrix, null);
-        bitmapTemp.recycle();
+            Bitmap bitmapTemp = Bitmap.createScaledBitmap(MainActivity.instance.bitmapRight, width, height, true);
+            canvasCombine.drawBitmap(bitmapTemp, 75, height + 50, null);
 
-        drawText(canvasCombine);
+            bitmapTemp = Bitmap.createScaledBitmap(MainActivity.instance.bitmapLeft, width, height, true);
+            Matrix matrix = new Matrix();
+            matrix.postRotate(180);
+            matrix.postTranslate(width + 75, height + 50);
+            canvasCombine.drawBitmap(bitmapTemp, matrix, null);
+            bitmapTemp.recycle();
 
-        canvasCombine.drawRect(0, 0, width - 2, height * 2 - 2, rectBorderPaint);
-        canvasCombine.drawRect(2, 2, width - 2, height * 2 - 2, rectBorderPaint);
+            drawText(canvasCombine);
+
+            canvasCombine.drawRect(0, 0, width + 150, height * 2 + 100, rectBorderPaint);
+            canvasCombine.drawRect(2, 2, width + 150 - 2, height * 2 + 100 - 2, rectBorderPaint);
+        }else {
+            bitmapCombine = Bitmap.createBitmap(width, height * 2, Bitmap.Config.ARGB_8888);
+            Canvas canvasCombine= new Canvas(bitmapCombine);
+            canvasCombine.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
+            canvasCombine.drawColor(0xffffffff);
+
+            Bitmap bitmapTemp = Bitmap.createScaledBitmap(MainActivity.instance.bitmapRight, width, height, true);
+            canvasCombine.drawBitmap(bitmapTemp, 0, height, null);
+
+            bitmapTemp = Bitmap.createScaledBitmap(MainActivity.instance.bitmapLeft, width, height, true);
+            Matrix matrix = new Matrix();
+            matrix.postRotate(180);
+            matrix.postTranslate(width, height);
+            canvasCombine.drawBitmap(bitmapTemp, matrix, null);
+            bitmapTemp.recycle();
+
+            drawText(canvasCombine);
+
+            canvasCombine.drawRect(0, 0, width, height * 2, rectBorderPaint);
+            canvasCombine.drawRect(2, 2, width - 2, height * 2 - 2, rectBorderPaint);
+        }
+
 
 
         try {
-            String nameCombine = orderItems.get(currentID).sku + (orderItems.get(currentID).sizeStr.equals("12") ? "小" : "大") + "_" + orderItems.get(currentID).order_number + strPlus + ".jpg";
+            String nameCombine = orderItems.get(currentID).sku + (orderItems.get(currentID).sizeStr.equals("S") ? "小" : "大") + "_" + orderItems.get(currentID).order_number + strPlus + ".jpg";
 
             String pathSave;
             if(MainActivity.instance.cb_classify.isChecked()){
@@ -252,15 +281,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         }catch (Exception e){
         }
         if (num == 1) {
-            if (MainActivity.instance.bitmapPillow != null) {
-                MainActivity.instance.bitmapPillow.recycle();
-            }
-            if (MainActivity.instance.bitmapRight != null) {
-                MainActivity.instance.bitmapRight.recycle();
-            }
-            if (MainActivity.instance.bitmapLeft != null) {
-                MainActivity.instance.bitmapLeft.recycle();
-            }
+            MainActivity.recycleExcelImages();
 
             getActivity().runOnUiThread(new Runnable() {
                 @Override
@@ -311,12 +332,14 @@ String sdCardPath = "/storage/emulated/0/Pictures";
 
     void setSize(){
         switch (orderItems.get(currentID).sizeStr) {
-            case "12":
-                width = 1700;
-                height = 2290;
+            case "S":
+//                width = 1700;
+//                height = 2290;
+                width = 1500;
+                height = 2190;
                 break;
-            case "40":
-                width = 3900;
+            case "L":
+                width = 3900 - 24;
                 height = 4940;
                 break;
 

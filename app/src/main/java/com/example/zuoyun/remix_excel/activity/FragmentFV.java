@@ -1,20 +1,25 @@
 package com.example.zuoyun.remix_excel.activity;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PaintFlagsDrawFilter;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.zuoyun.remix_excel.R;
 import com.example.zuoyun.remix_excel.activity.start.bean.OrderItem;
+import com.example.zuoyun.remix_excel.bean.Config;
 import com.example.zuoyun.remix_excel.tools.BitmapToJpg;
 
 import java.io.File;
@@ -49,6 +54,7 @@ public class FragmentFV extends BaseFragment {
 
     int num;
     String strPlus = "";
+    int intPlus = 1;
 
     Paint paint,paintRed,paintBlue, rectPaint;
     String time = MainActivity.instance.orderDate_Print;
@@ -69,19 +75,19 @@ public class FragmentFV extends BaseFragment {
         //paint
         paint = new Paint();
         paint.setColor(0xff000000);
-        paint.setTextSize(15);
+        paint.setTextSize(18);
         paint.setTypeface(Typeface.DEFAULT_BOLD);
         paint.setAntiAlias(true);
 
         paintRed = new Paint();
         paintRed.setColor(0xffff0000);
-        paintRed.setTextSize(15);
+        paintRed.setTextSize(18);
         paintRed.setTypeface(Typeface.DEFAULT_BOLD);
         paintRed.setAntiAlias(true);
 
         paintBlue = new Paint();
         paintBlue.setColor(0xff000000);
-        paintBlue.setTextSize(15);
+        paintBlue.setTextSize(18);
         paintBlue.setTypeface(Typeface.DEFAULT_BOLD);
         paintBlue.setAntiAlias(true);
 
@@ -133,49 +139,29 @@ public class FragmentFV extends BaseFragment {
     }
 
     public void remix(){
-        new Thread(){
-            @Override
-            public void run() {
-                super.run();
-                for(num=orderItems.get(currentID).num;num>=1;num--) {
-                    for(int i=0;i<currentID;i++) {
-                        if (orderItems.get(currentID).order_number.equals(orderItems.get(i).order_number)) {
-                            strPlus += "+";
+        if (Config.FV_type == 0) {
+            showDialogChoose();
+        } else {
+            new Thread(){
+                @Override
+                public void run() {
+                    super.run();
+                    for(num=orderItems.get(currentID).num;num>=1;num--) {
+                        for(int i=0;i<currentID;i++) {
+                            if (orderItems.get(currentID).order_number.equals(orderItems.get(i).order_number)) {
+                                intPlus += 1;
+                            }
                         }
+                        strPlus = intPlus == 1 ? "" : "(" + intPlus + ")";
+                        remixx();
+                        intPlus += 1;
                     }
-                    remixx();
-                    strPlus += "+";
                 }
-            }
-        }.start();
-
+            }.start();
+        }
     }
 
     void drawText(Canvas canvas) {
-//        canvas.save();
-//        canvas.rotate(-1.1f, 672, 25);
-//        canvas.drawRect(672, 25-15, 672+200, 25, rectPaint);
-//        canvas.drawText(time + "  " + orderItems.get(currentID).order_number, 672, 25-2, paint);
-//        canvas.restore();
-//
-//        canvas.save();
-//        canvas.rotate(1.4f, 886, 20);
-//        canvas.drawRect(886, 20-15, 886+140, 20, rectPaint);
-//        canvas.drawText("左" + orderItems.get(currentID).color + "   " + orderItems.get(currentID).newCode, 886, 20 - 2, paintRed);
-//        canvas.restore();
-//
-//        canvas.save();
-//        canvas.rotate(-1.1f, 672 + 1823, 25);
-//        canvas.drawRect(672 + 1823, 25-15, 672+200 + 1823, 25, rectPaint);
-//        canvas.drawText(time + "  " + orderItems.get(currentID).order_number, 672 + 1823, 25-2, paint);
-//        canvas.restore();
-//
-//        canvas.save();
-//        canvas.rotate(1.4f, 886 + 1823, 20);
-//        canvas.drawRect(886 + 1823, 20-15, 886+140 + 1823, 20, rectPaint);
-//        canvas.drawText("右" + orderItems.get(currentID).color + "   " + orderItems.get(currentID).newCode, 886 + 1823, 20 - 2, paintRed);
-//        canvas.restore();
-
         canvas.save();
         canvas.rotate(3.5f, 600, 4679);
         canvas.drawRect(600, 4679-18, 600+280, 4679, rectPaint);
@@ -200,31 +186,42 @@ public class FragmentFV extends BaseFragment {
         canvas.drawText("右" + orderItems.get(currentID).color + "   " + orderItems.get(currentID).newCode, 950 + 1830, 4692 - 2, paintRed);
         canvas.restore();
     }
+    void drawTextBlackBorder(Canvas canvas, String LR) {
+        canvas.save();
+        canvas.rotate(0.8f, 600, 4787);
+        canvas.drawRect(600, 4787-18, 600+280, 4787, rectPaint);
+        canvas.drawText(time + "  " + orderItems.get(currentID).order_number, 600, 4787 - 2, paint);
+        canvas.restore();
+
+        canvas.save();
+        canvas.rotate(-0.6f, 913, 4791);
+        canvas.drawRect(913, 4791-18, 913+280, 4791, rectPaint);
+        canvas.drawText(LR + orderItems.get(currentID).color + "   " + orderItems.get(currentID).newCode, 913, 4791 - 2, paintRed);
+        canvas.restore();
+
+    }
     public void remixx(){
+        if (Config.FV_type == 1) {
+            Bitmap bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.fv2);
 
-        Bitmap bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.fv2);
+            Bitmap bitmapCombine;
+            bitmapCombine = Bitmap.createBitmap(1757 * 2 + 66, 4700 + 60, Bitmap.Config.ARGB_8888);
+            Canvas canvasCombine = new Canvas(bitmapCombine);
+            canvasCombine.drawColor(0xffffffff);
+            canvasCombine.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
 
-        Bitmap bitmapCombine;
-        bitmapCombine = Bitmap.createBitmap(1757 * 2 + 66, 4700 + 60, Bitmap.Config.ARGB_8888);
-        Canvas canvasCombine = new Canvas(bitmapCombine);
-        canvasCombine.drawColor(0xffffffff);
-        canvasCombine.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
+            Rect rectCut = new Rect(27, 0, 1772, 4673);
+            Rect rectDraw = new Rect(0, 0, 1757, 4700);
+            canvasCombine.drawBitmap(MainActivity.instance.bitmapLeft, rectCut, rectDraw, null);
+            rectDraw = new Rect(1757 + 66, 0, 1757 * 2 + 66, 4700);
+            canvasCombine.drawBitmap(MainActivity.instance.bitmapRight, rectCut, rectDraw, null);
 
-        Rect rectCut = new Rect(27, 0, 1772, 4673);
-        Rect rectDraw = new Rect(0, 0, 1757, 4700);
-        canvasCombine.drawBitmap(MainActivity.instance.bitmapLeft, rectCut, rectDraw, null);
-        rectDraw = new Rect(1757 + 66, 0, 1757 * 2 + 66, 4700);
-        canvasCombine.drawBitmap(MainActivity.instance.bitmapRight, rectCut, rectDraw, null);
+            canvasCombine.drawBitmap(bitmapDB, 0, 0, null);
+            canvasCombine.drawBitmap(bitmapDB, 1757 + 66, 0, null);
+            bitmapDB.recycle();
+            drawText(canvasCombine);
 
-        canvasCombine.drawBitmap(bitmapDB, 0, 0, null);
-        canvasCombine.drawBitmap(bitmapDB, 1757 + 66, 0, null);
-        bitmapDB.recycle();
-        drawText(canvasCombine);
-
-        try {
             bitmapCombine = Bitmap.createScaledBitmap(bitmapCombine, 3720, 4940, true);
-//            bitmapCombine = Bitmap.createScaledBitmap(bitmapCombine, 3621, 4922, true);
-            String printColor = orderItems.get(currentID).color.equals("黑") ? "B" : "W";
             String noNewCode = orderItems.get(currentID).newCode.equals("") ? orderItems.get(currentID).sku + "_" : "";
             String nameCombine = noNewCode + "_" + orderItems.get(currentID).newCode + "_" + orderItems.get(currentID).color + "_" + orderItems.get(currentID).order_number + strPlus + ".jpg";
 
@@ -240,6 +237,70 @@ public class FragmentFV extends BaseFragment {
 
             //释放bitmap
             bitmapCombine.recycle();
+
+        } else {
+            Bitmap bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.fv_blackborder);
+
+            Bitmap bitmapCombine;
+            bitmapCombine = Bitmap.createBitmap(1789, 4803, Bitmap.Config.ARGB_8888);
+            Canvas canvasCombine = new Canvas(bitmapCombine);
+            canvasCombine.drawColor(0xffffffff);
+            canvasCombine.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
+
+            Rect rectCut = new Rect(27, 0, 1772, 4673);
+            Rect rectDraw = new Rect(0, 0, 1789, 4803);
+            canvasCombine.drawBitmap(MainActivity.instance.bitmapLeft, rectCut, rectDraw, null);
+            canvasCombine.drawBitmap(bitmapDB, 0, 0, null);
+            drawTextBlackBorder(canvasCombine,"左");
+
+            Matrix matrix = new Matrix();
+            matrix.postRotate(180, bitmapCombine.getWidth() / 2, bitmapCombine.getHeight() / 2);
+            bitmapCombine = Bitmap.createBitmap(bitmapCombine, 0, 0, bitmapCombine.getWidth(), bitmapCombine.getHeight(), matrix, true);
+
+            String noNewCode = orderItems.get(currentID).newCode.equals("") ? orderItems.get(currentID).sku + "_" : "";
+            String nameCombine = noNewCode + "_" + orderItems.get(currentID).newCode + "_左_" + orderItems.get(currentID).color + "_" + orderItems.get(currentID).order_number + strPlus + ".jpg";
+
+            String pathSave;
+            if(MainActivity.instance.cb_classify.isChecked()){
+                pathSave = sdCardPath + "/生产图/" + childPath + "/" + orderItems.get(currentID).sku + "/";
+            } else
+                pathSave = sdCardPath + "/生产图/" + childPath + "/";
+            if(!new File(pathSave).exists())
+                new File(pathSave).mkdirs();
+            File fileSave = new File(pathSave + nameCombine);
+            BitmapToJpg.save(bitmapCombine, fileSave, 90);
+
+            //
+            canvasCombine = new Canvas(bitmapCombine);
+            canvasCombine.drawColor(0xffffffff);
+            canvasCombine.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
+            canvasCombine.drawBitmap(MainActivity.instance.bitmapRight, rectCut, rectDraw, null);
+            canvasCombine.drawBitmap(bitmapDB, 0, 0, null);
+            drawTextBlackBorder(canvasCombine,"右");
+
+            bitmapCombine = Bitmap.createBitmap(bitmapCombine, 0, 0, bitmapCombine.getWidth(), bitmapCombine.getHeight(), matrix, true);
+
+            nameCombine = noNewCode + "_" + orderItems.get(currentID).newCode + "_右_" + orderItems.get(currentID).color + "_" + orderItems.get(currentID).order_number + strPlus + ".jpg";
+
+            if(MainActivity.instance.cb_classify.isChecked()){
+                pathSave = sdCardPath + "/生产图/" + childPath + "/" + orderItems.get(currentID).sku + "/";
+            } else
+                pathSave = sdCardPath + "/生产图/" + childPath + "/";
+            if(!new File(pathSave).exists())
+                new File(pathSave).mkdirs();
+            fileSave = new File(pathSave + nameCombine);
+            BitmapToJpg.save(bitmapCombine, fileSave, 90);
+
+
+            //释放bitmap
+            bitmapDB.recycle();
+            bitmapCombine.recycle();
+        }
+
+
+
+        try {
+            String printColor = orderItems.get(currentID).color.equals("黑") ? "B" : "W";
 
             //写入excel
             String writePath = sdCardPath + "/生产图/" + childPath + "/生产单.xls";
@@ -268,9 +329,9 @@ public class FragmentFV extends BaseFragment {
             Workbook book = Workbook.getWorkbook(fileWrite);
             WritableWorkbook workbook = Workbook.createWorkbook(fileWrite,book);
             WritableSheet sheet = workbook.getSheet(0);
-            Label label0 = new Label(0, currentID+1, orderItems.get(currentID).order_number+orderItems.get(currentID).sku+orderItems.get(currentID).size+printColor);
+            Label label0 = new Label(0, currentID+1, orderItems.get(currentID).order_number+orderItems.get(currentID).sku+printColor);
             sheet.addCell(label0);
-            Label label1 = new Label(1, currentID+1, orderItems.get(currentID).sku+orderItems.get(currentID).size+printColor);
+            Label label1 = new Label(1, currentID+1, orderItems.get(currentID).sku+printColor);
             sheet.addCell(label1);
             Number number2 = new Number(2, currentID+1, orderItems.get(currentID).num);
             sheet.addCell(number2);
@@ -309,5 +370,40 @@ public class FragmentFV extends BaseFragment {
         }
     }
 
+    private void showDialogChoose(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.DialogTransBackGround);
+        final AlertDialog dialog_choose = builder.create();
+        dialog_choose.setCancelable(false);
+        dialog_choose.show();
+        View view_dialog = LayoutInflater.from(context).inflate(R.layout.item_dialog_confirm, null);
+        dialog_choose.setContentView(view_dialog);
+
+        TextView tv_title_update = (TextView) view_dialog.findViewById(R.id.tv_dialog_title);
+        TextView tv_content = (TextView) view_dialog.findViewById(R.id.tv_dialog_content);
+        Button bt_yes = (Button) view_dialog.findViewById(R.id.bt_dialog_yes);
+        Button bt_no = (Button) view_dialog.findViewById(R.id.bt_dialog_no);
+
+        tv_title_update.setText("FV座椅套");
+        tv_content.setText("请选择排版方式");
+        bt_yes.setText("滚筒机");
+        bt_no.setText("激光裁");
+
+        bt_yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Config.FV_type = 1;
+                dialog_choose.dismiss();
+                remix();
+            }
+        });
+        bt_no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Config.FV_type = 2;
+                dialog_choose.dismiss();
+                remix();
+            }
+        });
+    }
 
 }

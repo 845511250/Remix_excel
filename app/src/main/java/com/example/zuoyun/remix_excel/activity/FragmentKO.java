@@ -89,7 +89,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
 
         paintRed = new Paint();
         paintRed.setColor(0xffff0000);
-        paintRed.setTextSize(30);
+        paintRed.setTextSize(21);
         paintRed.setTypeface(Typeface.DEFAULT_BOLD);
         paintRed.setAntiAlias(true);
 
@@ -165,14 +165,14 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvas.save();
         canvas.rotate(-1, 2349, 15);
         canvas.drawRect(2349, 15, 2349 + 400, 15 + 20, rectPaint);
-        canvas.drawText(time + " " + orderItems.get(currentID).order_number + number + orderItems.get(currentID).color, 2349, 15 + 18, paint);
+        canvas.drawText(time + " " + orderItems.get(currentID).order_number + number + orderItems.get(currentID).color + "  " + orderItems.get(currentID).newCode_short, 2349, 15 + 18, paint);
         canvas.restore();
 
         canvas.drawRect(1343, 1070 - 20, 1343 + 400, 1070, rectPaint);
-        canvas.drawText(time + " " + orderItems.get(currentID).order_number + number + orderItems.get(currentID).color, 1343, 1070 - 2, paint);
+        canvas.drawText(time + " " + orderItems.get(currentID).order_number + number + orderItems.get(currentID).color + orderItems.get(currentID).newCode_short, 1343, 1070 - 2, paint);
 
         canvas.drawRect(1343, 8178 - 20, 1343 + 400, 8178, rectPaint);
-        canvas.drawText(time + " " + orderItems.get(currentID).order_number + number + orderItems.get(currentID).color, 1343, 8178 - 2, paint);
+        canvas.drawText(time + " " + orderItems.get(currentID).order_number + number + orderItems.get(currentID).color + orderItems.get(currentID).newCode_short, 1343, 8178 - 2, paint);
     }
 
     public void remixx(){
