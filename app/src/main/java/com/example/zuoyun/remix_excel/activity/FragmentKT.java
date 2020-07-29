@@ -336,7 +336,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
 //                width = 1700;
 //                height = 2290;
                 width = 1500;
-                height = 2190;
+                height = 2230;
                 break;
             case "L":
                 width = 3900 - 24;
