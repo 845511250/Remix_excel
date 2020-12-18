@@ -31,6 +31,7 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -300,11 +301,19 @@ public class LocalOrderActivity extends AppCompatActivity {
 
                     }
 
+                    String SKU = getContent(row, 1);
+                    orderItem.skuStr = SKU;
+                    orderItem.sku = SKU;
+
                     String print_index = getContent(row, 3);
                     orderItem.newCode = print_index;
                     orderItem.newCodeStr = print_index;
                     if (print_index.length() > 10 && print_index.contains("-")) {
                         orderItem.newCode_short = print_index.substring(0, 1) + "-" + print_index.substring(print_index.lastIndexOf("-") - 1);
+                        if(orderItem.sku.startsWith("HL")){
+                            String str_sub = orderItem.newCode.substring(0, orderItem.newCode.lastIndexOf("-"));
+                            orderItem.newCode_short = orderItem.newCode.substring(0, 1) + orderItem.color + str_sub.substring(str_sub.lastIndexOf("-")) + orderItem.newCode.substring(orderItem.newCode.lastIndexOf("-"));
+                        }
                     }
                     String size = orderItem.sizeStr.equals("S/M") ? "中码" : orderItem.sizeStr.equals("L/XL") ? "大码" : orderItem.sizeStr;
                     if (print_index.startsWith("A")) {
@@ -321,9 +330,7 @@ public class LocalOrderActivity extends AppCompatActivity {
                         orderItem.num = 1;
                     }
 
-                    String SKU = getContent(row, 1);
-                    orderItem.skuStr = SKU;
-                    orderItem.sku = SKU;
+                    //
                     if (SKU.equals("MENFLIPFLOP") || SKU.equals("WOMENFLIPFLOP") || SKU.equals("MENFLIPFLOPDHL") || SKU.equals("WOMENFLIPFLOPDHL"))
                         orderItem.sku = "AB";//拖鞋
 
@@ -332,8 +339,13 @@ public class LocalOrderActivity extends AppCompatActivity {
                         orderItem.imgs.add(getImageName(str_img));
                     }
                     if (images.length == 2) {
-                        orderItem.img_right = getImageName(images[0]);
-                        orderItem.img_left = getImageName(images[1]);
+                        if (getImageName(images[0]).toLowerCase().contains("left")) {
+                            orderItem.img_left = getImageName(images[0]);
+                            orderItem.img_right = getImageName(images[1]);
+                        }else{
+                            orderItem.img_right = getImageName(images[0]);
+                            orderItem.img_left = getImageName(images[1]);
+                        }
                     } else if (images.length == 1) {
                         orderItem.img_pillow = getImageName(images[0]);
                     } else if (images.length == 3) {
@@ -357,6 +369,7 @@ public class LocalOrderActivity extends AppCompatActivity {
     }
 
     String getImageName(String str){
+        str = URLDecoder.decode(str);
         return str.substring(str.lastIndexOf("/")+1);
     }
 

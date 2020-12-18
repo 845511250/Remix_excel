@@ -204,7 +204,7 @@ public class FragmentHV extends BaseFragment {
         canvasTemp.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
         canvasTemp.drawBitmap(bitmapDBLeft, 0, 0, null);
         bitmapDBLeft.recycle();
-        drawTextL(canvasTemp);
+//        drawTextL(canvasTemp);
         bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width, height, true);
         Matrix matrix = new Matrix();
         matrix.postRotate(180);
@@ -216,7 +216,7 @@ public class FragmentHV extends BaseFragment {
         canvasTemp.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
         canvasTemp.drawBitmap(bitmapDBRight, 0, 0, null);
         bitmapDBRight.recycle();
-        drawTextR(canvasTemp);
+//        drawTextR(canvasTemp);
         bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, width, height, true);
         matrix.postTranslate(1380, 0);
         canvasCombine.drawBitmap(bitmapTemp, matrix, null);

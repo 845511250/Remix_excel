@@ -162,12 +162,12 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvas.save();
         canvas.rotate(-90, width, 1200 + 1000);
         canvas.drawRect(width, 1200 + 1000 - 30, width + 1000, 1200 + 1000 - 5, rectPaint);
-        canvas.drawText("上边      空调毯-" + orderItems.get(currentID).color + orderItems.get(currentID).sizeStr + "   " + time + "   " + orderItems.get(currentID).order_number + "    " + orderItems.get(currentID).newCodeStr, width, 1200 + 1000 - 8, paint);
+        canvas.drawText(" 空调毯-" + orderItems.get(currentID).color + orderItems.get(currentID).sizeStr + "   " + time + "   " + orderItems.get(currentID).order_number + "    " + orderItems.get(currentID).newCodeStr, width, 1200 + 1000 - 8, paint);
         canvas.restore();
         canvas.save();
         canvas.rotate(90, 0, height - 1200 - 1000);
         canvas.drawRect(0, height - 1200 - 1000 - 30, 1000, height - 1200 - 1000 - 5, rectPaint);
-        canvas.drawText("下边      空调毯-" + orderItems.get(currentID).color + orderItems.get(currentID).sizeStr + "   " + time + "   " + orderItems.get(currentID).order_number + "    " + orderItems.get(currentID).newCodeStr, 0, height - 1200 - 1000 - 8, paint);
+        canvas.drawText("空调毯-" + orderItems.get(currentID).color + orderItems.get(currentID).sizeStr + "   " + time + "   " + orderItems.get(currentID).order_number + "    " + orderItems.get(currentID).newCodeStr, 0, height - 1200 - 1000 - 8, paint);
         canvas.restore();
     }
     void drawText2(Canvas canvas) {
@@ -175,12 +175,12 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvas.save();
         canvas.rotate(-90, width, 1900 + 2000);
         canvas.drawRect(width, 1900 + 2000 - 45, width + 2000, 1900 + 2000 - 5, rectPaint);
-        canvas.drawText("上边      空调毯-" + orderItems.get(currentID).color + orderItems.get(currentID).sizeStr + "   " + time + "   " + orderItems.get(currentID).order_number + "    " + orderItems.get(currentID).newCodeStr, width, 1900 + 2000 - 9, paint);
+        canvas.drawText("空调毯-" + orderItems.get(currentID).color + orderItems.get(currentID).sizeStr + "   " + time + "   " + orderItems.get(currentID).order_number + "    " + orderItems.get(currentID).newCodeStr, width, 1900 + 2000 - 9, paint);
         canvas.restore();
         canvas.save();
         canvas.rotate(90, 0, height - 1900 - 2000);
         canvas.drawRect(0, height - 1900 - 2000 - 45, 2000, height - 1900 - 2000 - 5, rectPaint);
-        canvas.drawText("下边      空调毯-" + orderItems.get(currentID).color + orderItems.get(currentID).sizeStr + "   " + time + "   " + orderItems.get(currentID).order_number + "    " + orderItems.get(currentID).newCodeStr, 0, height - 1900 - 2000 - 9, paint);
+        canvas.drawText("空调毯-" + orderItems.get(currentID).color + orderItems.get(currentID).sizeStr + "   " + time + "   " + orderItems.get(currentID).order_number + "    " + orderItems.get(currentID).newCodeStr, 0, height - 1900 - 2000 - 9, paint);
         canvas.restore();
     }
     void drawText1(Canvas canvas) {
@@ -188,12 +188,12 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvas.save();
         canvas.rotate(-90, width, 2400 + 2000);
         canvas.drawRect(width, 2400 + 2000 - 55, width + 2000, 2400 + 2000 - 5, rectPaint);
-        canvas.drawText("上边      空调毯-" + orderItems.get(currentID).color + orderItems.get(currentID).sizeStr + "   " + time + "   " + orderItems.get(currentID).order_number + "    " + orderItems.get(currentID).newCodeStr, width, 2400 + 2000 - 9, paint);
+        canvas.drawText("空调毯-" + orderItems.get(currentID).color + orderItems.get(currentID).sizeStr + "   " + time + "   " + orderItems.get(currentID).order_number + "    " + orderItems.get(currentID).newCodeStr, width, 2400 + 2000 - 9, paint);
         canvas.restore();
         canvas.save();
         canvas.rotate(90, 0, height - 2400 - 2000);
         canvas.drawRect(0, height - 2400 - 2000 - 55, 2000, height - 2400 - 2000 - 5, rectPaint);
-        canvas.drawText("下边      空调毯-" + orderItems.get(currentID).color + orderItems.get(currentID).sizeStr + "   " + time + "   " + orderItems.get(currentID).order_number + "    " + orderItems.get(currentID).newCodeStr, 0, height - 2400 - 2000 - 9, paint);
+        canvas.drawText("空调毯-" + orderItems.get(currentID).color + orderItems.get(currentID).sizeStr + "   " + time + "   " + orderItems.get(currentID).order_number + "    " + orderItems.get(currentID).newCodeStr, 0, height - 2400 - 2000 - 9, paint);
         canvas.restore();
     }
 
@@ -232,7 +232,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
             if (sizeStr.equals("Crib/Lap Blanket")) {
                 sizeStr = "LapBlanket";
             }
-            String nameCombine = orderItems.get(currentID).sku + "_" + orderItems.get(currentID).color + "_" + sizeStr + "_" + orderItems.get(currentID).order_number + strPlus + ".jpg";
+            String nameCombine = orderItems.get(currentID).sku + "_" + orderItems.get(currentID).newCode_short + "_" + orderItems.get(currentID).order_number + strPlus + ".jpg";
 
             String pathSave;
             if(MainActivity.instance.cb_classify.isChecked()){
@@ -347,29 +347,29 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     void setSize(){
         switch (orderItems.get(currentID).skuStr) {
             case "HL1":
-                dpi = 297;
-                width = 13800;
-                height = 15000;
+                dpi = 200;
+                width = 9293;
+                height = 10101;
                 break;
             case "HL2":
-                dpi = 242;
-                width = 13800;
-                height = 15000;
+                dpi = 200;
+                width = 11405;
+                height = 12397;
                 break;
             case "HL3":
-                dpi = 175;
-                width = 13414;
-                height = 15268;
+                dpi = 160;
+                width = 12264;
+                height = 13959;
                 break;
             case "HL4":
-                dpi = 166;
-                width = 13600;
-                height = 15300;
+                dpi = 150;
+                width = 12289;
+                height = 13825;
                 break;
             case "HL5":
-                dpi = 146;
-                width = 13629;
-                height = 15300;
+                dpi = 130;
+                width = 12136;
+                height = 13623;
                 break;
             default:
                 sizeOK = false;

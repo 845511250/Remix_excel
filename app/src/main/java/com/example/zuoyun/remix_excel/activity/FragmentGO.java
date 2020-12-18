@@ -49,7 +49,7 @@ public class FragmentGO extends BaseFragment {
     int frontWidth=2120, frontHeight=3294, backWidth=2065, backHeight=1557;
     int num;
     String strPlus = "";
-
+    int intPlus = 1;
     Paint paint,paintRed,paintBlue, rectPaint;
     String time = MainActivity.instance.orderDate_Print;
 

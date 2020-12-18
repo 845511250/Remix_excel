@@ -52,7 +52,7 @@ public class FragmentFF extends BaseFragment {
     int part1RX,part1RY,part2RX,part2RY,part3RX,part3RY;
     int num;
     String strPlus = "";
-
+    int intPlus = 1;
     Paint paint,paintRed,paintBlue, rectPaint;
     String time = MainActivity.instance.orderDate_Print;
 

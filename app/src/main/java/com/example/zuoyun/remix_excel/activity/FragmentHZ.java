@@ -46,7 +46,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     int mainWidth, mainHeight, tongueWidth, tongueHeight;
     int num;
     String strPlus = "";
-
+    int intPlus = 1;
     Paint rectPaint, paint, paintRed, paintSmall,paintRectBlack;
     String time;
 

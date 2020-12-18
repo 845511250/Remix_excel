@@ -50,7 +50,7 @@ public class FragmentFH extends BaseFragment {
     int mianWidth, mainHeight, sideWidth, sideHeight;
     int num;
     String strPlus = "";
-
+    int intPlus = 1;
     Paint paint,paintRed,paintBlue, rectPaint;
     String time = MainActivity.instance.orderDate_Print;
 

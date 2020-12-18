@@ -49,7 +49,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
 
     int num;
     String strPlus = "";
-
+    int intPlus = 1;
     @Override
     public int getLayout() {
         return R.layout.fragment_dg;

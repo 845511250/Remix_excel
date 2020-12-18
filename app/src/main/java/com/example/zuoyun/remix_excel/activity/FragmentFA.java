@@ -55,6 +55,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     int pillow1X, pillow1Y, pillow2X, pillow2Y, quiltX, quiltY;
     int drawWidth, drawHeight;
     String strPlus = "";
+    int intPlus = 1;
     boolean sizeOK = true;
 
     Paint rectPaint, paint, paintRed, paintBlue, rectBorderPaint, paintSmall, paintRedSmall;
@@ -164,7 +165,6 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvas.drawRect(left, bottom - 20, left + 900, bottom, rectPaint);
         canvas.drawText(time + "  FA枕套  " + orderItems.get(currentID).sizeStr + orderItems.get(currentID).color + "   " + orderItems.get(currentID).order_number, left, bottom - 2, paintSmall);
         canvas.drawText(getRedNewCode(orderItems.get(currentID).newCode), left + 500, bottom - 2, paintRedSmall);
-//        canvas.drawText("验片码" + orderItems.get(currentID).platform, left + 600, bottom - 2, paintRedSmall);
     }
 
     void drawTextRotateQuilt(Canvas canvas, int degree, int left, int bottom) {
@@ -173,7 +173,6 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvas.drawRect(left, bottom - 20, left + 1000, bottom, rectPaint);
         canvas.drawText(time + "  FA被套  " + orderItems.get(currentID).sizeStr + orderItems.get(currentID).color + "   " + orderItems.get(currentID).order_number, left, bottom - 2, paintSmall);
         canvas.drawText(getRedNewCode(orderItems.get(currentID).newCode), left + 500, bottom - 2, paintRedSmall);
-//        canvas.drawText("验片码" + orderItems.get(currentID).platform, left + 600, bottom - 2, paintRedSmall);
         canvas.restore();
     }
 
@@ -253,12 +252,15 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvasPrintQuilt.restore();
         drawTextRotateQuilt(canvasPrintQuilt, 90, 0, drawWidth / 2 + 100);
 
-        try {
-            String nameCombine = orderItems.get(currentID).sku + "-"  + orderItems.get(currentID).newCode + noNewCode + "被套" + orderItems.get(currentID).color + orderItems.get(currentID).order_number + strPlus + ".jpg";
+        String nameCombine = orderItems.get(currentID).sku + "-"  + orderItems.get(currentID).newCode + noNewCode + "被套" + orderItems.get(currentID).color + orderItems.get(currentID).order_number + strPlus + ".jpg";
 
-            File fileSave = new File(pathSave + nameCombine);
-            BitmapToJpg.save(bitmapPrintQuilt, fileSave, 110);
-            bitmapPrintQuilt.recycle();
+        File fileSave = new File(pathSave + nameCombine);
+        BitmapToJpg.save(bitmapPrintQuilt, fileSave, 110);
+        bitmapPrintQuilt.recycle();
+
+
+        try {
+
             //写入excel
             String writePath = sdCardPath + "/生产图/" + childPath + "/生产单.xls";
             File fileWrite = new File(writePath);

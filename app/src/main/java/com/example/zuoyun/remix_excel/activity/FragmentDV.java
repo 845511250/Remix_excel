@@ -52,6 +52,7 @@ public class FragmentDV extends BaseFragment {
     float scaleX=1.0f, scaleY = 1.0f;
     int num;
     String strPlus = "";
+    int intPlus = 1;
 
     @Override
     public int getLayout() {

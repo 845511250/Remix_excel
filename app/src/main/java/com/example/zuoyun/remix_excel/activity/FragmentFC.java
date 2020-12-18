@@ -50,7 +50,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     int part1RX,part1RY,part2RX,part2RY,part3RX,part3RY,part4RX, part4RY;
     int num;
     String strPlus = "";
-
+    int intPlus = 1;
     Paint rectPaint, paint, paintRed, paintBlue, paintRectBlack;
     String time;
 

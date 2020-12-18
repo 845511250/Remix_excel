@@ -270,7 +270,6 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     public void remixx(){
         int margin = 130;
         Matrix matrix = new Matrix();
-        int widthMargin = Math.max(width_front, width_arm + height_xiabai + 100);
 
         Bitmap bitmapCombine = Bitmap.createBitmap(width_arm + width_maozi + margin, height_front + height_back + height_maozi * 4 + margin * 3, Bitmap.Config.ARGB_8888);
         Canvas canvasCombine= new Canvas(bitmapCombine);

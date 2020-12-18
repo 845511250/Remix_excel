@@ -50,7 +50,7 @@ public class FragmentGP extends BaseFragment {
     int frontWidth=2120, frontHeight=3294, backWidth=2145, backHeight=1637;
     int num;
     String strPlus = "";
-
+    int intPlus = 1;
     Paint paint,paintRed,paintBlue, rectPaint;
     String time = MainActivity.instance.orderDate_Print;
 

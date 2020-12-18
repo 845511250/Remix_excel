@@ -58,6 +58,7 @@ public class FragmentDD extends BaseFragment {
     int width, height;
     int num;
     String strPlus = "";
+    int intPlus = 1;
     Paint paint,paintRed,paintBlue, rectPaint;
     String time = MainActivity.instance.orderDate_Print;
 
