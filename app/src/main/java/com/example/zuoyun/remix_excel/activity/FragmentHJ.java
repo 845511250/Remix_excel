@@ -173,6 +173,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         Bitmap bitmapTemp = Bitmap.createBitmap(6200, 8200, Bitmap.Config.ARGB_8888);
         Canvas canvasTemp= new Canvas(bitmapTemp);
         canvasTemp.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
+        canvasTemp.drawColor(0xffffffff);
 
         canvasTemp.drawBitmap(MainActivity.instance.bitmapPillow, 0, 0, null);
         canvasTemp.drawRect(0, 0, 6200, 8200, rectBorderPaint);
