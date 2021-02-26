@@ -224,7 +224,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
 
             if (orderItems.get(currentID).sizeStr.equals("S")) {
                 BitmapToJpg.save(bitmapCombine, fileSave, 120);
-            }else if (orderItems.get(currentID).sizeStr.equals("L")) {
+            } else if (orderItems.get(currentID).sizeStr.equals("L")) {
                 BitmapToJpg.save(bitmapCombine, fileSave, 90);
             }
 
