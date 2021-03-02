@@ -106,6 +106,7 @@ public class FragmentDGH extends BaseFragment {
     }
 
     public void remixx(){
+        //
         Paint rectPaint = new Paint();
         rectPaint.setColor(0xffffffff);
         rectPaint.setStyle(Paint.Style.FILL);

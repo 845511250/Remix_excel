@@ -166,6 +166,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     }
 
     public void remixx(){
+
         Bitmap bitmapCombine = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, 43, 35, 4315, 4729);
         Canvas canvasCombine= new Canvas(bitmapCombine);
         canvasCombine.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));

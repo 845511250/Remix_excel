@@ -429,12 +429,14 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         canvasArm.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
         canvasArm.drawColor(0xffffffff);
 
-        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 1560, 6325, 3863, 431);
+        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapRight, 1560, 6326, 3863, 430);
         canvasArm.drawBitmap(bitmapTemp, 0, 0, null);
+        bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, 3863, -430, true);
         canvasArm.drawBitmap(bitmapTemp, 0, 430, null);
-        bitmapTemp.recycle();
-        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapLeft, 1604, 6325, 3863, 431);
+
+        bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapLeft, 1604, 6326, 3863, 430);
         canvasArm.drawBitmap(bitmapTemp, 3862, 0, null);
+        bitmapTemp = Bitmap.createScaledBitmap(bitmapTemp, 3863, -430, true);
         canvasArm.drawBitmap(bitmapTemp, 3862, 430, null);
         bitmapTemp.recycle();
 

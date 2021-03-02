@@ -199,8 +199,9 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     }
 
     public void remixx(){
+        //
         Bitmap bitmapCombine = null;
-        orderItems.get(currentID).newCodeStr = orderItems.get(currentID).newCodeStr.replace("\" ", "-");
+        orderItems.get(currentID).newCodeStr = orderItems.get(currentID).newCodeStr.replace("\"", "");
 
         if (orderItems.get(currentID).sku.equals("HO1") || orderItems.get(currentID).sku.equals("HO2")) {
             bitmapCombine = Bitmap.createBitmap(width_combine, height_combine, Bitmap.Config.ARGB_8888);

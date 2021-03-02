@@ -117,6 +117,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     }
 
     public void remixx(){
+
         Bitmap bitmapLeft = Bitmap.createScaledBitmap(MainActivity.instance.bitmapLeft, 688, 540, true);
         Bitmap bitmapRight = Bitmap.createScaledBitmap(MainActivity.instance.bitmapRight, 688, 540, true);
         Bitmap bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.lazy46);

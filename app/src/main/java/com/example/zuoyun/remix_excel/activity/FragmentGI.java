@@ -162,6 +162,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     }
 
     public void remixx(){
+        //
         Bitmap bitmapCombine = null;
         if (MainActivity.instance.bitmapPillow.getWidth() == 6500) {
             bitmapCombine = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, 68, 0, 6376, 7500);

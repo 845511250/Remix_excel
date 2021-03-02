@@ -122,6 +122,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     }
 
     public void remixxKid(){
+
         //main:1284*985
         //side:1688*470(470*844)
         Bitmap bitmapDB_main = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.dff31_main);

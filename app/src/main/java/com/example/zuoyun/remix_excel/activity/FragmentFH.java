@@ -185,6 +185,7 @@ public class FragmentFH extends BaseFragment {
         canvas.drawText(orderItems.get(currentID).newCode, 645, 657, paintRed);
     }
     public void remixx(){
+        //
         setScale(orderItems.get(currentID).size);
 
         Bitmap bitmapDB_main = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.fh_main);

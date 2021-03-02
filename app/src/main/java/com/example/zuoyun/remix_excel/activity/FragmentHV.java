@@ -189,6 +189,7 @@ public class FragmentHV extends BaseFragment {
     }
 
     public void remixx(){
+
         setSize(orderItems.get(currentID).sizeStr);
         Bitmap bitmapDBRight = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.hv_r);
         Bitmap bitmapDBLeft = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.hv_l);

@@ -164,6 +164,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     }
 
     public void remixx(){
+
         Bitmap bitmapTemp = null;
         if (orderItems.get(currentID).sku.equals("HSS")) {
             bitmapTemp = Bitmap.createBitmap(MainActivity.instance.bitmapPillow, 160, 130, 3778, 1628);

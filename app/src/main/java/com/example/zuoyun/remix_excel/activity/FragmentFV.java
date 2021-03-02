@@ -201,6 +201,7 @@ public class FragmentFV extends BaseFragment {
 
     }
     public void remixx(){
+
         if (Config.FV_type == 1) {
             Bitmap bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.fv2);
 

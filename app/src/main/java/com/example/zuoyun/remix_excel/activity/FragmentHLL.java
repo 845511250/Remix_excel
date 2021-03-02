@@ -176,6 +176,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     }
 
     public void remixx(){
+
         //空调毯
         Matrix matrix = new Matrix();
         matrix.postScale(width / 10926f, height / 12172f);

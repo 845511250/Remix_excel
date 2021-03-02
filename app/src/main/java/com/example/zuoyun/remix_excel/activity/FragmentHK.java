@@ -161,6 +161,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
 
 
     public void remixx(){
+
         setScale(orderItems.get(currentID).size);
         int margin=60;
 

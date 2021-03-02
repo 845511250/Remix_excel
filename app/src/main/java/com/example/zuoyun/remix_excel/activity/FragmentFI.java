@@ -200,6 +200,7 @@ public class FragmentFI extends BaseFragment {
     }
 
     public void remixx(){
+
         int margin = 100;
 
         Bitmap bitmapF = orderItems.get(currentID).img_left == null ? MainActivity.instance.bitmapPillow : MainActivity.instance.bitmapRight;

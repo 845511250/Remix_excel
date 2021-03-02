@@ -108,6 +108,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     }
 
     public void remixx(){
+
         Bitmap bitmapPillow = null;
         Bitmap bitmapDB = null;
 

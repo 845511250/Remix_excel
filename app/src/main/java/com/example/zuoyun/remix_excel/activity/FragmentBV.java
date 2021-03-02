@@ -8,7 +8,6 @@ import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PaintFlagsDrawFilter;
-import android.graphics.Typeface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -86,25 +85,21 @@ String sdCardPath = "/storage/emulated/0/Pictures";
         paint = new Paint();
         paint.setColor(0xff000000);
         paint.setTextSize(20);
-        paint.setTypeface(Typeface.DEFAULT_BOLD);
         paint.setAntiAlias(true);
 
         paintRed = new Paint();
         paintRed.setColor(0xffff0000);
         paintRed.setTextSize(20);
-        paintRed.setTypeface(Typeface.DEFAULT_BOLD);
         paintRed.setAntiAlias(true);
 
         paintBlue = new Paint();
         paintBlue.setColor(0xff0000ff);
         paintBlue.setTextSize(20);
-        paintBlue.setTypeface(Typeface.DEFAULT_BOLD);
         paintBlue.setAntiAlias(true);
 
         paintSmall = new Paint();
         paintSmall.setColor(0xff000000);
         paintSmall.setTextSize(20);
-        paintSmall.setTypeface(Typeface.DEFAULT_BOLD);
         paintSmall.setAntiAlias(true);
 
         time = MainActivity.instance.orderDate_Print;

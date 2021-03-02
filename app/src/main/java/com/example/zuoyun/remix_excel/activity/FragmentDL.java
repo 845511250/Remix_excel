@@ -106,8 +106,8 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     }
 
     public void remixx(){
+        //
         Bitmap bitmapPillow = Bitmap.createScaledBitmap(MainActivity.instance.bitmapPillow, 1605, 1408, true);
-//        bitmapPillow = Bitmap.createBitmap(bitmapPillow, 20, 10, 1561, 1377);
         bitmapPillow = Bitmap.createBitmap(bitmapPillow, 20, 10, 1565, 1388);
         Bitmap bitmapDB = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.dl);
 
@@ -151,9 +151,6 @@ String sdCardPath = "/storage/emulated/0/Pictures";
             canvasremix.drawText(orderItems.get(currentID).order_number,180,1385,paint);
             canvasremix.drawRect(500, 1358, 750, 1388, rectPaint);
             canvasremix.drawText(orderItems.get(currentID).newCode, 501, 1385, paintRed);
-            //-------
-            canvasremix.drawRect(1000, 1358, 1200, 1388, rectPaint);
-            canvasremix.drawText("验片码" + orderItems.get(currentID).platform, 1000, 1385, paintRed);
 
             canvasremix.drawRect(1500, 1358+1388, 1565, 1388+1388, rectPaint);
             canvasremix.drawText("DL", 1500, 1385+1388, paint);
@@ -162,9 +159,6 @@ String sdCardPath = "/storage/emulated/0/Pictures";
             canvasremix.drawText(orderItems.get(currentID).order_number,200,1385+1388,paint);
             canvasremix.drawRect(500, 1358+1388, 750, 1388+1388, rectPaint);
             canvasremix.drawText(orderItems.get(currentID).newCode, 501, 1385 + 1388, paintRed);
-            //-------
-            canvasremix.drawRect(1000, 1358+1388, 1200, 1388+1388, rectPaint);
-            canvasremix.drawText("验片码" + orderItems.get(currentID).platform, 1000, 1385+1388, paintRed);
 
             String noNewCode = orderItems.get(currentID).newCode.equals("") ? orderItems.get(currentID).sku : "";
             String nameCombine = noNewCode + orderItems.get(currentID).sku + orderItems.get(currentID).newCode + orderItems.get(currentID).order_number + strPlus + ".jpg";

@@ -177,6 +177,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     }
 
     public void remixx(){
+
         orderItems.get(currentID).sizeStr = orderItems.get(currentID).sizeStr.replace("/", ".");
         orderItems.get(currentID).newCode = orderItems.get(currentID).newCode.replace("/", ".");
         setScale(orderItems.get(currentID).sizeStr);

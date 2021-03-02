@@ -268,6 +268,7 @@ public class FragmentGQY extends BaseFragment {
     }
 
     public void remixx(){
+
         int margin = 130;
         Matrix matrix = new Matrix();
         int width = Math.max(width_front + height_xiabai + margin, width_arm + width_maozi + margin);

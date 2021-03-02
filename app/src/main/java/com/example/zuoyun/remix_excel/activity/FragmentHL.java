@@ -198,6 +198,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     }
 
     public void remixx(){
+
         Matrix matrix = new Matrix();
         matrix.postScale(width / 13800f, height / 15300f);
         if (orderItems.get(currentID).sku.equals("HL2") || orderItems.get(currentID).sku.equals("HL3") || orderItems.get(currentID).sku.equals("HL4")) {

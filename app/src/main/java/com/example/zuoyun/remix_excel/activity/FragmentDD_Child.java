@@ -171,6 +171,7 @@ public class FragmentDD_Child extends BaseFragment {
     }
 
     public void remixx(){
+        //
         setScale(orderItems.get(currentID).size);
         Bitmap bitmapDBRight = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.dd_child_r);
         Bitmap bitmapDBLeft = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.dd_child_l);

@@ -202,6 +202,7 @@ public class FragmentFF extends BaseFragment {
         canvas.restore();
     }
     public void remixx(){
+        //
         setScale(orderItems.get(currentID).size);
 
         Bitmap bitmapDB1 = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.ff_part1);

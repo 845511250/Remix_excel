@@ -175,6 +175,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
 
         Bitmap bitmapCombine = null;
         if(orderItems.get(currentID).sizeStr.equals("S")){
+            //
             bitmapCombine = Bitmap.createBitmap(width + 150, height * 2 + 100, Bitmap.Config.ARGB_8888);
             Canvas canvasCombine= new Canvas(bitmapCombine);
             canvasCombine.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));

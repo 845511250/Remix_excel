@@ -172,6 +172,7 @@ public class FragmentDQ extends BaseFragment {
         canvas.drawText(orderItems.get(currentID).newCode + "", 191, 438, paintRed);
     }
     public void remixx(){
+
         setScale(orderItems.get(currentID).size);
 
         Bitmap bitmapDB_main = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.dq_adam);

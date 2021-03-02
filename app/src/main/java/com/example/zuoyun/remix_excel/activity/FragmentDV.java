@@ -130,6 +130,7 @@ public class FragmentDV extends BaseFragment {
     }
 
     public void remixx(){
+
         //main:1000*1058
         //tongue:370*484
         Bitmap bitmapDB_main = BitmapFactory.decodeResource(getActivity().getApplicationContext().getResources(), R.drawable.dq31_main);

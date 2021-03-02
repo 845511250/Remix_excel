@@ -243,6 +243,7 @@ String sdCardPath = "/storage/emulated/0/Pictures";
     }
 
     public void remixx(){
+        //
         int margin = 50;
         int marginHeight = Math.max(height_front + height_back + margin, height_maozi * 4);
         Matrix matrix = new Matrix();
